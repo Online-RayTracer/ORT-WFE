@@ -1,0 +1,166 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.onlineRayTracerMainPage {
+    display: flex;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #EBEBEB;
+}
+
+.mainPage_sideBar {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 20%;
+    min-width: 400px;
+    height: 100%;
+    background-color: #384772;
+}
+
+.mainPage_logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 20%;
+    min-height: 185px;
+}
+
+.mainPage_logo::after {
+    content: '';
+    width: 60%;
+    height: 70%;
+    background-image: url('../src/onlineRayTracer_logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.mainPage_menu {
+    width: 100%;
+    height: 36%;
+    min-height: 320px;
+}
+
+.mainPage_menu > ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    list-style:none;
+}
+
+.mainPage_menu > ul > li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 25%;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.mainPage_menu > ul > li:hover {
+    background-color: #CAD1D8;
+}
+
+.mainPage_menu > ul > li > a {
+    font-size: 2.3rem;
+    text-decoration: none;
+    letter-spacing: 0.5rem;
+    color: white;
+}
+
+.mainPage_menu > ul > li > a:hover {
+    color: #598FD1;
+}
+
+#mainPage_menu_image {
+    background-color: #EBF0F5;
+}
+
+#mainPage_menu_image > a {
+    color: #598FD1;
+}
+
+.mainPage_goButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    min-height: 185px;
+}
+
+.mainPage_goButton > button {
+    border: 5px solid #EBF0F5;
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+    background-color: #FFFFFF;
+    font-size: 2.5rem;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.mainPage_goButton > button:hover {
+    width: 140px;
+    height: 140px;
+}
+
+.mainPage_goButton > button:active {
+    width: 130px;
+    height: 130px;
+}
