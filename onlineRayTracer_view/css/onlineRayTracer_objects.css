@@ -58,6 +58,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     min-height: 650px;
     overflow: hidden;
     background-color: #EBEBEB;
+    user-select: none;
 }
 
 .mainPage_sideBar {
@@ -324,6 +325,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 .mainPage_objCon_posTitle {
     padding-top: 4%;
     width: 15%;
+    min-width: 169px;
     height: calc(100% - 4%);
     font-size: 2.5rem;
 }
@@ -350,7 +352,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 8%;
+    width: 90px;
     height: 100%;
 }
 
@@ -462,38 +464,178 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     color: #598FD1;
 }
 
-
-
-
 .mainPage_objCon_radius {
     margin-top: 4%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 6%;
     min-height: 90px;
-    background-color: black;
+}
+
+.mainPage_objCon_radTitle {
+    width: 15%;
+    min-width: 169px;
+    height: 100%;
+    font-size: 2.5rem;
+}
+
+.mainPage_objCon_radRadiusRange {
+    margin-left: 3%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 45%;
+    height: 100%;
+}
+
+.mainPage_objCon_radRadiusRange > div {
+    border-left: 3px solid #707070;
+    border-right: 3px solid #707070;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 50%;
+}
+
+.mainPage_objCon_radRadiusRange > div::after {
+    content: '';
+    width: 3px;
+    height: 100%;
+    background-color: #707070;
+}
+
+.mainPage_objCon_radRadiusRange > input[type=range] {
+    z-index: 50;
+    width: 100%;
+    height: 20px;
+    margin: 0;
+    -webkit-appearance: none;
+    background: none;
+}
+
+.mainPage_objCon_radRadiusRange > input[type=range]:focus {
+    outline: none;
+}
+
+.mainPage_objCon_radRadiusRange > input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 3px;
+    cursor: pointer;
+    background: #707070;
+}
+
+.mainPage_objCon_radRadiusRange > input[type=range]::-webkit-slider-thumb {
+    width: 8px;
+    height: 30px;
+    background: #384772;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -14px;
+}
+
+.mainPage_objCon_radRadiusNumber {
+    margin-left: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 15%;
+    height: 100%;
+}
+
+.mainPage_objCon_radRadiusNumber > input {
+    border: 2px solid #384772;
+    width: 80%;
+    height: 45%;
+    font-size: 2rem;
+    text-align: center;
+    outline: none;
 }
 
 .mainPage_objCon_surface {
     margin-top: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 25%;
     min-height: 185px;
-    background-color: red;
 }
 
+.mainPage_objCon_surTitle {
+    width: 15%;
+    min-width: 169px;
+    height: 100%;
+    font-size: 2.5rem;
+}
 
+.mainPage_objCon_surQuality {
+    margin: 0 7% 0 3%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 55%;
+    height: 100%;
+}
 
+.mainPage_objCon_surQuality > div {
+    height: 70%;
+    width: 30%;
+}
 
+.mainPage_objCon_surQuality > div > a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+}
 
+.mainPage_objCon_surQuality > div > a > p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 35%;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 0.3rem;
+}
 
+.mainPage_objCon_surQuality > div > a > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 65%;
+}
 
+.mainPage_objCon_surQuality > div > a > div::before {
+    content: '';
+    width: 60%;
+    height: 85%;
+    background: #000000;
+}
 
+.object_quality_metar > p {
+    color: #384772;
+}
 
+.object_quality_nonMetar > p {
+    color: black;
+}
 
-
-
-
-
+.object_quality_glass > p {
+    color: black;
+}
 
 
 

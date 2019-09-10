@@ -38,13 +38,13 @@
             </div>
             <div class="mainPage_objCon_main">
                 <div class="mainPage_objCon_position">
-                    <div class="mainPage_objCon_posTitle"><p>Position:</p></div>
+                    <div class="mainPage_objCon_posTitle"><p>Position :</p></div>
                     <div class="mainPage_objCon_posXYLocation">
                         <canvas id="object_xyLocation" width="250px" height="250px"></canvas>
                     </div>
                     <div class="mainPage_objCon_posZLocation">
                         <div></div>
-                        <input id="object_zLocation" type="range" max="150" min="-150" step="1">
+                        <input id="object_zLocation" type="range" onchange="object_zLocationChange()" max="150" min="-150" step="1">
                     </div>
                     <div class="mainPage_objCon_posXYZ">
                         <div>
@@ -65,28 +65,35 @@
                     </div>
                 </div>
                 <div class="mainPage_objCon_radius">
-                    <div class="mainPage_objCon_rad"><p>Radius:</p></div>
-                    <div class="mainPage_objCon_rad">
-                        <canvas></canvas>
+                    <div class="mainPage_objCon_radTitle"><p>Radius :</p></div>
+                    <div class="mainPage_objCon_radRadiusRange">
+                        <div></div>
+                        <input id="object_radiusRange" type="range" onchange="object_radiusChange()" value="0" max="100" min="0" step="1">
                     </div>
-                    <div class="mainPage_objCon_rad">
-                        <input type="number">
+                    <div class="mainPage_objCon_radRadiusNumber">
+                        <input id="object_radiusNumber" type="number"value="0">
                     </div>
                 </div>
                 <div class="mainPage_objCon_surface">
-                    <div class="mainPage_objCon_sur"><p>Surface:</p></div>
-                    <div class="mainPage_objCon_sur">
+                    <div class="mainPage_objCon_surTitle"><p>Surface :</p></div>
+                    <div class="mainPage_objCon_surQuality">
                         <div>
-                            <p>METAR</p>
-                            <div></div>
+                            <a class="object_quality_metar" href="#">
+                                <p>METAR</p>
+                                <div></div>
+                            </a>
                         </div>
                         <div>
-                            <p>NON</p>
-                            <div></div>
+                            <a class="object_quality_nonMetar" href="#">
+                                <p>NON<br>METAR</p>
+                                <div></div>
+                            </a>
                         </div>
                         <div>
-                            <p></p>
-                            <div></div>
+                            <a class="object_quality_glass" href="#">
+                                <p>GLASS</p>
+                                <div></div>
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -102,12 +102,24 @@ function object_xyDraw(evt) {
         ctx.lineTo((posx-10), (posy-10));
         ctx.stroke();
         object_xLocationBox.value = Math.round(posx)-125;
-        object_yLocationBox.value = Math.round(posy)-125;
+        object_yLocationBox.value = -(Math.round(posy)-125);
         console.log(`x: ${Math.round(posx)}, u: ${Math.round(posy)}`);
     }
-  }
+}
 
+const object_zLocation = document.getElementById('object_zLocation');
+const object_zLocationBox = document.getElementById('object_zLocationBox');
 
+function object_zLocationChange() {
+    object_zLocationBox.value = object_zLocation.value;
+}
+
+const object_radiusRange = document.getElementById('object_radiusRange');
+const object_radiusNumber = document.getElementById('object_radiusNumber');
+
+function object_radiusChange() {
+    object_radiusNumber.value = object_radiusRange.value;
+}
 
 
 
