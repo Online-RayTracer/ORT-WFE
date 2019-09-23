@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link type="text/css" href="./css/onlineRayTracer_scenePage.css" rel="stylesheet" />
+    <title>onlineRayTracer_scenePage</title>
+</head>
+<body>
+    <div class="onlineRayTracerScenePage">
+        <aside class="onlineRayTracerSideBar">
+            <div class="sideBar_logo"></div>
+            <nav class="sideBar_menu">
+                <ul>
+                    <li id="goto_objectsP"><a href="#">objects</a></li>
+                    <li id="goto_sceneP"><a href="#">scene</a></li>
+                    <li id="goto_cameraP"><a href="#">camera</a></li>
+                    <li id="goto_backgroundP"><a href="#">background</a></li>
+                    <li id="goto_renderP"><a href="#">render</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <section class="sceneContents">
+            <div>
+                <article class="sceneContent scene_name">
+                    <div><h3>Name</h3></div>
+                    <div>
+                        <input class="scene_name_inputT" type="text" placeholder="input scene name">
+                    </div>
+                </article>
+                <article class="sceneContent scene_resolution">
+                    <div><h3>Resolution</h3></div>
+                    <div>
+                        <input class="scene_resolution_inputT" type="number" placeholder="0">
+                        <div class="scene_resolution_x"></div>
+                        <input class="scene_resolution_inputT" type="number" placeholder="0">
+                    </div>
+                </article>
+                <article class="sceneContent scene_quality">
+                    <div><h3>Quality</h3></div>
+                    <div>
+                        <div class="scene_quality_inputR"><input type="range" value="0" min="0" max="1" step="0.1"></div>
+                        <input class="scene_quality_inputT" type="number" placeholder="0.0">
+                    </div>
+                </article>
+            </div>
+            <div>
+                <button class="scene_exportB">EXPORT</button>
+                <button class="scene_importB">IMPORT</button>
+                <button class="scene_saveB">SAVE</button>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
