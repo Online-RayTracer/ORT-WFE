@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link type="text/css" href="./css/onlineRayTracer_objectsPage.css" rel="stylesheet" />
+    <title>Document</title>
+    <script src="https://unpkg.com/konva@4.0.12/konva.min.js"></script>
+</head>
+<body>
+    <div class="onlineRayTracerObjectsPage">
+        <aside class="onlineRayTracerSideBar">
+            <div class="sideBar_logo"></div>
+            <nav class="sideBar_menu">
+                <ul>
+                    <li id="goto_objectsP"><a href="#">objects</a></li>
+                    <li id="goto_sceneP"><a href="../onlineRayTracer_scenePage/onlineRayTracer_scenePage.html">scene</a></li>
+                    <li id="goto_cameraP"><a href="#">camera</a></li>
+                    <li id="goto_backgroundP"><a href="#">background</a></li>
+                    <li id="goto_renderP"><a href="#">render</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <section class="objectsContents">
+            <article class="objects_topMenu">
+                <a href="#;" onClick="zoomIn();">화면확대</a>
+                <a href="#;" onClick="zoomOut();">화면축소</a>
+                <a href="#;" onClick="zoomReset();">기본설정</a>
+            </article>
+            <article class="objects_main">
+                <div id="objects_box"></div>
+            </article>
+            <article class="objects_sideBar"></article>
+        </section>
+        <script src="./js/onlineRayTracer_objectsPage.js"></script>
+    </div>
+</body>
+</html>

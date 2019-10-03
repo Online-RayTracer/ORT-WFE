@@ -197,6 +197,11 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     font-size: 1.8rem;
     text-align: center;
     outline: none;
+    transition: border 0.2s ease-in-out;
+}
+
+.fillName .scene_name_inputT {
+    border: 3px solid gold;
 }
 
 .scene_resolution_inputT {
@@ -209,6 +214,11 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     font-size: 1.8rem;
     text-align: center;
     outline: none;
+    transition: border 0.2s ease-in-out;
+}
+
+.fillResolution .scene_resolution_inputT {
+    border: 3px solid gold;
 }
 
 .scene_resolution_x {
@@ -228,6 +238,10 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     position: relative;
     width: 250px;
     height: 40px;
+}
+
+.fillQuality .scene_quality_inputR {
+    border: 3px solid gold;
 }
 
 .scene_quality_inputR::before {
@@ -274,10 +288,12 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     width: 15%;
     height: 50%;
     background: none;
+    color: #707070;
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 1.8rem;
     text-align: center;
     outline: none;
+    transition: border 0.2s ease-in-out;
 }
 
 .sceneContents > div:nth-child(2) {

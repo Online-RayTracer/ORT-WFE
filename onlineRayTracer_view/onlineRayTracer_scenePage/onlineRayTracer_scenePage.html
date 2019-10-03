@@ -13,11 +13,11 @@
             <div class="sideBar_logo"></div>
             <nav class="sideBar_menu">
                 <ul>
-                    <li id="goto_objectsP"><a href="#">objects</a></li>
-                    <li id="goto_sceneP"><a href="#">scene</a></li>
-                    <li id="goto_cameraP"><a href="#">camera</a></li>
-                    <li id="goto_backgroundP"><a href="#">background</a></li>
-                    <li id="goto_renderP"><a href="#">render</a></li>
+                    <li id="goto_objectsP"><a>objects</a></li>
+                    <li id="goto_sceneP"><a>scene</a></li>
+                    <li id="goto_cameraP"><a>camera</a></li>
+                    <li id="goto_backgroundP"><a>background</a></li>
+                    <li id="goto_renderP"><a>render</a></li>
                 </ul>
             </nav>
         </aside>
@@ -26,31 +26,32 @@
                 <article class="sceneContent scene_name">
                     <div><h3>Name</h3></div>
                     <div>
-                        <input class="scene_name_inputT" type="text" placeholder="input scene name">
+                        <input id="sceneName" class="scene_name_inputT" type="text" value="" placeholder="input scene name">
                     </div>
                 </article>
                 <article class="sceneContent scene_resolution">
                     <div><h3>Resolution</h3></div>
                     <div>
-                        <input class="scene_resolution_inputT" type="number" placeholder="0">
+                        <input id="sceneResolutionX" class="scene_resolution_inputT" type="number" placeholder="0">
                         <div class="scene_resolution_x"></div>
-                        <input class="scene_resolution_inputT" type="number" placeholder="0">
+                        <input id="sceneResolutionY" class="scene_resolution_inputT" type="number" placeholder="0">
                     </div>
                 </article>
                 <article class="sceneContent scene_quality">
                     <div><h3>Quality</h3></div>
                     <div>
-                        <div class="scene_quality_inputR"><input type="range" value="0" min="0" max="1" step="0.1"></div>
-                        <input class="scene_quality_inputT" type="number" placeholder="0.0">
+                        <div class="scene_quality_inputR"><input id="sceneQualityRange" type="range" oninput='sceneQualityRangeValue(this.value)' value="0" min="0" max="1" step="0.1"></div>
+                        <input id="sceneQualityText" class="scene_quality_inputT" type="number" value="0" placeholder="0.0" readonly>
                     </div>
                 </article>
             </div>
             <div>
-                <button class="scene_exportB">EXPORT</button>
-                <button class="scene_importB">IMPORT</button>
-                <button class="scene_saveB">SAVE</button>
+                <button id="sceneExportButton" class="scene_exportB">EXPORT</button>
+                <button id="sceneImportButton" class="scene_importB">IMPORT</button>
+                <button id="sceneSaveButton" class="scene_saveB">SAVE</button>
             </div>
         </section>
+        <script src="./js/onlineRayTracer_scenePage.js"></script>
     </div>
 </body>
 </html>
