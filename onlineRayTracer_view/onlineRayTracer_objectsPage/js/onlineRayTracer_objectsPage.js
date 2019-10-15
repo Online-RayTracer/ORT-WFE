@@ -6,6 +6,61 @@ window.addEventListener('load', () => {
     objects_box.style = `width: ${objectsData.resolution_width}px;height: ${objectsData.resolution_length}px;`;
 })
 
+var width = objectsData.resolution_width;
+var height = objectsData.resolution_length;
+
+function addCircle(layer) {
+    var color = 'red';
+
+    var randX = Math.random() * stage.width();
+    var randY = Math.random() * stage.height();
+    var circle = new Konva.Circle({
+        x: randX,
+        y: randY,
+        radius: 6,
+        fill: color
+    });
+
+    layer.add(circle);
+}
+
+var stage = new Konva.Stage({
+    container: 'objects_box',
+    width: width,
+    height: height
+});
+
+var dragLayer = new Konva.Layer();
+
+var layersArr = [];
+/*
+* create 10 layers each containing 1000 shapes to create
+* 10,000 shapes.  This greatly improves performance because
+* only 1,000 shapes will have to be drawn at a time when a
+* circle is removed from a layer rather than all 10,000 shapes.
+* Keep in mind that having too many layers can also slow down performance.
+* I found that using 10 layers each made up of 1,000 shapes performs better
+* than 20 layers with 500 shapes or 5 layers with 2,000 shapes
+*/
+var layer = new Konva.Layer();
+layersArr.push(layer);
+
+for (var n = 0; n < 1; n++) {
+    addCircle(layer);
+}
+
+stage.add(layer);
+stage.add(dragLayer);
+
+stage.on('mousedown', (evt) => {
+    var circle = evt.target;
+    var layer = circle.getLayer();
+
+    circle.moveTo(dragLayer);
+    layer.draw();
+    circle.startDrag();
+});
+
 
 
 
@@ -62,6 +117,26 @@ window.addEventListener('keyup', (e) => {
     }
 });
 
+
+
+
+const objectRadiusText = document.getElementById('objectRadiusText');
+
+function objectRadiusValue(v) {
+    objectRadiusText.value = v;
+}
+
+const objectRoughnessText = document.getElementById('objectRoughnessText');
+
+function objectRoughnessValue(v) {
+    objectRoughnessText.value = v;
+}
+
+var colorPicker = new iro.ColorPicker("#objectcolorPicker", {
+    width: 130,
+    color: "#ff0000",
+    sliderHeight: 10
+  });
 
 // objects_main.addEventListener('scroll', (e) => {
 //     scroll = objects_main.scrollTop;
@@ -134,73 +209,3 @@ window.addEventListener('keyup', (e) => {
 //         target.css('transform','translate('+(pos.x)+'px,'+(pos.y)+'px) scale('+scale+','+scale+')')
 //     }
 // }
-
-var width = window.innerWidth;
-var height = window.innerHeight;
-
-function addCircle(layer) {
-    var color = colors[colorIndex++];
-    if (colorIndex >= colors.length) {
-        colorIndex = 0;
-    }
-
-    var randX = Math.random() * stage.width();
-    var randY = Math.random() * stage.height();
-    var circle = new Konva.Circle({
-    x: randX,
-    y: randY,
-    radius: 6,
-    fill: color
-    });
-
-    layer.add(circle);
-}
-
-var stage = new Konva.Stage({
-    container: 'objects_box',
-    width: width,
-    height: height
-});
-
-var dragLayer = new Konva.Layer();
-var colors = [
-    'red',
-    'orange',
-    'yellow',
-    'green',
-    'blue',
-    'cyan',
-    'purple'
-];
-var colorIndex = 0;
-
-var layersArr = [];
-/*
-* create 10 layers each containing 1000 shapes to create
-* 10,000 shapes.  This greatly improves performance because
-* only 1,000 shapes will have to be drawn at a time when a
-* circle is removed from a layer rather than all 10,000 shapes.
-* Keep in mind that having too many layers can also slow down performance.
-* I found that using 10 layers each made up of 1,000 shapes performs better
-* than 20 layers with 500 shapes or 5 layers with 2,000 shapes
-*/
-// for (var i = 0; i < 10; i++) {
-var layer = new Konva.Layer();
-layersArr.push(layer);
-
-for (var n = 0; n < 1000; n++) {
-addCircle(layer);
-}
-
-stage.add(layer);
-// }
-stage.add(dragLayer);
-
-stage.on('mousedown', (evt) => {
-    var circle = evt.target;
-    var layer = circle.getLayer();
-
-    circle.moveTo(dragLayer);
-    layer.draw();
-    circle.startDrag();
-});

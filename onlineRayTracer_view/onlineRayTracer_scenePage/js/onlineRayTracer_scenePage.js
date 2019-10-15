@@ -1,4 +1,3 @@
-
 const sceneContents = document.querySelector('.sceneContents');
 
 const sceneName = document.getElementById('sceneName');
@@ -49,7 +48,7 @@ function sceneSave() {
 }
 
 function gotoObjectsPage() {
-	if (isceneDataSaved) {
+	if (isSceneDataSaved) {
 		location.href = '../onlineRayTracer_objectsPage/onlineRayTracer_objectsPage.html';
 	} else if(sceneName.value === '') {
 		alert('Name의 값을 정해주세요.');

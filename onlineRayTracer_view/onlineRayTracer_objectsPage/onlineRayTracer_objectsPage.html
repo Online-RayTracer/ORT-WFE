@@ -7,6 +7,7 @@
     <link type="text/css" href="./css/onlineRayTracer_objectsPage.css" rel="stylesheet" />
     <title>Document</title>
     <script src="https://unpkg.com/konva@4.0.12/konva.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro/dist/iro.min.js"></script>
 </head>
 <body>
     <div class="onlineRayTracerObjectsPage">
@@ -24,14 +25,92 @@
         </aside>
         <section class="objectsContents">
             <article class="objects_topMenu">
-                <a href="#;" onClick="zoomIn();">화면확대</a>
+                <!-- <a href="#;" onClick="zoomIn();">화면확대</a>
                 <a href="#;" onClick="zoomOut();">화면축소</a>
-                <a href="#;" onClick="zoomReset();">기본설정</a>
+                <a href="#;" onClick="zoomReset();">기본설정</a> -->
+                <div><a>top</a></div>
+                <div><a>front</a></div>
+                <div><a>right</a></div>
+                <div><!--blank--></div>
+                <div><a>reset</a></div>
+                <div><a>random</a></div>
+                <div><a>delete</a></div>
+                <div><a>create</a></div>
             </article>
             <article class="objects_main">
                 <div id="objects_box"></div>
             </article>
-            <article class="objects_sideBar"></article>
+            <article class="objects_sideBar">
+                <div class="objects_sideBarPosition">
+                    <div class="objects_sideBarTitle">
+                        <h4>Position</h4>
+                        <a>set Default</a>
+                    </div>
+                    <div class="objects_sideBarPositionC">
+                        <div>
+                            <h5>X</h5>
+                            <input type="number">
+                        </div>
+                        <div>
+                            <h5>Y</h5>
+                            <input type="number">
+                        </div>
+                        <div>
+                            <h5>Z</h5>
+                            <input type="number">
+                        </div>
+                    </div>
+                </div>
+                <div class="objects_sideBarRadius">
+                    <div class="objects_sideBarTitle">
+                        <h4>Radius</h4>
+                        <a>set Default</a>
+                    </div>
+                    <div class="objects_sideBarRadiusC">
+                        <div class="objects_radiusinputR"><input type="range" oninput='objectRadiusValue(this.value)' value="0" min="1" max="200" step="1"></div>
+                        <input id="objectRadiusText" class="objects_radiusinputT" type="number" value="1" readonly>
+                    </div>
+                </div>
+                <div class="objects_sideBarSurface">
+                    <div class="objects_sideBarTitle">
+                        <h4>Surface</h4>
+                        <a>set Default</a>
+                    </div>
+                    <div class="objects_sideBarSurfaceC">
+                        <div>
+                            <h5>METAL</h5>
+                            <img>
+                        </div>
+                        <div>
+                            <h5>NON<br>METAL</h5>
+                            <img>
+                        </div>
+                        <div>
+                            <h5>GLASS</h5>
+                            <img>
+                        </div>
+                    </div>
+                </div>
+                <div class="objects_sideBarRoughness">
+                    <div class="objects_sideBarTitle">
+                        <h4>Roughness</h4>
+                        <a>set Default</a>
+                    </div>
+                    <div class="objects_sideBarRoughnessC">
+                        <div class="objects_roughnessinputR"><input type="range" oninput='objectRoughnessValue(this.value)' value="0" min="0" max="1" step="0.1"></div>
+                        <input id="objectRoughnessText" class="objects_roughnessinputT" type="number" value="0" readonly>
+                    </div>
+                </div>
+                <div class="objects_sideBarColors">
+                    <div class="objects_sideBarTitle">
+                        <h4>Colors</h4>
+                        <a>set Default</a>
+                    </div>
+                    <div class="objects_sideBarColorsC">
+                        <div id="objectcolorPicker"></div>
+                    </div>
+                </div>
+            </article>
         </section>
         <script src="./js/onlineRayTracer_objectsPage.js"></script>
     </div>
