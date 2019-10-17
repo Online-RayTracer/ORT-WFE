@@ -249,6 +249,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 
 .objects_sideBarPositionC > div > input {
     width: 100%;
+    text-align: center;
 }
 
 .objects_sideBarRadius {
@@ -330,7 +331,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    height: calc(100% - 31px);
+    height: calc(75% - 31px);
 }
 
 .objects_sideBarSurfaceC > div {
@@ -339,11 +340,21 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     align-items: center;
     justify-content: space-between;
     width: 25%;
-    height: 70px;
+    height: 80px;
 }
 
 .objects_sideBarSurfaceC > div > h5 {
-    
+    display: flex;
+    align-items: center;
+    height: 32px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.objects_sideBarSurfaceC > div > img {
+    width: 60%;
+    height: 40px;
+    background-color: #1C1C1C;
 }
 
 .objects_sideBarRoughness {

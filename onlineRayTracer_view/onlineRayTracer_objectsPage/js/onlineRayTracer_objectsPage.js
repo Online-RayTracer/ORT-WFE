@@ -6,15 +6,15 @@ window.addEventListener('load', () => {
     objects_box.style = `width: ${objectsData.resolution_width}px;height: ${objectsData.resolution_length}px;`;
 })
 
-var width = objectsData.resolution_width;
-var height = objectsData.resolution_length;
+let resolution_width = objectsData.resolution_width;
+let resolution_length = objectsData.resolution_length;
 
 function addCircle(layer) {
-    var color = 'red';
+    let color = 'red';
 
-    var randX = Math.random() * stage.width();
-    var randY = Math.random() * stage.height();
-    var circle = new Konva.Circle({
+    let randX = Math.random() * stage.width();
+    let randY = Math.random() * stage.height();
+    let circle = new Konva.Circle({
         x: randX,
         y: randY,
         radius: 6,
@@ -24,15 +24,15 @@ function addCircle(layer) {
     layer.add(circle);
 }
 
-var stage = new Konva.Stage({
+let stage = new Konva.Stage({
     container: 'objects_box',
-    width: width,
-    height: height
+    width: resolution_width,
+    height: resolution_length
 });
 
-var dragLayer = new Konva.Layer();
+let dragLayer = new Konva.Layer();
 
-var layersArr = [];
+let layersArr = [];
 /*
 * create 10 layers each containing 1000 shapes to create
 * 10,000 shapes.  This greatly improves performance because
@@ -42,10 +42,10 @@ var layersArr = [];
 * I found that using 10 layers each made up of 1,000 shapes performs better
 * than 20 layers with 500 shapes or 5 layers with 2,000 shapes
 */
-var layer = new Konva.Layer();
+let layer = new Konva.Layer();
 layersArr.push(layer);
 
-for (var n = 0; n < 1; n++) {
+for (let n = 0; n < 1; n++) {
     addCircle(layer);
 }
 
@@ -53,8 +53,8 @@ stage.add(layer);
 stage.add(dragLayer);
 
 stage.on('mousedown', (evt) => {
-    var circle = evt.target;
-    var layer = circle.getLayer();
+    let circle = evt.target;
+    let layer = circle.getLayer();
 
     circle.moveTo(dragLayer);
     layer.draw();
@@ -68,7 +68,7 @@ stage.on('mousedown', (evt) => {
 
 
 
-var nowZoom = 100;
+let nowZoom = 100;
 
 function zoomOut() {   // 화면크기축소
     nowZoom = nowZoom - 10;
@@ -132,11 +132,11 @@ function objectRoughnessValue(v) {
     objectRoughnessText.value = v;
 }
 
-var colorPicker = new iro.ColorPicker("#objectcolorPicker", {
+let colorPicker = new iro.ColorPicker("#objectcolorPicker", {
     width: 130,
     color: "#ff0000",
     sliderHeight: 10
-  });
+});
 
 // objects_main.addEventListener('scroll', (e) => {
 //     scroll = objects_main.scrollTop;
