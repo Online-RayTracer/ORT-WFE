@@ -3,6 +3,7 @@ const sceneContents = document.querySelector('.sceneContents');
 const sceneName = document.getElementById('sceneName');
 const sceneResolutionX = document.getElementById('sceneResolutionX');
 const sceneResolutionY = document.getElementById('sceneResolutionY');
+const sceneQualityRange = document.getElementById('sceneQualityRange');
 const sceneQualityText = document.getElementById("sceneQualityText");
 let sceneData = JSON.parse(sessionStorage.getItem('ORTData'));
 
@@ -10,13 +11,13 @@ window.addEventListener('load', () => {
 	sceneName.value = sceneData.name;
 	sceneResolutionX.value = sceneData.resolution_width;
 	sceneResolutionY.value = sceneData.resolution_length;
+	// sceneQualityRange.value = sceneData.
 	// sceneQualityText.value = sceneData.
 })
 
 
 
 document.getElementById('sceneSaveButton').addEventListener('click', sceneSave);
-document.getElementById('goto_objectsP').addEventListener('click', gotoObjectsPage);
 
 
 function saveSceneData() {
@@ -47,7 +48,7 @@ function sceneSave() {
 	}
 }
 
-function gotoObjectsPage() {
+function gotoOtherPage(k) {
 	if (isSceneDataSaved) {
 		location.href = '../onlineRayTracer_objectsPage/onlineRayTracer_objectsPage.html';
 	} else if(sceneName.value === '') {
@@ -61,7 +62,14 @@ function gotoObjectsPage() {
 		sceneContents.classList.add('fillQuality');
 	} else {
 		sceneSave();
-		location.href = '../onlineRayTracer_objectsPage/onlineRayTracer_objectsPage.html';
+		switch(k) {
+			case 0: location.href = '../onlineRayTracer_objectsPage/onlineRayTracer_objectsPage.html'; break;
+			case 1: location.href = '../onlineRayTracer_cameraPage/onlineRayTracer_cameraPage.html'; break;
+			case 2: location.href = '../onlineRayTracer_backgroundPage/onlineRayTracer_backgroundPage.html'; break;
+			case 3: location.href = '../onlineRayTracer_renderPage/onlineRayTracer_renderPage.html'; break;
+			default: alert('Error');
+		}
+		
 	}
 }
 

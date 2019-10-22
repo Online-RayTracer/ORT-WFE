@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link type="text/css" href="./css/onlineRayTracer_cameraPage.css" rel="stylesheet" />
+    <link type="text/css" href="./css/resetCSS.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+    <div class="onlineRayTracerCameraPage">
+        <aside class="onlineRayTracerSideBar">
+            <a class="sideBar_logo" href="../onlineRayTracer_startPage/onlineRayTracer_startPage.html"></a>
+            <nav class="sideBar_menu">
+                <ul>
+                    <li id="goto_objectsP"><a href="../onlineRayTracer_objectsPage/onlineRayTracer_objectsPage.html">objects</a></li>
+                    <li id="goto_sceneP"><a href="../onlineRayTracer_scenePage/onlineRayTracer_scenePage.html">scene</a></li>
+                    <li id="goto_cameraP"><a>camera</a></li>
+                    <li id="goto_backgroundP"><a href="../onlineRayTracer_backgroundPage/onlineRayTracer_backgroundPage.html">background</a></li>
+                    <li id="goto_renderP"><a href="../onlineRayTracer_renderPage/onlineRayTracer_renderPage.html">render</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <section class="cameraContents">
+            <article class="camera_topMenu">
+                <div><a>top</a></div>
+                <div><a>front</a></div>
+                <div><a>right</a></div>
+                <div><!--blank--></div>
+                <div><!--blank--></div>
+                <div><!--blank--></div>
+                <div><!--blank--></div>
+                <div><a>create</a></div>
+            </article>
+            <article class="camera_main">
+                <div id="camera_box"></div>
+            </article>
+            <article class="camera_sideBar">
+                <div class="camera_sideBarPosition">
+                    <div class="camera_sideBarTitle">
+                        <h4>Position</h4>
+                        <a>set Default</a>
+                    </div>
+                    <div class="camera_sideBarPositionC">
+                        <div>
+                            <h5>X</h5>
+                            <input type="number" value="0" min="0">
+                        </div>
+                        <div>
+                            <h5>Y</h5>
+                            <input type="number" value="0" min="0">
+                        </div>
+                        <div>
+                            <h5>Z</h5>
+                            <input type="number" value="0" min="0">
+                        </div>
+                    </div>
+                </div>
+                
+            </article>
+        </section>
+    </div>
+    <script src="./js/onlineRayTracer_cameraPage.js"></script>
+</body>
+</html>

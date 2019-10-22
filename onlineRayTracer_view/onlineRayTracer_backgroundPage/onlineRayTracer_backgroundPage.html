@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link type="text/css" href="./css/onlineRayTracer_backgroundPage.css" rel="stylesheet" />
+    <link type="text/css" href="./css/resetCSS.css" rel="stylesheet" />
+    <title>onlineRayTracer_backgroundPage</title>
+</head>
+<body>
+    <div class="onlineRayTracerBackgroundPage">
+        <aside class="onlineRayTracerSideBar">
+            <a class="sideBar_logo" href="../onlineRayTracer_startPage/onlineRayTracer_startPage.html"></a>
+            <nav class="sideBar_menu">
+                <ul>
+                    <li id="goto_objectsP"><a href="../onlineRayTracer_objectsPage/onlineRayTracer_objectsPage.html">objects</a></li>
+                    <li id="goto_sceneP"><a href="../onlineRayTracer_scenePage/onlineRayTracer_scenePage.html">scene</a></li>
+                    <li id="goto_cameraP"><a href="../onlineRayTracer_cameraPage/onlineRayTracer_cameraPage.html">camera</a></li>
+                    <li id="goto_backgroundP"><a>background</a></li>
+                    <li id="goto_renderP"><a href="../onlineRayTracer_renderPage/onlineRayTracer_renderPage.html">render</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <section class="backgroundContents">
+            <article class="backgroundContent">
+                <div><h3>Setting</h3></div>
+                <div class="backgroundContent_opacity">
+                    <div>
+                        <input type="radio" name="setting" value="0" checked><label for=""></label><p>Opacity</p>
+                    </div>
+                    <div>
+                        <input type="radio" name="setting" value="1"><p>Limpidity</p>
+                    </div>
+                </div>
+            </article>
+        </section>
+        <script src="./js/onlineRayTracer_backgroundPage.js"></script>
+    </div>
+</body>
+</html>

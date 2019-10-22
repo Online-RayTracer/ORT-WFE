@@ -9,6 +9,12 @@ window.addEventListener('load', () => {
 let resolution_width = objectsData.resolution_width;
 let resolution_length = objectsData.resolution_length;
 
+let stage = new Konva.Stage({
+    container: 'objects_box',
+    width: resolution_width,
+    height: resolution_length
+});
+
 function addCircle(layer) {
     let color = 'red';
 
@@ -24,26 +30,11 @@ function addCircle(layer) {
     layer.add(circle);
 }
 
-let stage = new Konva.Stage({
-    container: 'objects_box',
-    width: resolution_width,
-    height: resolution_length
-});
-
-let dragLayer = new Konva.Layer();
-
 let layersArr = [];
-/*
-* create 10 layers each containing 1000 shapes to create
-* 10,000 shapes.  This greatly improves performance because
-* only 1,000 shapes will have to be drawn at a time when a
-* circle is removed from a layer rather than all 10,000 shapes.
-* Keep in mind that having too many layers can also slow down performance.
-* I found that using 10 layers each made up of 1,000 shapes performs better
-* than 20 layers with 500 shapes or 5 layers with 2,000 shapes
-*/
 let layer = new Konva.Layer();
 layersArr.push(layer);
+
+let dragLayer = new Konva.Layer();
 
 for (let n = 0; n < 1; n++) {
     addCircle(layer);
@@ -68,54 +59,54 @@ stage.on('mousedown', (evt) => {
 
 
 
-let nowZoom = 100;
+// let nowZoom = 100;
 
-function zoomOut() {   // 화면크기축소
-    nowZoom = nowZoom - 10;
-    if(nowZoom <= 70) nowZoom = 70;   // 화면크기 최대 축소율 70%
-    zooms();
-}
+// function zoomOut() {   // 화면크기축소
+//     nowZoom = nowZoom - 10;
+//     if(nowZoom <= 70) nowZoom = 70;   // 화면크기 최대 축소율 70%
+//     zooms();
+// }
 
-function zoomIn() {   // 화면크기확대
-    nowZoom = nowZoom + 20;
-    if(nowZoom >= 200) nowZoom = 200;   // 화면크기 최대 확대율 200%
-    zooms();
-}
+// function zoomIn() {   // 화면크기확대
+//     nowZoom = nowZoom + 20;
+//     if(nowZoom >= 200) nowZoom = 200;   // 화면크기 최대 확대율 200%
+//     zooms();
+// }
 
-function zoomReset() {
-    nowZoom = 100;   // 원래 화면크기로 되돌아가기
-    zooms();
-}
+// function zoomReset() {
+//     nowZoom = 100;   // 원래 화면크기로 되돌아가기
+//     zooms();
+// }
 
-const objects_main = document.querySelector('.objects_main');
+// const objects_main = document.querySelector('.objects_main');
 
-function zooms() {
-    objects_main.style.zoom = nowZoom + "%";
-    if(nowZoom == 70) {
-        alert("더 이상 축소할 수 없습니다.");   // 화면 축소율이 70% 이하일 경우 경고창
-    }
-    if(nowZoom == 200) {
-        alert("더 이상 확대할 수 없습니다.");   // 화면 확대율이 200% 이상일 경우 경고창
-    }
-}
+// function zooms() {
+//     objects_main.style.zoom = nowZoom + "%";
+//     if(nowZoom == 70) {
+//         alert("더 이상 축소할 수 없습니다.");   // 화면 축소율이 70% 이하일 경우 경고창
+//     }
+//     if(nowZoom == 200) {
+//         alert("더 이상 확대할 수 없습니다.");   // 화면 확대율이 200% 이상일 경우 경고창
+//     }
+// }
 
-let ctrlPressed = false;
-let scrollUpDown = objects_main.scrollTop;
-let scroll = objects_main.scrollTop;
+// let ctrlPressed = false;
+// let scrollUpDown = objects_main.scrollTop;
+// let scroll = objects_main.scrollTop;
 
-window.addEventListener('keydown', (e) => {
-    if (e.keyCode === 17) {
-        console.log('ctrlDown');
-        ctrlPressed = true;
-    }
-});
+// window.addEventListener('keydown', (e) => {
+//     if (e.keyCode === 17) {
+//         console.log('ctrlDown');
+//         ctrlPressed = true;
+//     }
+// });
 
-window.addEventListener('keyup', (e) => {
-    if (e.keyCode === 17) {
-        console.log('ctrlUp');
-        ctrlPressed = false;
-    }
-});
+// window.addEventListener('keyup', (e) => {
+//     if (e.keyCode === 17) {
+//         console.log('ctrlUp');
+//         ctrlPressed = false;
+//     }
+// });
 
 
 
