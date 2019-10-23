@@ -29,14 +29,14 @@
                 <!-- <a href="#;" onClick="zoomIn();">화면확대</a>
                 <a href="#;" onClick="zoomOut();">화면축소</a>
                 <a href="#;" onClick="zoomReset();">기본설정</a> -->
-                <div><a>top</a></div>
-                <div><a>front</a></div>
-                <div><a>right</a></div>
+                <div><a id="object_top">top</a></div>
+                <div><a id="object_front">front</a></div>
+                <div><a id="object_right">right</a></div>
                 <div><!--blank--></div>
-                <div><a>reset</a></div>
-                <div><a>random</a></div>
-                <div><a>delete</a></div>
-                <div><a>create</a></div>
+                <div><a id="object_reset">reset</a></div>
+                <div><a id="object_random">random</a></div>
+                <div><a id="object_delete">delete</a></div>
+                <div><a id="object_create">create</a></div>
             </article>
             <article class="objects_main">
                 <div id="objects_box"></div>
@@ -78,18 +78,18 @@
                         <a>set Default</a>
                     </div>
                     <div class="objects_sideBarSurfaceC">
-                        <div>
+                        <a id="object_metal">
                             <h5>METAL</h5>
                             <img>
-                        </div>
-                        <div>
+                        </a>
+                        <a id="object_nonMetal">
                             <h5>NON<br>METAL</h5>
                             <img>
-                        </div>
-                        <div>
+                        </a>
+                        <a id="object_glass">
                             <h5>GLASS</h5>
                             <img>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <div class="objects_sideBarRoughness">

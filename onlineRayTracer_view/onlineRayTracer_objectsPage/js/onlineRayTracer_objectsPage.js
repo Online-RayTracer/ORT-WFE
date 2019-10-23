@@ -24,24 +24,45 @@ function addCircle(layer) {
         x: randX,
         y: randY,
         radius: 6,
-        fill: color
+        fill: color,
+        name: 'i.toString()'
     });
 
     layer.add(circle);
+
+    stage.add(layer);
+    stage.add(dragLayer);
 }
 
 let layersArr = [];
 let layer = new Konva.Layer();
+
 layersArr.push(layer);
 
 let dragLayer = new Konva.Layer();
+
+var tooltipLayer = new Konva.Layer();
+
+var tooltip = new Konva.Text({
+    text: '',
+    fontFamily: 'Calibri',
+    fontSize: 12,
+    padding: 5,
+    visible: false,
+    fill: 'black',
+    opacity: 0.75,
+    textFill: 'white'
+});
+
+tooltipLayer.add(tooltip);
+stage.add(tooltipLayer);
 
 for (let n = 0; n < 1; n++) {
     addCircle(layer);
 }
 
-stage.add(layer);
-stage.add(dragLayer);
+// stage.add(layer);
+// stage.add(dragLayer);
 
 stage.on('mousedown', (evt) => {
     let circle = evt.target;
@@ -52,10 +73,127 @@ stage.on('mousedown', (evt) => {
     circle.startDrag();
 });
 
+layer.on('mousemove', function(e) {
+    // update tooltip
+    var mousePos = stage.getPointerPosition();
+    tooltip.position({
+        x: mousePos.x + 5,
+        y: mousePos.y - 10
+    });
+    tooltip.text(
+        'node: ' + e.target.name() + ', color: ' + e.target.fill()
+    );
+    tooltip.show();
+    tooltipLayer.draw();
+});
+
+layer.on('mouseout', function() {
+    tooltip.hide();
+    tooltipLayer.draw();
+});
+
+document.getElementById('object_create').addEventListener('click', () => {addCircle(layer)})
+
+/*
+var stage = new Konva.Stage({
+    container: 'container',
+    width: width,
+    height: height
+});
+
+var circlesLayer = new Konva.Layer(); = layer
+var tooltipLayer = new Konva.Layer(); = 이건 새로운거
+
+for (var i = 0; i < 10000; i++) {
+    var color = red;
+
+    var randX = Math.random() * stage.width();
+    var randY = Math.random() * stage.height();
+    var circle = new Konva.Circle({
+        x: randX,
+        y: randY,
+        radius: 3,
+        fill: color,
+        name: i.toString()
+    });
+
+    circlesLayer.add(circle);
+}
+
+var tooltip = new Konva.Text({
+    text: '',
+    fontFamily: 'Calibri',
+    fontSize: 12,
+    padding: 5,
+    visible: false,
+    fill: 'black',
+    opacity: 0.75,
+    textFill: 'white'
+});
+
+tooltipLayer.add(tooltip);
+stage.add(circlesLayer);
+stage.add(tooltipLayer);
+
+circlesLayer.on('mousemove', function(e) {
+    // update tooltip
+    var mousePos = stage.getPointerPosition();
+    tooltip.position({
+        x: mousePos.x + 5,
+        y: mousePos.y + 5
+    });
+    tooltip.text(
+        'node: ' + e.target.name() + ', color: ' + e.target.fill()
+    );
+    tooltip.show();
+    tooltipLayer.draw();
+});
+circlesLayer.on('mouseout', function() {
+    tooltip.hide();
+    tooltipLayer.draw();
+});
+*/
 
 
 
 
+
+const objectRadiusText = document.getElementById('objectRadiusText');
+
+function objectRadiusValue(v) {
+    objectRadiusText.value = v;
+}
+
+const objectRoughnessText = document.getElementById('objectRoughnessText');
+
+function objectRoughnessValue(v) {
+    objectRoughnessText.value = v;
+}
+
+let colorPicker = new iro.ColorPicker("#objectcolorPicker", {
+    width: 130,
+    color: "#ff0000",
+    sliderHeight: 10
+});
+
+const objects_sideBar = document.querySelector('.objects_sideBar');
+
+document.getElementById('object_metal').addEventListener('click', () => {choseSurface(0)});
+document.getElementById('object_nonMetal').addEventListener('click', () => {choseSurface(1)});
+document.getElementById('object_glass').addEventListener('click', () => {choseSurface(2)});
+
+function choseSurface(s) {
+    objects_sideBar.classList.remove('metal');
+    objects_sideBar.classList.remove('nonMetal');
+    objects_sideBar.classList.remove('glass');
+    if(s === 0) {
+        objects_sideBar.classList.add('metal');
+    } else if (s === 1) {
+        objects_sideBar.classList.add('nonMetal');
+    } else if (s === 2) {
+        objects_sideBar.classList.add('glass');
+    }
+}
 
 
 
@@ -110,24 +248,6 @@ stage.on('mousedown', (evt) => {
 
 
 
-
-const objectRadiusText = document.getElementById('objectRadiusText');
-
-function objectRadiusValue(v) {
-    objectRadiusText.value = v;
-}
-
-const objectRoughnessText = document.getElementById('objectRoughnessText');
-
-function objectRoughnessValue(v) {
-    objectRoughnessText.value = v;
-}
-
-let colorPicker = new iro.ColorPicker("#objectcolorPicker", {
-    width: 130,
-    color: "#ff0000",
-    sliderHeight: 10
-});
 
 // objects_main.addEventListener('scroll', (e) => {
 //     scroll = objects_main.scrollTop;

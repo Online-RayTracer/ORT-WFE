@@ -108,11 +108,13 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: 1fr;
+    grid-gap: 5px;
     position: absolute;
     top: 3%;
     left: 3%;
     width: calc(80% - 6% - 60px);
     height: calc(10% - 1%);
+    min-width: 580px;
     background-color: #343434;
 }
 
@@ -137,6 +139,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 }
 
 #objects_box {
+    margin: 0 auto;
     background-color: #cfcfcf;
 }
 
@@ -153,6 +156,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 
 .objects_sideBar > div {
     width: 80%;
+    min-width: 250px;
 }
 
 .objects_sideBarTitle {
@@ -177,6 +181,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 
 .objects_sideBarPosition {
     height: 18%;
+    min-height: 125px;
 }
 
 .objects_sideBarPositionC {
@@ -208,6 +213,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 
 .objects_sideBarRadius {
     height: 20%;
+    min-height: 140px;
 }
 
 .objects_sideBarRadiusC {
@@ -278,6 +284,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 
 .objects_sideBarSurface {
     height: 20%;
+    min-height: 140px;
 }
 
 .objects_sideBarSurfaceC {
@@ -286,18 +293,20 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     align-items: center;
     justify-content: space-around;
     height: calc(75% - 31px);
+    min-height: 80px;
 }
 
-.objects_sideBarSurfaceC > div {
+.objects_sideBarSurfaceC > a {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     width: 25%;
     height: 80px;
+    cursor: pointer;
 }
 
-.objects_sideBarSurfaceC > div > h5 {
+.objects_sideBarSurfaceC > a > h5 {
     display: flex;
     align-items: center;
     height: 32px;
@@ -305,7 +314,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     font-weight: bold;
 }
 
-.objects_sideBarSurfaceC > div > img {
+.objects_sideBarSurfaceC > a > img {
     width: 60%;
     height: 40px;
     background-color: #1C1C1C;
@@ -313,6 +322,13 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 
 .objects_sideBarRoughness {
     height: 18%;
+    min-height: 125px;
+}
+
+.nonMetal .objects_sideBarRoughness {
+    height: 0;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .objects_sideBarRoughnessC {
@@ -389,11 +405,18 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     height: 22%;
 }
 
+.glass .objects_sideBarColors {
+    height: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
 .objects_sideBarColorsC {
     border: 1px solid black;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 180px;
-    height: calc(100% - 40px);
+    /* height: calc(100% - 40px); */
+    height: 162px;
 }
