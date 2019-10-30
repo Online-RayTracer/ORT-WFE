@@ -9,21 +9,20 @@ let sceneData = JSON.parse(sessionStorage.getItem('ORTData'));
 
 window.addEventListener('load', () => {
 	sceneName.value = sceneData.name;
-	sceneResolutionX.value = sceneData.resolution_width;
-	sceneResolutionY.value = sceneData.resolution_length;
-	// sceneQualityRange.value = sceneData.
-	// sceneQualityText.value = sceneData.
+	sceneResolutionX.value = sceneData.width;
+	sceneResolutionY.value = sceneData.height;
+	sceneQualityRange.value = sceneData.samples;
+	sceneQualityText.value = sceneData.samples;
 })
-
-
 
 document.getElementById('sceneSaveButton').addEventListener('click', sceneSave);
 
 
 function saveSceneData() {
 	sceneData.name = sceneName.value;
-	sceneData.resolution_width = sceneResolutionX.value;
-	sceneData.resolution_length = sceneResolutionY.value;
+	sceneData.width = sceneResolutionX.value;
+	sceneData.height = sceneResolutionY.value;
+	sceneData.samples = sceneQualityText.value;
 	sessionStorage.setItem('ORTData', JSON.stringify(sceneData));
 }
 

@@ -27,22 +27,22 @@
                 <article class="sceneContent scene_name">
                     <div><h3>Name</h3></div>
                     <div>
-                        <input id="sceneName" class="scene_name_inputT" type="text" value="" placeholder="input scene name">
+                        <input id="sceneName" class="scene_name_inputT" type="text" value="" placeholder="input scene name" onfocus="this.select()">
                     </div>
                 </article>
                 <article class="sceneContent scene_resolution">
                     <div><h3>Resolution</h3></div>
                     <div>
-                        <input id="sceneResolutionX" class="scene_resolution_inputT" type="number" placeholder="0">
+                        <input id="sceneResolutionX" class="scene_resolution_inputT" type="number" placeholder="0" onfocus="this.select()">
                         <div class="scene_resolution_x"></div>
-                        <input id="sceneResolutionY" class="scene_resolution_inputT" type="number" placeholder="0">
+                        <input id="sceneResolutionY" class="scene_resolution_inputT" type="number" placeholder="0" onfocus="this.select()">
                     </div>
                 </article>
                 <article class="sceneContent scene_quality">
                     <div><h3>Number of samples per pixel</h3></div>
                     <div>
                         <div class="scene_quality_inputR"><input id="sceneQualityRange" type="range" oninput='sceneQualityRangeValue(this.value)' value="100" min="100" max="1000" step="1"></div>
-                        <input id="sceneQualityText" class="scene_quality_inputT" type="number" value="100" readonly>
+                        <input id="sceneQualityText" class="scene_quality_inputT" type="number" min="100" max="1000" value="100" readonly>
                     </div>
                 </article>
             </div>

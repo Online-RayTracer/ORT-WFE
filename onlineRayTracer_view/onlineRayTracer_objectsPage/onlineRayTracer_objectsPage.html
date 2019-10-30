@@ -50,15 +50,15 @@
                     <div class="objects_sideBarPositionC">
                         <div>
                             <h5>X</h5>
-                            <input type="number" value="0" min="0">
+                            <input id="object_positionX" onchange="objectDataChanged('x')" type="number" value="0" min="0">
                         </div>
                         <div>
                             <h5>Y</h5>
-                            <input type="number" value="0" min="0">
+                            <input id="object_positionY" onchange="objectDataChanged('y')" type="number" value="0" min="0">
                         </div>
                         <div>
                             <h5>Z</h5>
-                            <input type="number" value="0" min="0">
+                            <input id="object_positionZ" onchange="objectDataChanged('z')" type="number" value="0" min="0">
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                         <a>set Default</a>
                     </div>
                     <div class="objects_sideBarRadiusC">
-                        <div class="objects_radiusinputR"><input type="range" oninput='objectRadiusValue(this.value)' value="0" min="1" max="200" step="1"></div>
+                        <div class="objects_radiusinputR"><input id="objectRadiusRange" type="range" oninput='objectRadiusValue(this.value)' value="0" min="1" max="200" step="1"></div>
                         <input id="objectRadiusText" class="objects_radiusinputT" type="number" value="1" readonly>
                     </div>
                 </div>
@@ -80,15 +80,15 @@
                     <div class="objects_sideBarSurfaceC">
                         <a id="object_metal">
                             <h5>METAL</h5>
-                            <img>
+                            <img src="https://lh3.google.com/u/0/d/1XpkVKMWA7dyKS4FxLOQLfAArb9mTbo35=w1489-h937-iv1">
                         </a>
                         <a id="object_nonMetal">
                             <h5>NON<br>METAL</h5>
-                            <img>
+                            <img src="https://lh3.google.com/u/0/d/1XpkVKMWA7dyKS4FxLOQLfAArb9mTbo35=w1489-h937-iv1">
                         </a>
                         <a id="object_glass">
                             <h5>GLASS</h5>
-                            <img>
+                            <img src="https://lh3.google.com/u/0/d/1aaKJGS5zIMqc72qJE8EOFwD6rnaBnObR=w1920-h937-iv1">
                         </a>
                     </div>
                 </div>

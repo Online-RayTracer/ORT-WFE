@@ -3,165 +3,153 @@ const objects_box = document.getElementById('objects_box');
 let objectsData = JSON.parse(sessionStorage.getItem('ORTData'));
 
 window.addEventListener('load', () => {
-    objects_box.style = `width: ${objectsData.resolution_width}px;height: ${objectsData.resolution_length}px;`;
+    objects_box.style = `width: ${objectsData.width}px; height: ${objectsData.height}px;`;
+    putObjects();
 })
 
-let resolution_width = objectsData.resolution_width;
-let resolution_length = objectsData.resolution_length;
+let objectStructure = {
+    // location: [],
+    // size: 0,
+    // material: {
+    //     type: 1,
+    //     color: [],
+    //     Roughness: 0.0,
+    //     Refractive_index: 0
+    // }
+}
 
 let stage = new Konva.Stage({
     container: 'objects_box',
-    width: resolution_width,
-    height: resolution_length
+    width: objectsData.width,
+    height: objectsData.height
 });
 
+let circleIndex = objectsData.objects.length;
+
 function addCircle(layer) {
-    let color = 'red';
 
     let randX = Math.random() * stage.width();
     let randY = Math.random() * stage.height();
+    let radius = 6;
+    let color = 'rgb(255,0,0)';
     let circle = new Konva.Circle({
         x: randX,
         y: randY,
-        radius: 6,
+        radius: radius,
         fill: color,
-        name: 'i.toString()'
+        name: `${circleIndex}`,
+        stroke: 'white',
+        strokeWidth: 0,
+        draggable: false
     });
 
     layer.add(circle);
 
     stage.add(layer);
-    stage.add(dragLayer);
+
+    circleIndex++;
+    objectStructure = {
+        location: [parseInt(randX), parseInt(randY), 000],
+        size: radius,
+        material: {
+            type: 1,
+            color: [255, 0, 0],
+            roughness: 0.0,
+            ref_idx: 0
+        }
+    }
+    objectsData.objects.push(objectStructure);
 }
 
-let layersArr = [];
 let layer = new Konva.Layer();
+var dragLayer = new Konva.Layer();
 
-layersArr.push(layer);
+stage.add(dragLayer)
 
-let dragLayer = new Konva.Layer();
+// for (let n = 0; n < 1; n++) {
+//     addCircle(layer);
+// }
 
-var tooltipLayer = new Konva.Layer();
-
-var tooltip = new Konva.Text({
-    text: '',
-    fontFamily: 'Calibri',
-    fontSize: 12,
-    padding: 5,
-    visible: false,
-    fill: 'black',
-    opacity: 0.75,
-    textFill: 'white'
-});
-
-tooltipLayer.add(tooltip);
-stage.add(tooltipLayer);
-
-for (let n = 0; n < 1; n++) {
-    addCircle(layer);
+function putObjects() {
+    if(objectsData.objects.length > 0) {
+        objectsData.objects.forEach((v, i) => {
+            let circle = new Konva.Circle({
+                x: location[0],
+                y: location[1],
+                radius: v.size,
+                fill: v.material.color,
+                name: `${i}`,
+                stroke: 'white',
+                strokeWidth: 0,
+                draggable: false
+            })
+            layer.add(circle);
+        
+            stage.add(layer);
+        })
+    }
 }
 
-// stage.add(layer);
-// stage.add(dragLayer);
+let objectTarget = {};
 
-stage.on('mousedown', (evt) => {
-    let circle = evt.target;
-    let layer = circle.getLayer();
+// stage.on('click', (e) => {
+//     objectInitialization();
+// })
 
-    circle.moveTo(dragLayer);
+layer.on('click', (e) => {
+    // event.stopPropagation();
+    console.log('it clicked', e.target);
+    if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
+        objectTarget.setAttrs({
+            draggable: false,
+            strokeWidth: 0
+        })
+    }
+    objectTarget = e.target;
+    getTargetData();
+    objectTarget.setAttrs({
+        draggable: true,
+        strokeWidth: 4
+    })
     layer.draw();
-    circle.startDrag();
-});
+})
 
-layer.on('mousemove', function(e) {
-    // update tooltip
-    var mousePos = stage.getPointerPosition();
-    tooltip.position({
-        x: mousePos.x + 5,
-        y: mousePos.y - 10
-    });
-    tooltip.text(
-        'node: ' + e.target.name() + ', color: ' + e.target.fill()
-    );
-    tooltip.show();
-    tooltipLayer.draw();
+layer.on('mouseover', function() {
+    document.body.style.cursor = 'pointer';
 });
 
 layer.on('mouseout', function() {
-    tooltip.hide();
-    tooltipLayer.draw();
+    document.body.style.cursor = 'default';
 });
 
-document.getElementById('object_create').addEventListener('click', () => {addCircle(layer)})
+layer.on('dragmove', (e) => {
+    // objectTarget.moveTo(dragLayer);
+    // stage.draw();
+    objectMove();
+})
 
-/*
-var stage = new Konva.Stage({
-    container: 'container',
-    width: width,
-    height: height
-});
+document.getElementById('object_random').addEventListener('click', () => {objectRandom()})
 
-var circlesLayer = new Konva.Layer(); = layer
-var tooltipLayer = new Konva.Layer(); = 이건 새로운거
+document.getElementById('object_delete').addEventListener('click', () => {objectDelete()});
 
-for (var i = 0; i < 10000; i++) {
-    var color = red;
+document.getElementById('object_create').addEventListener('click', () => {addCircle(layer)});
 
-    var randX = Math.random() * stage.width();
-    var randY = Math.random() * stage.height();
-    var circle = new Konva.Circle({
-        x: randX,
-        y: randY,
-        radius: 3,
-        fill: color,
-        name: i.toString()
-    });
+function objectRandom() {
 
-    circlesLayer.add(circle);
 }
 
-var tooltip = new Konva.Text({
-    text: '',
-    fontFamily: 'Calibri',
-    fontSize: 12,
-    padding: 5,
-    visible: false,
-    fill: 'black',
-    opacity: 0.75,
-    textFill: 'white'
-});
-
-tooltipLayer.add(tooltip);
-stage.add(circlesLayer);
-stage.add(tooltipLayer);
-
-circlesLayer.on('mousemove', function(e) {
-    // update tooltip
-    var mousePos = stage.getPointerPosition();
-    tooltip.position({
-        x: mousePos.x + 5,
-        y: mousePos.y + 5
-    });
-    tooltip.text(
-        'node: ' + e.target.name() + ', color: ' + e.target.fill()
-    );
-    tooltip.show();
-    tooltipLayer.draw();
-});
-circlesLayer.on('mouseout', function() {
-    tooltip.hide();
-    tooltipLayer.draw();
-});
-*/
-
-
-
-
+function objectDelete() {
+    if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
+        objectTarget.remove();
+        layer.draw();
+    }
+}
 
 const objectRadiusText = document.getElementById('objectRadiusText');
 
 function objectRadiusValue(v) {
     objectRadiusText.value = v;
+    objectDataChanged('ra', v);
 }
 
 const objectRoughnessText = document.getElementById('objectRoughnessText');
@@ -174,6 +162,18 @@ let colorPicker = new iro.ColorPicker("#objectcolorPicker", {
     width: 130,
     color: "#ff0000",
     sliderHeight: 10
+});
+
+colorPicker.on('input:move', (color) => {
+    if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
+        objectTarget.setAttrs({
+            fill: color.rgbString
+        });
+        objectsData.objects[objectTarget.attrs.name].material.color[0] = color.rgb.r;
+        objectsData.objects[objectTarget.attrs.name].material.color[1] = color.rgb.g;
+        objectsData.objects[objectTarget.attrs.name].material.color[2] = color.rgb.b;
+        layer.draw();
+    }
 });
 
 const objects_sideBar = document.querySelector('.objects_sideBar');
@@ -195,6 +195,70 @@ function choseSurface(s) {
     }
 }
 
+const object_positionX = document.getElementById('object_positionX');
+const object_positionY = document.getElementById('object_positionY');
+const object_positionZ = document.getElementById('object_positionZ');
+
+const objectRadiusRange = document.getElementById('objectRadiusRange');
+
+function getTargetData() {
+    let obj = objectsData.objects[objectTarget.attrs.name];
+
+    object_positionX.value = obj.location[0];
+    object_positionY.value = obj.location[1];
+    object_positionZ.value = obj.location[2];
+
+    objectRadiusRange.value = obj.size;
+    objectRadiusText.value = obj.size;
+
+    colorPicker.color.setChannel('rgb', 'r', obj.material.color[0]);
+    colorPicker.color.setChannel('rgb', 'g', obj.material.color[1]);
+    colorPicker.color.setChannel('rgb', 'b', obj.material.color[2]);
+}
+
+function objectMove() {
+    object_positionX.value = parseInt(objectTarget.attrs.x);
+    object_positionY.value = parseInt(objectTarget.attrs.y);
+    objectsData.objects[objectTarget.attrs.name].location[0] = parseInt(objectTarget.attrs.x);
+    objectsData.objects[objectTarget.attrs.name].location[1] = parseInt(objectTarget.attrs.y);
+}
+
+function objectDataChanged(k, v) {
+    let obj = objectsData.objects[objectTarget.attrs.name]
+    if(k === 'x') {
+        objectTarget.setAttrs({
+            x:parseInt(object_positionX.value)
+        })
+        obj.location[0] = parseInt(object_positionX.value);
+    } else if(k === 'y') {
+        objectTarget.setAttrs({
+            y:parseInt(object_positionY.value)
+        })
+        obj.location[1] = parseInt(object_positionY.value);
+    } else if(k === 'z') {
+        obj.location[2] = parseInt(object_positionZ.value);
+    } else if(k === 'ra') {
+        objectTarget.setAttrs({
+            radius: v
+        })
+        obj.size = v;
+    } else if(k === 'ro') {
+
+    } else if(k === 're') {
+
+    }
+
+    layer.draw();
+}
+
+function objectInitialization() {
+    objectTarget = {};
+    object_positionX.value = 0;
+    object_positionY.value = 0;
+    object_positionZ.value = 0;
+    objectRadiusRange.value = 0;
+    objectRadiusText.value = 0;
+}
 
 
 // let nowZoom = 100;
