@@ -11,7 +11,7 @@ let objectStructure = {
     // location: [],
     // size: 0,
     // material: {
-    //     type: 1,
+    //     type: "",
     //     color: [],
     //     Roughness: 0.0,
     //     Refractive_index: 0
@@ -39,7 +39,7 @@ function addCircle(layer) {
         fill: color,
         name: `${circleIndex}`,
         stroke: 'white',
-        strokeWidth: 0,
+        strokeWidth: 1,
         draggable: false
     });
 
@@ -52,14 +52,15 @@ function addCircle(layer) {
         location: [parseInt(randX), parseInt(randY), 000],
         size: radius,
         material: {
-            type: 1,
+            type: "metal",
             color: [255, 0, 0],
             roughness: 0.0,
-            ref_idx: 0
         }
     }
     objectsData.objects.push(objectStructure);
 }
+
+
 
 let layer = new Konva.Layer();
 var dragLayer = new Konva.Layer();
@@ -74,13 +75,13 @@ function putObjects() {
     if(objectsData.objects.length > 0) {
         objectsData.objects.forEach((v, i) => {
             let circle = new Konva.Circle({
-                x: location[0],
-                y: location[1],
+                x: v.location[0],
+                y: v.location[1],
                 radius: v.size,
-                fill: v.material.color,
+                fill: `rgb(${v.material.color[0]},${v.material.color[1]},${v.material.color[2]})`,
                 name: `${i}`,
                 stroke: 'white',
-                strokeWidth: 0,
+                strokeWidth: 1,
                 draggable: false
             })
             layer.add(circle);
@@ -92,6 +93,8 @@ function putObjects() {
 
 let objectTarget = {};
 
+let objDeleteList = [];
+
 // stage.on('click', (e) => {
 //     objectInitialization();
 // })
@@ -102,7 +105,7 @@ layer.on('click', (e) => {
     if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
         objectTarget.setAttrs({
             draggable: false,
-            strokeWidth: 0
+            strokeWidth: 1
         })
     }
     objectTarget = e.target;
@@ -135,11 +138,15 @@ document.getElementById('object_delete').addEventListener('click', () => {object
 document.getElementById('object_create').addEventListener('click', () => {addCircle(layer)});
 
 function objectRandom() {
-
+    objects_sideBar.classList.remove('metal');
+    objects_sideBar.classList.remove('nonMetal');
+    objects_sideBar.classList.remove('glass');
+    objects_sideBar.classList.add('random');
 }
 
 function objectDelete() {
     if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
+        objDeleteList.push(parseInt(objectTarget.attrs.name));
         objectTarget.remove();
         layer.draw();
     }
@@ -156,6 +163,14 @@ const objectRoughnessText = document.getElementById('objectRoughnessText');
 
 function objectRoughnessValue(v) {
     objectRoughnessText.value = v;
+    objectDataChanged('ro', v);
+}
+
+const objectRefractiveText = document.getElementById('objectRefractiveText');
+
+function objectRefractiveValue(v) {
+    objectRefractiveText.value = v;
+    objectDataChanged('re', v);
 }
 
 let colorPicker = new iro.ColorPicker("#objectcolorPicker", {
@@ -188,10 +203,41 @@ function choseSurface(s) {
     objects_sideBar.classList.remove('glass');
     if(s === 0) {
         objects_sideBar.classList.add('metal');
+        if(objectsData.objects[objectTarget.attrs.name].material.type == "lambertian") {
+            let objcolor = objectTarget.attrs.fill;
+            objectsData.objects[objectTarget.attrs.name].material = {
+                type: "metal",
+                color: [parseInt(objcolor.substring(objcolor.indexOf('(')+1, objcolor.indexOf(','))), parseInt(objcolor.substring(objcolor.indexOf(',')+1, objcolor.lastIndexOf(','))), parseInt(objcolor.substring(objcolor.lastIndexOf(',')+1, objcolor.indexOf(')')))],
+                roughness: 0.0
+            }
+        } else {
+            objectsData.objects[objectTarget.attrs.name].material = {
+                type: "metal",
+                color: [255, 0, 0],
+                roughness: 0.0
+            }
+        }
     } else if (s === 1) {
         objects_sideBar.classList.add('nonMetal');
+        if(objectsData.objects[objectTarget.attrs.name].material.type == "metal") {
+            let objcolor = objectTarget.attrs.fill;
+            objectsData.objects[objectTarget.attrs.name].material = {
+                type: "lambertian",
+                color: [parseInt(objcolor.substring(objcolor.indexOf('(')+1, objcolor.indexOf(','))), parseInt(objcolor.substring(objcolor.indexOf(',')+1, objcolor.lastIndexOf(','))), parseInt(objcolor.substring(objcolor.lastIndexOf(',')+1, objcolor.indexOf(')')))]
+            }
+        } else {
+            objectsData.objects[objectTarget.attrs.name].material = {
+                type: "lambertian",
+                color: [255, 0, 0]
+            }
+        }
+        
     } else if (s === 2) {
         objects_sideBar.classList.add('glass');
+        objectsData.objects[objectTarget.attrs.name].material = {
+            type: "dielectric",
+            ref_idx: 0.0
+        }
     }
 }
 
@@ -200,6 +246,8 @@ const object_positionY = document.getElementById('object_positionY');
 const object_positionZ = document.getElementById('object_positionZ');
 
 const objectRadiusRange = document.getElementById('objectRadiusRange');
+const objectRoughnessRange = document.getElementById('objectRoughnessRange');
+const objectRefractiveRange = document.getElementById('objectRefractiveRange');
 
 function getTargetData() {
     let obj = objectsData.objects[objectTarget.attrs.name];
@@ -210,10 +258,35 @@ function getTargetData() {
 
     objectRadiusRange.value = obj.size;
     objectRadiusText.value = obj.size;
+    
+    objects_sideBar.classList.remove('metal');
+    objects_sideBar.classList.remove('nonMetal');
+    objects_sideBar.classList.remove('glass');
 
-    colorPicker.color.setChannel('rgb', 'r', obj.material.color[0]);
-    colorPicker.color.setChannel('rgb', 'g', obj.material.color[1]);
-    colorPicker.color.setChannel('rgb', 'b', obj.material.color[2]);
+    if(obj.material.type === "metal") {
+        objects_sideBar.classList.add('metal');
+
+        colorPicker.color.setChannel('rgb', 'r', obj.material.color[0]);
+        colorPicker.color.setChannel('rgb', 'g', obj.material.color[1]);
+        colorPicker.color.setChannel('rgb', 'b', obj.material.color[2]);
+
+        objectRoughnessRange.value = obj.material.roughness;
+        objectRoughnessRange.value = obj.material.roughness;
+
+    } else if(obj.material.type === "lambertian") {
+        objects_sideBar.classList.add('nonMetal');
+
+        colorPicker.color.setChannel('rgb', 'r', obj.material.color[0]);
+        colorPicker.color.setChannel('rgb', 'g', obj.material.color[1]);
+        colorPicker.color.setChannel('rgb', 'b', obj.material.color[2]);
+
+    } else if(obj.material.type === "dielectric") {
+        objects_sideBar.classList.add('glass');
+
+        objectRefractiveRange.value = obj.material.ref_idx;
+        objectRefractiveRange.value = obj.material.ref_idx;
+
+    }
 }
 
 function objectMove() {
@@ -241,11 +314,12 @@ function objectDataChanged(k, v) {
         objectTarget.setAttrs({
             radius: v
         })
-        obj.size = v;
+        obj.size = parseInt(v);
     } else if(k === 'ro') {
-
+        console.log('init!', v);
+        obj.material.roughness = parseFloat(v);
     } else if(k === 're') {
-
+        obj.material.ref_idx = parseFloat(v);
     }
 
     layer.draw();
@@ -260,6 +334,24 @@ function objectInitialization() {
     objectRadiusText.value = 0;
 }
 
+document.querySelectorAll('.sideBar_menu > ul > li').forEach((v, i) => {
+    if(i >= 1) {
+        v.addEventListener('click', () => {saveObjectsData();})
+    }
+})
+
+function saveObjectsData() {
+    if(objDeleteList.length > 0) {
+        objDeleteList.sort((a, b) => {
+            return b - a;
+        });
+        for(let v of objDeleteList) {
+            objectsData.objects.splice(v, 1);
+        }
+    }
+	sessionStorage.setItem('ORTData', JSON.stringify(objectsData));
+
+}
 
 // let nowZoom = 100;
 

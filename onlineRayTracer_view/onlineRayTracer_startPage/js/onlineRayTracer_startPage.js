@@ -13,7 +13,7 @@ document.getElementById('mainContentsStartButton').addEventListener('click', () 
             location: [],
             size: 0,
             material: {
-                type: 1,
+                type: "metal or lambertian or dielectric",
                 color: [],
                 roughness: 0.0,
                 ref_idx: 0

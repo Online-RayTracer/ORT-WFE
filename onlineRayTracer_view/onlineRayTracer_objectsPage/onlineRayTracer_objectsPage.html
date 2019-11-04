@@ -84,7 +84,7 @@
                         </a>
                         <a id="object_nonMetal">
                             <h5>NON<br>METAL</h5>
-                            <img src="https://lh3.google.com/u/0/d/1XpkVKMWA7dyKS4FxLOQLfAArb9mTbo35=w1489-h937-iv1">
+                            <img src="https://lh3.google.com/u/0/d/1YOHr3RCIkhwgdBv8tLw0AGCEX512uf7K=w1489-h937-iv1">
                         </a>
                         <a id="object_glass">
                             <h5>GLASS</h5>
@@ -98,7 +98,7 @@
                         <a>set Default</a>
                     </div>
                     <div class="objects_sideBarRoughnessC">
-                        <div class="objects_roughnessinputR"><input type="range" oninput='objectRoughnessValue(this.value)' value="0" min="0" max="1" step="0.1"></div>
+                        <div class="objects_roughnessinputR"><input id="objectRoughnessRange" type="range" oninput='objectRoughnessValue(this.value)' value="0" min="0" max="1" step="0.1"></div>
                         <input id="objectRoughnessText" class="objects_roughnessinputT" type="number" value="0" readonly>
                     </div>
                 </div>
@@ -109,6 +109,29 @@
                     </div>
                     <div class="objects_sideBarColorsC">
                         <div id="objectcolorPicker"></div>
+                    </div>
+                </div>
+                <div class="objects_sideBarRefractive">
+                    <div class="objects_sideBarTitle">
+                        <h4>Refractive</h4>
+                        <a>set Default</a>
+                    </div>
+                    <div class="objects_sideBarRefractiveC">
+                        <div class="objects_refractiveinputR"><input type="range" id="objectRefractiveRange" oninput='objectRefractiveValue(this.value)' value="0" min="0" max="1" step="0.1"></div>
+                        <input id="objectRefractiveText" class="objects_refractiveinputT" type="number" value="0" readonly>
+                    </div>
+                </div>
+                <div class="objects_sideBarRandom">
+                    <div class="objects_sideBarTitle">
+                        <h4>Random</h4>
+                        <a>set Default</a>
+                    </div>
+                    <div class="objects_sideBarRandomC">
+                        <p>Amount</p>
+                        <input type="number" value="0" min="0">
+                    </div>
+                    <div class="objects_sideBarRandomB">
+                        <button>SAVE</button>
                     </div>
                 </div>
             </article>

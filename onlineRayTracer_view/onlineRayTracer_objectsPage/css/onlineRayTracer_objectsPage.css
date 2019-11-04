@@ -184,6 +184,12 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     min-height: 125px;
 }
 
+.random .objects_sideBarPosition {
+    height: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
 .objects_sideBarPositionC {
     display: flex;
     flex-direction: row;
@@ -214,6 +220,12 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 .objects_sideBarRadius {
     height: 20%;
     min-height: 140px;
+}
+
+.random .objects_sideBarRadius {
+    height: 0;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .objects_sideBarRadiusC {
@@ -287,6 +299,12 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     min-height: 140px;
 }
 
+.random .objects_sideBarSurface {
+    height: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
 .objects_sideBarSurfaceC {
     display: flex;
     flex-direction: row;
@@ -325,7 +343,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     min-height: 125px;
 }
 
-.nonMetal .objects_sideBarRoughness {
+.nonMetal .objects_sideBarRoughness, .glass .objects_sideBarRoughness, .random .objects_sideBarRoughness {
     height: 0;
     min-height: 0;
     overflow: hidden;
@@ -405,7 +423,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     height: 22%;
 }
 
-.glass .objects_sideBarColors {
+.glass .objects_sideBarColors, .random .objects_sideBarColors {
     height: 0;
     min-height: 0;
     overflow: hidden;
@@ -419,4 +437,128 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     width: 180px;
     /* height: calc(100% - 40px); */
     height: 162px;
+}
+
+.objects_sideBarRefractive {
+    height: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.glass .objects_sideBarRefractive {
+    height: 18%;
+    min-height: 125px;
+}
+
+.objects_sideBarRefractiveC {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 100px;
+}
+
+.objects_refractiveinputR {
+    margin-right: 2%;
+    border-left: 2px solid #ABABAB;
+    border-right: 2px solid #ABABAB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 230px;
+    height: 30px;
+}
+
+.objects_refractiveinputR::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background-color: #ABABAB;
+}
+
+.objects_refractiveinputR > input[type=range] {
+    z-index: 50;
+    width: 100%;
+    height: 20px;
+    margin: 0;
+    -webkit-appearance: none;
+    background: none;
+}
+
+.objects_refractiveinputR > input[type=range]:focus {
+    outline: none;
+}
+
+.objects_refractiveinputR > input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    background: #707070;
+}
+
+.objects_refractiveinputR > input[type=range]::-webkit-slider-thumb {
+    width: 8px;
+    height: 30px;
+    background: #384772;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -14px;
+}
+
+.objects_refractiveinputT {
+    width: 220px;
+    height: 20px;
+    outline: none;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.objects_sideBarRandom {
+    height: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.random .objects_sideBarRandom {
+    height: 25%;
+}
+
+.objects_sideBarRandomC {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 100px;
+}
+
+.objects_sideBarRandomC > p {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.objects_sideBarRandomC > input {
+    width: 25%;
+    text-align: center;
+}
+
+.objects_sideBarRandomB {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40%;
+}
+
+.objects_sideBarRandomB > button {
+    border: 0;
+    border-radius: 100px;
+    width: 100px;
+    height: 30px;
+    background-color: #384772;
+    color: #FFFFFF;
+    letter-spacing: 0.1rem;
+    outline: none;
 }
