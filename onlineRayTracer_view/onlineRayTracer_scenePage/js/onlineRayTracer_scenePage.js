@@ -18,6 +18,30 @@ window.addEventListener('load', () => {
 document.getElementById('sceneSaveButton').addEventListener('click', sceneSave);
 
 
+function sceneSave(k) {
+	sceneContents.setAttribute('class', 'sceneContents');
+
+	if(sceneName.value === '') {
+		addToast('Name의 값을 정해주세요.');
+		sceneContents.classList.add('fillName');
+	} else if(sceneResolutionX.value === '' && sceneResolutionY.value === '') {
+		addToast('Resolution의 값을 정해주세요.');
+		sceneContents.classList.add('fillResolution');
+	} else if(sceneQualityText.value === '') {
+		addToast('Quality의 값을 정해주세요.');
+		sceneContents.classList.add('fillQuality');
+	} else {
+		saveSceneData();
+		addToast('데이터 저장이 완료되었습니다.');
+		switch(k) {
+			case 0: location.href = '../onlineRayTracer_objectsPage/onlineRayTracer_objectsPage.html'; break;
+			case 1: location.href = '../onlineRayTracer_cameraPage/onlineRayTracer_cameraPage.html'; break;
+			case 2: location.href = '../onlineRayTracer_backgroundPage/onlineRayTracer_backgroundPage.html'; break;
+			case 3: location.href = '../onlineRayTracer_renderPage/onlineRayTracer_renderPage.html'; break;
+		}
+	}
+}
+
 function saveSceneData() {
 	sceneData.name = sceneName.value;
 	sceneData.width = sceneResolutionX.value;
@@ -26,54 +50,20 @@ function saveSceneData() {
 	sessionStorage.setItem('ORTData', JSON.stringify(sceneData));
 }
 
-let isSceneDataSaved = false;
-
-function sceneSave() {
-	sceneContents.setAttribute('class', 'sceneContents');
-
-	if(sceneName.value === '') {
-		alert('Name의 값을 정해주세요.');
-		sceneContents.classList.add('fillName');
-	} else if(sceneResolutionX.value === '' && sceneResolutionY.value === '') {
-		alert('Resolution의 값을 정해주세요.');
-		sceneContents.classList.add('fillResolution');
-	} else if(sceneQualityText.value === '') {
-		alert('Quality의 값을 정해주세요.');
-		sceneContents.classList.add('fillQuality');
-	} else {
-		saveSceneData();
-		isceneDataSaved = true;
-		alert('데이터 저장이 완료되었습니다.');
-	}
-}
-
-function gotoOtherPage(k) {
-	if (isSceneDataSaved) {
-		location.href = '../onlineRayTracer_objectsPage/onlineRayTracer_objectsPage.html';
-	} else if(sceneName.value === '') {
-		alert('Name의 값을 정해주세요.');
-		sceneContents.classList.add('fillName');
-	} else if(sceneResolutionX.value === '' && sceneResolutionY.value === '') {
-		alert('Resolution의 값을 정해주세요.');
-		sceneContents.classList.add('fillResolution');
-	} else if(sceneQualityText.value === '') {
-		alert('Quality의 값을 정해주세요.');
-		sceneContents.classList.add('fillQuality');
-	} else {
-		sceneSave();
-		switch(k) {
-			case 0: location.href = '../onlineRayTracer_objectsPage/onlineRayTracer_objectsPage.html'; break;
-			case 1: location.href = '../onlineRayTracer_cameraPage/onlineRayTracer_cameraPage.html'; break;
-			case 2: location.href = '../onlineRayTracer_backgroundPage/onlineRayTracer_backgroundPage.html'; break;
-			case 3: location.href = '../onlineRayTracer_renderPage/onlineRayTracer_renderPage.html'; break;
-			default: alert('Error');
-		}
-		
-	}
-}
-
 function sceneQualityRangeValue(v) {
 	sceneQualityText.value = v;
 }
 
+const toastPopupWrapper = document.getElementById('toastPopupWrapper');
 
+function addToast(v) {
+	let toastBox = document.createElement('li');
+	toastBox.innerText = v;
+	toastBox.addEventListener('click', () => {
+		toastBox.remove();
+	})
+	setTimeout(()=> {
+		toastBox.remove();
+	}, 3000);
+	toastPopupWrapper.prepend(toastBox);
+}

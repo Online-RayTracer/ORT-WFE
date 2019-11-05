@@ -38,7 +38,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     content: '';
     width: 220px;
     height: 120px;
-    background-image: url('../src/logoWhite.png');
+    background-image: url('https://lh3.google.com/u/0/d/1a1pngLFLnquZtPcRfFqGlPr1zsK8hWbQ=w1920-h937-iv1');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -135,14 +135,18 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 }
 
 .camera_main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 80%;
     height: 100%;
-    background: #4A4A4A;
+    background: #bdbdbd;
     overflow-y: scroll;
 }
 
 #camera_box {
-    background-color: #cfcfcf;
+    width: 100%;
+    height: 100%;
 }
 
 .camera_sideBar {
@@ -208,5 +212,76 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 
 .camera_sideBarPositionC > div > input, .camera_sideBarLocationC > div > input {
     width: 100%;
+    text-align: center;
+}
+
+.camera_sideBarAperture {
+    height: 20%;
+    min-height: 140px;
+}
+
+.camera_sideBarApertureC {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 100px;
+}
+
+.camera_apertureinputR {
+    margin-right: 2%;
+    border-left: 2px solid #ABABAB;
+    border-right: 2px solid #ABABAB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 230px;
+    height: 30px;
+}
+
+.camera_apertureinputR::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background-color: #ABABAB;
+}
+
+.camera_apertureinputR > input[type=range] {
+    z-index: 50;
+    width: 100%;
+    height: 20px;
+    margin: 0;
+    -webkit-appearance: none;
+    background: none;
+}
+
+.camera_apertureinputR > input[type=range]:focus {
+    outline: none;
+}
+
+.camera_apertureinputR > input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    background: #707070;
+}
+
+.camera_apertureinputR > input[type=range]::-webkit-slider-thumb {
+    width: 8px;
+    height: 30px;
+    background: #384772;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -14px;
+}
+
+.camera_apertureinputT {
+    width: 220px;
+    height: 20px;
+    outline: none;
+    font-size: 1.2rem;
     text-align: center;
 }

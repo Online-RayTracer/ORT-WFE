@@ -14,11 +14,11 @@
             <a class="sideBar_logo" href="../onlineRayTracer_startPage/onlineRayTracer_startPage.html"></a>
             <nav class="sideBar_menu">
                 <ul>
-                    <li id="goto_objectsP"><a onclick="gotoOtherPage(0)">objects</a></li>
+                    <li id="goto_objectsP"><a onclick="sceneSave(0)">objects</a></li>
                     <li id="goto_sceneP"><a>scene</a></li>
-                    <li id="goto_cameraP"><a onclick="gotoOtherPage(1)">camera</a></li>
-                    <li id="goto_backgroundP"><a onclick="gotoOtherPage(2)">background</a></li>
-                    <li id="goto_renderP"><a onclick="gotoOtherPage(3)">render</a></li>
+                    <li id="goto_cameraP"><a onclick="sceneSave(1)">camera</a></li>
+                    <li id="goto_backgroundP"><a onclick="sceneSave(2)">background</a></li>
+                    <li id="goto_renderP"><a onclick="sceneSave(3)">render</a></li>
                 </ul>
             </nav>
         </aside>
@@ -51,6 +51,9 @@
                 <button id="sceneImportButton" class="scene_importB">IMPORT</button>
                 <button id="sceneSaveButton" class="scene_saveB">SAVE</button>
             </div>
+        </section>
+        <section class="toastPopup_wrapper">
+            <ul id="toastPopupWrapper"></ul>
         </section>
         <script src="./js/onlineRayTracer_scenePage.js"></script>
     </div>

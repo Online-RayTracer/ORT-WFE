@@ -7,7 +7,7 @@ document.getElementById('mainContentsStartButton').addEventListener('click', () 
         cam_location: [0.000, 0.000, 0.000],
         cam_lookat: [0.000, 0.000, 0.000],
         camera_aperture: 0,
-        bg_transparent: false,
+        bg_transparent: true,
         bg_color: [],
         objects: [] /*{
             location: [],

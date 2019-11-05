@@ -26,9 +26,6 @@
         </aside>
         <section class="objectsContents">
             <article class="objects_topMenu">
-                <!-- <a href="#;" onClick="zoomIn();">화면확대</a>
-                <a href="#;" onClick="zoomOut();">화면축소</a>
-                <a href="#;" onClick="zoomReset();">기본설정</a> -->
                 <div><a id="object_top">top</a></div>
                 <div><a id="object_front">front</a></div>
                 <div><a id="object_right">right</a></div>
@@ -128,10 +125,10 @@
                     </div>
                     <div class="objects_sideBarRandomC">
                         <p>Amount</p>
-                        <input type="number" value="0" min="0">
+                        <input id="objectRandomText" type="number"onfocus="this.select()" value="0" min="0" max="1000">
                     </div>
                     <div class="objects_sideBarRandomB">
-                        <button>SAVE</button>
+                        <button id="objectRandomSave">SAVE</button>
                     </div>
                 </div>
             </article>

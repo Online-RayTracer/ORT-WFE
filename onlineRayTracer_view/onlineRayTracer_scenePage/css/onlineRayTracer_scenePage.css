@@ -40,7 +40,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     content: '';
     width: 220px;
     height: 120px;
-    background-image: url('../src/logoWhite.png');
+    background-image: url('https://lh3.google.com/u/0/d/1a1pngLFLnquZtPcRfFqGlPr1zsK8hWbQ=w1920-h937-iv1');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -304,9 +304,42 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     background-color: #2e3c61;
 }
 
+.toastPopup_wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: auto;
+}
 
+.toastPopup_wrapper > ul {
+    width: 400px;
+    height: auto;
+    transition: height 0.3s ease-in-out;
+}
 
+.toastPopup_wrapper > ul > li {
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 0px 20px;
+    height: 0;
+    background-color: #57a99a;
+    color: #ecf4f3;
+    font-size: 1.2rem;
+    animation: toastAnimation 3s;
+    animation-timing-function: ease-in-out;
+    overflow: hidden;
+} 
 
+@keyframes toastAnimation {
+    0%,to{padding-top: 0; min-height: 0px;}
+    5%{padding-top: 20px;}
+    10%{min-height: 40px;}
+    80%{opacity: 1;}
+    100%{padding-top: 20px; min-height: 40px; opacity: 0;}
+}
 
 
 

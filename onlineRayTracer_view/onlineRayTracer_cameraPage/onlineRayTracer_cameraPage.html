@@ -7,6 +7,7 @@
     <link type="text/css" href="./css/onlineRayTracer_cameraPage.css" rel="stylesheet" />
     <link type="text/css" href="./css/resetCSS.css" rel="stylesheet" />
     <title>Document</title>
+    <script src="https://unpkg.com/konva@4.0.12/konva.min.js"></script>
 </head>
 <body>
     <div class="onlineRayTracerCameraPage">
@@ -73,6 +74,16 @@
                             <h5>Z</h5>
                             <input type="number" value="0" min="0">
                         </div>
+                    </div>
+                </div>
+                <div class="camera_sideBarAperture">
+                    <div class="camera_sideBarTitle">
+                        <h4>Aperture</h4>
+                        <a>set Default</a>
+                    </div>
+                    <div class="camera_sideBarApertureC">
+                        <div class="camera_apertureinputR"><input id="cameraApertureRange" type="range" oninput='cameraApertureValue(this.value)' value="0" min="0" max="22" step="0.1"></div>
+                        <input id="cameraApertureText" class="camera_apertureinputT" type="number" value="0" readonly>
                     </div>
                 </div>
             </article>

@@ -1,9 +1,7 @@
-const objects_box = document.getElementById('objects_box');
-
 let objectsData = JSON.parse(sessionStorage.getItem('ORTData'));
 
 window.addEventListener('load', () => {
-    objects_box.style = `width: ${objectsData.width}px; height: ${objectsData.height}px;`;
+    // objects_box.style = `width: ${objectsData.width}px; height: ${objectsData.height}px;`;
     putObjects();
 })
 
@@ -18,42 +16,94 @@ let objectStructure = {
     // }
 }
 
+const objects_box = document.getElementById('objects_box');
+
 let stage = new Konva.Stage({
     container: 'objects_box',
-    width: objectsData.width,
-    height: objectsData.height
+    width: objects_box.clientWidth,
+    height: objects_box.clientHeight,
+    draggable: true
 });
+
+let layer = new Konva.Layer();
+
+let stageRect =  new Konva.Rect({ 
+    x:0,
+    y:0,
+    width: objectsData.width,
+    height: objectsData.height,
+    fill: 'rgb(74, 74, 74)',
+    listening: true
+})
+layer.add(stageRect);
+stage.add(layer);
 
 let circleIndex = objectsData.objects.length;
 
-function addCircle(layer) {
-
-    let randX = Math.random() * stage.width();
-    let randY = Math.random() * stage.height();
-    let radius = 6;
-    let color = 'rgb(255,0,0)';
+function addCircle(kind) {
+    let X, Y, radius, color;
+    if(kind === 'random') {
+        X = parseInt(Math.random() * objectsData.width);
+        Y = parseInt(Math.random() * objectsData.height);
+        radius = parseInt(Math.random() * 50) + 9;
+        color = `rgb(${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)})`;
+    } else {
+        X = parseInt(objectsData.width / 2);
+        Y = parseInt(objectsData.height / 2);
+        radius = 10;
+        color = 'rgb(255,0,0)';
+    }
     let circle = new Konva.Circle({
-        x: randX,
-        y: randY,
+        x: X,
+        y: Y,
         radius: radius,
         fill: color,
         name: `${circleIndex}`,
-        stroke: 'white',
-        strokeWidth: 1,
+        stroke: 'rgb(145,145,145)',
+        strokeWidth: 2,
         draggable: false
     });
+    circleIndex++;
+
+    circle.on('click', (e) => {
+        console.log('it clicked', e.target);
+        if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
+            objectTarget.setAttrs({
+                draggable: false,
+                strokeWidth: 2
+            })
+        }
+        objectTarget = e.target;
+        getTargetData();
+        objectTarget.setAttrs({
+            draggable: true,
+            strokeWidth: 5
+        })
+        layer.draw();
+    })
+    
+    circle.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    
+    circle.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+    
+    circle.on('dragmove', (e) => {
+        objectMove();
+    })
 
     layer.add(circle);
 
     stage.add(layer);
 
-    circleIndex++;
     objectStructure = {
-        location: [parseInt(randX), parseInt(randY), 000],
+        location: [X, Y, 000],
         size: radius,
         material: {
             type: "metal",
-            color: [255, 0, 0],
+            color: [parseInt(color.substring(color.indexOf('(')+1, color.indexOf(','))), parseInt(color.substring(color.indexOf(',')+1, color.lastIndexOf(','))), parseInt(color.substring(color.lastIndexOf(',')+1, color.indexOf(')')))],
             roughness: 0.0,
         }
     }
@@ -61,28 +111,59 @@ function addCircle(layer) {
 }
 
 
-
-let layer = new Konva.Layer();
-var dragLayer = new Konva.Layer();
-
-stage.add(dragLayer)
-
-// for (let n = 0; n < 1; n++) {
-//     addCircle(layer);
-// }
-
 function putObjects() {
     if(objectsData.objects.length > 0) {
+        let fill;
+        let stroke;
         objectsData.objects.forEach((v, i) => {
+            if(v.material.type === "metal"){
+                fill = `rgb(${v.material.color[0]},${v.material.color[1]},${v.material.color[2]})`;
+                stroke = 'rgb(145,145,145)';
+            } else if(v.material.type === "lambertian") {
+                fill = `rgb(${v.material.color[0]},${v.material.color[1]},${v.material.color[2]})`;
+                stroke = 'rgb(105,105,105)';
+            } else if(v.material.type === "dielectric") {
+                fill = 'rgb(249,248,247)';
+                stroke = 'rgb(232,231,227)';
+            }
             let circle = new Konva.Circle({
                 x: v.location[0],
                 y: v.location[1],
                 radius: v.size,
-                fill: `rgb(${v.material.color[0]},${v.material.color[1]},${v.material.color[2]})`,
+                fill: fill,
                 name: `${i}`,
-                stroke: 'white',
-                strokeWidth: 1,
+                stroke: stroke,
+                strokeWidth: 2,
                 draggable: false
+            })
+
+            circle.on('click', (e) => {
+                console.log('it clicked', e.target);
+                if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
+                    objectTarget.setAttrs({
+                        draggable: false,
+                        strokeWidth: 2
+                    })
+                }
+                objectTarget = e.target;
+                getTargetData();
+                objectTarget.setAttrs({
+                    draggable: true,
+                    strokeWidth: 5
+                })
+                layer.draw();
+            })
+            
+            circle.on('mouseover', function() {
+                document.body.style.cursor = 'pointer';
+            });
+            
+            circle.on('mouseout', function() {
+                document.body.style.cursor = 'default';
+            });
+            
+            circle.on('dragmove', (e) => {
+                objectMove();
             })
             layer.add(circle);
         
@@ -95,53 +176,93 @@ let objectTarget = {};
 
 let objDeleteList = [];
 
-// stage.on('click', (e) => {
-//     objectInitialization();
-// })
+let scaleBy = 1.1;
+stage.on('wheel', e => {
+    e.evt.preventDefault();
+    let oldScale = stage.scaleX();
 
-layer.on('click', (e) => {
-    // event.stopPropagation();
-    console.log('it clicked', e.target);
+    let mousePointTo = {
+        x: stage.getPointerPosition().x / oldScale - stage.x() / oldScale,
+        y: stage.getPointerPosition().y / oldScale - stage.y() / oldScale
+    };
+
+    let newScale = e.evt.deltaY > 0 ? oldScale * scaleBy : oldScale / scaleBy;
+    stage.scale({ x: newScale, y: newScale });
+
+    let newPos = {
+        x: -(mousePointTo.x - stage.getPointerPosition().x / newScale) * newScale,
+        y: -(mousePointTo.y - stage.getPointerPosition().y / newScale) *newScale
+    };
+    stage.position(newPos);
+    stage.batchDraw();
+});
+
+stageRect.on('click', () => {
     if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
         objectTarget.setAttrs({
             draggable: false,
-            strokeWidth: 1
+            strokeWidth: 2
         })
+        layer.draw();
+        object_positionX.value = 0;
+        object_positionY.value = 0;
+        object_positionZ.value = 0;
+        objectRadiusRange.value = 0;
+        objectRadiusText.value = 0;
+        objectRoughnessRange.value = 0;
+        objectRoughnessText.value = 0;
+        objectRefractiveRange.value = 0;
+        objectRefractiveText.value = 0;
+        objectTarget = {};
     }
-    objectTarget = e.target;
-    getTargetData();
-    objectTarget.setAttrs({
-        draggable: true,
-        strokeWidth: 4
-    })
-    layer.draw();
-})
-
-layer.on('mouseover', function() {
-    document.body.style.cursor = 'pointer';
 });
 
-layer.on('mouseout', function() {
-    document.body.style.cursor = 'default';
-});
-
-layer.on('dragmove', (e) => {
-    // objectTarget.moveTo(dragLayer);
-    // stage.draw();
-    objectMove();
-})
+document.getElementById('object_reset').addEventListener('click', () => {objectReset()})
 
 document.getElementById('object_random').addEventListener('click', () => {objectRandom()})
 
 document.getElementById('object_delete').addEventListener('click', () => {objectDelete()});
 
-document.getElementById('object_create').addEventListener('click', () => {addCircle(layer)});
+document.getElementById('object_create').addEventListener('click', () => {addCircle()});
+
+function objectReset() {
+    if(confirm('초기화 됩니다. 계속 하시겠습니까?')) {
+        layer.removeChildren();
+        objectsData.objects = [];
+        objectTarget = {};
+        objDeleteList = [];
+        circleIndex = 0;
+        layer.add(stageRect);
+            
+        stage.add(layer);
+    }
+}
 
 function objectRandom() {
     objects_sideBar.classList.remove('metal');
     objects_sideBar.classList.remove('nonMetal');
     objects_sideBar.classList.remove('glass');
     objects_sideBar.classList.add('random');
+}
+
+const objectRandomText = document.getElementById('objectRandomText');
+
+document.getElementById('objectRandomSave').addEventListener('click', () => {objectRandomMake()})
+
+objectRandomText.addEventListener('keyup', (e) => { if(e.keyCode === 13) {objectRandomMake()} })
+
+function objectRandomMake() {
+    if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
+        objectTarget.setAttrs({
+            draggable: false,
+            strokeWidth: 2
+        })
+        objectTarget = {};
+    }
+    for(let i = 0; i < parseInt(objectRandomText.value); i++) {
+        addCircle('random');
+    }
+    objects_sideBar.classList.remove('random');
 }
 
 function objectDelete() {
@@ -216,7 +337,17 @@ function choseSurface(s) {
                 color: [255, 0, 0],
                 roughness: 0.0
             }
+            objectTarget.setAttrs({
+                fill: 'rgb(255,0,0)'
+            });
+            colorPicker.color.setChannel('rgb', 'r', 255);
+            colorPicker.color.setChannel('rgb', 'g', 0);
+            colorPicker.color.setChannel('rgb', 'b', 0);
         }
+        objectTarget.setAttrs({
+            stroke: 'rgb(145,145,145)'
+        });
+
     } else if (s === 1) {
         objects_sideBar.classList.add('nonMetal');
         if(objectsData.objects[objectTarget.attrs.name].material.type == "metal") {
@@ -230,7 +361,16 @@ function choseSurface(s) {
                 type: "lambertian",
                 color: [255, 0, 0]
             }
+            objectTarget.setAttrs({
+                fill: 'rgb(255,0,0)'
+            });
+            colorPicker.color.setChannel('rgb', 'r', 255);
+            colorPicker.color.setChannel('rgb', 'g', 0);
+            colorPicker.color.setChannel('rgb', 'b', 0);
         }
+        objectTarget.setAttrs({
+            stroke: 'rgb(105,105,105)'
+        });
         
     } else if (s === 2) {
         objects_sideBar.classList.add('glass');
@@ -238,7 +378,12 @@ function choseSurface(s) {
             type: "dielectric",
             ref_idx: 0.0
         }
+        objectTarget.setAttrs({
+            fill: 'rgb(249,248,247)',
+            stroke: 'rgb(232,231,227)'
+        });
     }
+    layer.draw();
 }
 
 const object_positionX = document.getElementById('object_positionX');
@@ -271,7 +416,7 @@ function getTargetData() {
         colorPicker.color.setChannel('rgb', 'b', obj.material.color[2]);
 
         objectRoughnessRange.value = obj.material.roughness;
-        objectRoughnessRange.value = obj.material.roughness;
+        objectRoughnessText.value = obj.material.roughness;
 
     } else if(obj.material.type === "lambertian") {
         objects_sideBar.classList.add('nonMetal');
@@ -284,7 +429,7 @@ function getTargetData() {
         objects_sideBar.classList.add('glass');
 
         objectRefractiveRange.value = obj.material.ref_idx;
-        objectRefractiveRange.value = obj.material.ref_idx;
+        objectRefractiveText.value = obj.material.ref_idx;
 
     }
 }
@@ -316,22 +461,12 @@ function objectDataChanged(k, v) {
         })
         obj.size = parseInt(v);
     } else if(k === 'ro') {
-        console.log('init!', v);
         obj.material.roughness = parseFloat(v);
     } else if(k === 're') {
         obj.material.ref_idx = parseFloat(v);
     }
 
     layer.draw();
-}
-
-function objectInitialization() {
-    objectTarget = {};
-    object_positionX.value = 0;
-    object_positionY.value = 0;
-    object_positionZ.value = 0;
-    objectRadiusRange.value = 0;
-    objectRadiusText.value = 0;
 }
 
 document.querySelectorAll('.sideBar_menu > ul > li').forEach((v, i) => {
@@ -352,127 +487,3 @@ function saveObjectsData() {
 	sessionStorage.setItem('ORTData', JSON.stringify(objectsData));
 
 }
-
-// let nowZoom = 100;
-
-// function zoomOut() {   // 화면크기축소
-//     nowZoom = nowZoom - 10;
-//     if(nowZoom <= 70) nowZoom = 70;   // 화면크기 최대 축소율 70%
-//     zooms();
-// }
-
-// function zoomIn() {   // 화면크기확대
-//     nowZoom = nowZoom + 20;
-//     if(nowZoom >= 200) nowZoom = 200;   // 화면크기 최대 확대율 200%
-//     zooms();
-// }
-
-// function zoomReset() {
-//     nowZoom = 100;   // 원래 화면크기로 되돌아가기
-//     zooms();
-// }
-
-// const objects_main = document.querySelector('.objects_main');
-
-// function zooms() {
-//     objects_main.style.zoom = nowZoom + "%";
-//     if(nowZoom == 70) {
-//         alert("더 이상 축소할 수 없습니다.");   // 화면 축소율이 70% 이하일 경우 경고창
-//     }
-//     if(nowZoom == 200) {
-//         alert("더 이상 확대할 수 없습니다.");   // 화면 확대율이 200% 이상일 경우 경고창
-//     }
-// }
-
-// let ctrlPressed = false;
-// let scrollUpDown = objects_main.scrollTop;
-// let scroll = objects_main.scrollTop;
-
-// window.addEventListener('keydown', (e) => {
-//     if (e.keyCode === 17) {
-//         console.log('ctrlDown');
-//         ctrlPressed = true;
-//     }
-// });
-
-// window.addEventListener('keyup', (e) => {
-//     if (e.keyCode === 17) {
-//         console.log('ctrlUp');
-//         ctrlPressed = false;
-//     }
-// });
-
-
-
-
-// objects_main.addEventListener('scroll', (e) => {
-//     scroll = objects_main.scrollTop;
-//     if(scroll < scrollUpDown && ctrlPressed) {
-//         console.log('scrollUp');
-//         nowZoom = nowZoom + 20;
-//         if(nowZoom >= 200) nowZoom = 200;   // 화면크기 최대 확대율 200%
-//         zooms();
-//     } else if(ctrlPressed) {
-//         console.log('scrollDown');   // 화면크기축소
-//         nowZoom = nowZoom - 10;
-//         if(nowZoom <= 70) nowZoom = 70;   // 화면크기 최대 축소율 70%
-//         zooms();
-//     }
-
-//     scrollUpDown = scroll;
-// });
-
-// new ScrollZoom($('#slide'),4,0.5)
-// function ScrollZoom(container,max_scale,factor){
-//     var target = container.children().first()
-//     var size = {w:target.width(),h:target.height()}
-//     var pos = {x:0,y:0}
-//     var zoom_target = {x:0,y:0}
-//     var zoom_point = {x:0,y:0}
-//     var scale = 1
-//     target.css('transform-origin','0 0')
-//     target.on("mousewheel DOMMouseScroll",scrolled)
-
-//     function scrolled(e){
-//         var offset = container.offset()
-//         zoom_point.x = e.pageX - offset.left
-//         zoom_point.y = e.pageY - offset.top
-
-//         e.preventDefault();
-//         var delta = e.delta || e.originalEvent.wheelDelta;
-//         if (delta === undefined) {
-//         //we are on firefox
-//         delta = e.originalEvent.detail;
-//         }
-//         delta = Math.max(-1,Math.min(1,delta)) // cap the delta to [-1,1] for cross browser consistency
-
-//         // determine the point on where the slide is zoomed in
-//         zoom_target.x = (zoom_point.x - pos.x)/scale
-//         zoom_target.y = (zoom_point.y - pos.y)/scale
-
-//         // apply zoom
-//         scale += delta*factor * scale
-//         scale = Math.max(1,Math.min(max_scale,scale))
-
-//         // calculate x and y based on zoom
-//         pos.x = -zoom_target.x * scale + zoom_point.x
-//         pos.y = -zoom_target.y * scale + zoom_point.y
-
-
-//         // Make sure the slide stays in its container area when zooming out
-//         if(pos.x>0)
-//             pos.x = 0
-//         if(pos.x+size.w*scale<size.w)
-//             pos.x = -size.w*(scale-1)
-//         if(pos.y>0)
-//             pos.y = 0
-//         if(pos.y+size.h*scale<size.h)
-//             pos.y = -size.h*(scale-1)
-
-//         update()
-//     }
-
-//     function update(){
-//         target.css('transform','translate('+(pos.x)+'px,'+(pos.y)+'px) scale('+scale+','+scale+')')
-//     }
-// }
