@@ -41,12 +41,13 @@ stage.add(layer);
 let circleIndex = objectsData.objects.length;
 
 function addCircle(kind) {
-    let X, Y, radius, color;
+    let X, Y, radius, color, roughness;
     if(kind === 'random') {
         X = parseInt(Math.random() * objectsData.width);
         Y = parseInt(Math.random() * objectsData.height);
         radius = parseInt(Math.random() * 50) + 9;
         color = `rgb(${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)})`;
+        roughness = Math.random().toFixed(1);
     } else {
         X = parseInt(objectsData.width / 2);
         Y = parseInt(objectsData.height / 2);
@@ -104,7 +105,7 @@ function addCircle(kind) {
         material: {
             type: "metal",
             color: [parseInt(color.substring(color.indexOf('(')+1, color.indexOf(','))), parseInt(color.substring(color.indexOf(',')+1, color.lastIndexOf(','))), parseInt(color.substring(color.lastIndexOf(',')+1, color.indexOf(')')))],
-            roughness: 0.0,
+            roughness: roughness,
         }
     }
     objectsData.objects.push(objectStructure);
@@ -213,6 +214,12 @@ stageRect.on('click', () => {
         objectRoughnessText.value = 0;
         objectRefractiveRange.value = 0;
         objectRefractiveText.value = 0;
+        colorPicker.color.setChannel('rgb', 'r', 255);
+        colorPicker.color.setChannel('rgb', 'g', 0);
+        colorPicker.color.setChannel('rgb', 'b', 0);
+        objects_sideBar.classList.remove('metal');
+        objects_sideBar.classList.remove('nonMetal');
+        objects_sideBar.classList.remove('glass');
         objectTarget = {};
     }
 });
