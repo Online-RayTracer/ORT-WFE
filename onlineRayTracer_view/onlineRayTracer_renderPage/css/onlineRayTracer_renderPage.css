@@ -49,8 +49,8 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    height: 44%;
-    min-height: 320px;
+    height: 35%;
+    min-height: 256px;
 }
 
 .sideBar_menu > ul {

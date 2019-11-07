@@ -292,7 +292,7 @@ function cameraDataChanged(k, v) {
 }
 
 document.querySelectorAll('.sideBar_menu > ul > li').forEach((v, i) => {
-    if(i >= 1) {
+    if(i !== 2) {
         v.addEventListener('click', () => {saveCameraData();})
     }
 })

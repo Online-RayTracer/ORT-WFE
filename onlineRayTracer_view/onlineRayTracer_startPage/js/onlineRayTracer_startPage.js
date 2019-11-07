@@ -6,9 +6,8 @@ document.getElementById('mainContentsStartButton').addEventListener('click', () 
         samples: 100,
         cam_location: [0.000, 0.000, 0.000],
         cam_lookat: [0.000, 0.000, 0.000],
-        camera_aperture: 0,
-        bg_transparent: true,
-        bg_color: [],
+        cam_aperture: 0.0,
+        light_color: [0.000, 0.000, 0.000],
         objects: [] /*{
             location: [],
             size: 0,

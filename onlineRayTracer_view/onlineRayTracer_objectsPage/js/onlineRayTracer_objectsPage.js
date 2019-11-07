@@ -1,7 +1,9 @@
 let objectsData = JSON.parse(sessionStorage.getItem('ORTData'));
 
 window.addEventListener('load', () => {
-    // objects_box.style = `width: ${objectsData.width}px; height: ${objectsData.height}px;`;
+    if(objectsData == null) {
+        location.href = '../onlineRayTracer_startPage/onlineRayTracer_startPage.html'
+    }
     putObjects();
 })
 
@@ -67,7 +69,7 @@ function addCircle(kind) {
     circleIndex++;
 
     circle.on('click', (e) => {
-        console.log('it clicked', e.target);
+        // console.log('it clicked', e.target);
         if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
             objectTarget.setAttrs({
                 draggable: false,
@@ -83,11 +85,11 @@ function addCircle(kind) {
         layer.draw();
     })
     
-    circle.on('mouseover', function() {
+    circle.on('mouseover', () => {
         document.body.style.cursor = 'pointer';
     });
     
-    circle.on('mouseout', function() {
+    circle.on('mouseout', () => {
         document.body.style.cursor = 'default';
     });
     
@@ -139,7 +141,7 @@ function putObjects() {
             })
 
             circle.on('click', (e) => {
-                console.log('it clicked', e.target);
+                // console.log('it clicked', e.target);
                 if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
                     objectTarget.setAttrs({
                         draggable: false,
@@ -155,11 +157,11 @@ function putObjects() {
                 layer.draw();
             })
             
-            circle.on('mouseover', function() {
+            circle.on('mouseover', () => {
                 document.body.style.cursor = 'pointer';
             });
             
-            circle.on('mouseout', function() {
+            circle.on('mouseout', () => {
                 document.body.style.cursor = 'default';
             });
             
