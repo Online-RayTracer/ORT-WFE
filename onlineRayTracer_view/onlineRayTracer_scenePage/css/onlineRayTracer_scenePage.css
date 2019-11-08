@@ -92,22 +92,79 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 }
 
 .sceneContents {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start; */
     width: 77%;
     min-width: 650px;
     height: 100%;
     background-color: #FFFFFF;
+    overflow-y: scroll;
 }
 
 .sceneContents > div:nth-child(1) {
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-gap: 13%;
-    width: 80%;
-    height: 65%;
+    padding-right: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: calc(100% - 10%);
+    height: 190px;
+}
+
+.sceneContents > div:nth-child(1) > button {
+    margin-left: 5%;
+    padding: 0;
+    border-radius: 100px;
+    width: 13.5%;
+    min-width: 175px;
+    height: 33%;
+    min-height: 55px;
+    font-size: 2rem;
+    font-weight: 100;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.scene_exportB {
+    border: 1px solid #000000;
+    background: none;
+    color: #000000;
+}
+
+.scene_exportB:hover {
+    background-color: #e9e9e9;
+}
+
+.scene_importB {
+    border: 0;
+    background-color: #BBBBBB;
+    color: #FFFFFF;
+}
+
+.scene_importB:hover {
+    background-color: #AAAAAA;
+}
+
+.scene_saveB {
+    border: 0;
+    background-color: #384772;
+    color: #FFFFFF;
+}
+
+.scene_saveB:hover {
+    background-color: #2e3c61;
+}
+
+.sceneContents > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 1200px;
 }
 
 .sceneContent {
@@ -115,9 +172,9 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 80%;
+    height: 19%;
     min-width: 570px;
-    height: 100%;
 }
 
 .sceneContent > div:nth-child(1) {
@@ -138,7 +195,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     align-items: flex-end;
     justify-content: center;
     width: 100%;
-    height: 50%;
+    height: 40%;
 }
 
 .scene_name_inputT {
@@ -148,7 +205,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     height: 50%;
     background: none;
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-align: center;
     outline: none;
     transition: border 0.2s ease-in-out;
@@ -165,7 +222,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     height: 50%;
     background: none;
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-align: center;
     outline: none;
     transition: border 0.2s ease-in-out;
@@ -243,64 +300,50 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     background: none;
     color: #707070;
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-align: center;
     outline: none;
     transition: border 0.2s ease-in-out;
 }
 
-.sceneContents > div:nth-child(2) {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    width: 100%;
+.scene_Light {
+    height: 40%;
+}
+
+.scene_Light > div:nth-child(1) {
     height: 20%;
 }
 
-.sceneContents > div:nth-child(2) > button {
-    margin-right: 5%;
-    padding: 0;
-    border-radius: 100px;
-    width: 13.5%;
-    min-width: 175px;
-    height: 33%;
-    min-height: 55px;
+.scene_Light > div:nth-child(2) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 80%;
+}
+
+.scene_Light > div:nth-child(2) > div:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#scenecolorPicker {
+    border: 1px solid #a8a8a8;
+    padding: 15px 15px 30px 15px;
+}
+
+#sceneColorBox {
+    border: 1px solid black;
+    width: 75px;
+    height: 75px;
+}
+
+#sceneColorText {
+    width: 160px;
+    margin-left: 20px;
     font-size: 2rem;
-    font-weight: 100;
-    outline: none;
-    cursor: pointer;
-    transition: background-color 0.5s ease-in-out;
-}
-
-.scene_exportB {
-    border: 1px solid #000000;
-    background: none;
-    color: #000000;
-}
-
-.scene_exportB:hover {
-    background-color: #e9e9e9;
-}
-
-.scene_importB {
-    border: 0;
-    background-color: #BBBBBB;
-    color: #FFFFFF;
-}
-
-.scene_importB:hover {
-    background-color: #AAAAAA;
-}
-
-.scene_saveB {
-    border: 0;
-    background-color: #384772;
-    color: #FFFFFF;
-}
-
-.scene_saveB:hover {
-    background-color: #2e3c61;
+    font-weight: bold;
+    letter-spacing: 0.3rem;
 }
 
 .toastPopup_wrapper {

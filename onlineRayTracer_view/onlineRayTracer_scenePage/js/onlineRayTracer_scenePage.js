@@ -16,7 +16,29 @@ window.addEventListener('load', () => {
 	sceneResolutionY.value = sceneData.height;
 	sceneQualityRange.value = sceneData.samples;
 	sceneQualityText.value = sceneData.samples;
+	colorPicker.color.setChannel('rgb', 'r', sceneData.light_color[0]);
+	colorPicker.color.setChannel('rgb', 'g', sceneData.light_color[1]);
+	colorPicker.color.setChannel('rgb', 'b', sceneData.light_color[2]);
+	sceneColorBox.setAttribute('style', `background-color: ${colorPicker.color.hexString};`)
+	sceneColorText.innerText = colorPicker.color.hexString;
 })
+
+let colorPicker = new iro.ColorPicker("#scenecolorPicker", {
+    width: 220,
+	color: "#ff0000",
+	sliderHeight: 10
+});
+
+const sceneColorBox = document.getElementById('sceneColorBox');
+const sceneColorText = document.getElementById('sceneColorText');
+
+colorPicker.on('input:move', (color) => {
+	sceneData.light_color[0] = color.rgb.r;
+	sceneData.light_color[1] = color.rgb.g;
+	sceneData.light_color[2] = color.rgb.b;
+	sceneColorBox.setAttribute('style', `background-color: ${colorPicker.color.hexString};`)
+	sceneColorText.innerText = colorPicker.color.hexString;
+});
 
 document.getElementById('sceneSaveButton').addEventListener('click', sceneSave);
 

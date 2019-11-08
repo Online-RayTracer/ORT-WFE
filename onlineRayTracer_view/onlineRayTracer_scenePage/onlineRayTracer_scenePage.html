@@ -7,6 +7,7 @@
     <link type="text/css" href="./css/onlineRayTracer_scenePage.css" rel="stylesheet" />
     <link type="text/css" href="./css/resetCSS.css" rel="stylesheet" />
     <title>onlineRayTracer_scenePage</title>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro/dist/iro.min.js"></script>
 </head>
 <body>
     <div class="onlineRayTracerScenePage">
@@ -22,6 +23,11 @@
             </nav>
         </aside>
         <section class="sceneContents">
+            <div>
+                <button id="sceneExportButton" class="scene_exportB">EXPORT</button>
+                <button id="sceneImportButton" class="scene_importB">IMPORT</button>
+                <button id="sceneSaveButton" class="scene_saveB">SAVE</button>
+            </div>
             <div>
                 <article class="sceneContent scene_name">
                     <div><h3>Name</h3></div>
@@ -44,11 +50,13 @@
                         <input id="sceneQualityText" class="scene_quality_inputT" type="number" min="100" max="1000" value="100" readonly>
                     </div>
                 </article>
-            </div>
-            <div>
-                <button id="sceneExportButton" class="scene_exportB">EXPORT</button>
-                <button id="sceneImportButton" class="scene_importB">IMPORT</button>
-                <button id="sceneSaveButton" class="scene_saveB">SAVE</button>
+                <article class="sceneContent scene_Light">
+                    <div><h3>Light Color</h3></div>
+                    <div>
+                        <div id="scenecolorPicker"></div>
+                        <div><div id="sceneColorBox"></div><p id="sceneColorText">#ff0000</p></div>
+                    </div>
+                </article>
             </div>
         </section>
         <section class="toastPopup_wrapper">
