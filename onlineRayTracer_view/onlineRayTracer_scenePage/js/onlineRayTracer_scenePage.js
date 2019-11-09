@@ -73,9 +73,9 @@ document.querySelectorAll('.sideBar_menu > ul > li').forEach((v, i) => {
 
 function saveSceneData() {
 	sceneData.name = sceneName.value;
-	sceneData.width = sceneResolutionX.value;
-	sceneData.height = sceneResolutionY.value;
-	sceneData.samples = sceneQualityText.value;
+	sceneData.width = parseInt(sceneResolutionX.value);
+	sceneData.height = parseInt(sceneResolutionY.value);
+	sceneData.samples = parseInt(sceneQualityText.value);
 	sessionStorage.setItem('ORTData', JSON.stringify(sceneData));
 }
 

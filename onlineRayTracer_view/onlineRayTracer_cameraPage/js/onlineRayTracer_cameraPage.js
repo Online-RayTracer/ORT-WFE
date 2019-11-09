@@ -17,6 +17,8 @@ window.addEventListener('load', () => {
 const camera_box = document.getElementById('camera_box');
 
 let stage = new Konva.Stage({
+    x: cameraData.width/2,
+    y: cameraData.height/2,
     container: 'camera_box',
     width: camera_box.clientWidth,
     height: camera_box.clientHeight,
@@ -26,8 +28,8 @@ let stage = new Konva.Stage({
 let layer = new Konva.Layer();
 
 let stageRect =  new Konva.Rect({ 
-    x:0,
-    y:0,
+    x: 0,
+    y: 0,
     width: cameraData.width,
     height: cameraData.height,
     fill: 'rgb(74, 74, 74)',
@@ -46,8 +48,8 @@ let cLc = cameraData.cam_location;
 let cLa = cameraData.cam_lookat;
 
 if(cLc[0] === 0 && cLc[1] === 0 && cLc[2] === 0 && cLa[0] === 0 && cLa[1] === 0 && cLa[2] === 0) {
-    cameraData.cam_location = [(cameraData.width/2-100), (cameraData.height/2), 0];
-    cameraData.cam_lookat = [(cameraData.width/2+100), (cameraData.height/2), 0];
+    cameraData.cam_location = [-(cameraData.width/4), 0, 0];
+    cameraData.cam_lookat = [(cameraData.width/4), 0, 0];
 }
 
 let camera = new Konva.Image({
@@ -85,7 +87,7 @@ let line = new Konva.Line({
 moveLine();
 
 function moveLine(){
-    let cameraX = (camera.getX()+50);
+    let cameraX = camera.getX();
     let cameraY = camera.getY();
     let pointX = point.getX();
     let pointY = point.getY();
@@ -94,17 +96,18 @@ function moveLine(){
     const dy = pointY - cameraY;
     let angle = Math.atan2(-dy, dx);
 
+    // let degree = ((Math.atan2(cameraY-camera.getY(), cameraX-camera.getX())*180)/Math.PI)*2;
+    let degree = ((Math.atan2(point.getY()-camera.getY(), point.getX()-camera.getX())*180)/Math.PI);
+    // console.log(degree,'도');
+
     const radius = 50;
 
-    cameraX = cameraX + -radius * Math.cos(angle + Math.PI);
+    cameraX = cameraX - radius * Math.cos(angle + Math.PI);
     cameraY = cameraY + radius * Math.sin(angle + Math.PI);
-
-    let degree = ((Math.atan2(cameraY-camera.getY(), cameraX-camera.getX())*180)/Math.PI)*2;
-    // console.log(degree,'도');
 
     camera.rotation(degree);
 
-    let p = [cameraX-50, cameraY, pointX, pointY];
+    let p = [cameraX, cameraY, pointX, pointY];
     line.setPoints(p);
     layer.draw();
 }
@@ -117,10 +120,11 @@ layer.add(line);
 
 setTimeout(()=> {
     stage.add(layer);
-}, 1000)
+    stageRect.position({x:-cameraData.width/2, y:-cameraData.height/2});
+}, 1000);
 
 let scaleBy = 1.1;
-stage.on('wheel', e => {
+stage.on('wheel', (e) => {
     e.evt.preventDefault();
     let oldScale = stage.scaleX();
 
@@ -145,13 +149,17 @@ const camera_withObjects = document.getElementById('camera_withObjects');
 let isWidthObject = false;
 
 camera_withObjects.addEventListener('click', () => {
-    camera_withObjects.classList.toggle('cameraWidthObjects');
-    if(isWidthObject) {
-        removeObjects();
-        isWidthObject = false;
+    if(cameraData.objects.length > 0) {
+        camera_withObjects.classList.toggle('cameraWidthObjects');
+        if(isWidthObject) {
+            removeObjects();
+            isWidthObject = false;
+        } else {
+            putObjects();
+            isWidthObject = true;
+        }
     } else {
-        putObjects();
-        isWidthObject = true;
+        alert('object가 없습니다.');
     }
 })
 
@@ -267,7 +275,7 @@ function cameraDataChanged(k, v) {
         cameraData.cam_location[0] = parseInt(camera_positionX.value);
     } else if(k === 'cy') {
         camera.setAttrs({
-            x:parseInt(camera_positionY.value)
+            y:parseInt(camera_positionY.value)
         })
         cameraData.cam_location[1] = parseInt(camera_positionY.value);
     } else if(k === 'cz') {
@@ -276,20 +284,37 @@ function cameraDataChanged(k, v) {
         point.setAttrs({
             x:parseInt(point_positionX.value)
         })
-        cameraData.cam_location[0] = parseInt(point_positionX.value);
+        cameraData.cam_lookat[0] = parseInt(point_positionX.value);
     } else if(k === 'py') {
         point.setAttrs({
-            x:parseInt(point_positionY.value)
+            y:parseInt(point_positionY.value)
         })
-        cameraData.cam_location[1] = parseInt(point_positionY.value);
+        cameraData.cam_lookat[1] = parseInt(point_positionY.value);
     } else if(k === 'pz') {
-        cameraData.cam_location[2] = parseInt(point_positionZ.value);
+        cameraData.cam_lookat[2] = parseInt(point_positionZ.value);
     } else if(k === 'ca') {
         cameraData.cam_aperture = parseFloat(v);
     }
-
-    layer.draw();
+    moveLine();
 }
+
+document.getElementById('cameraPositionDefault').addEventListener('click', () => {
+    cameraData.cam_location = [0.000, 0.000, 0.000];
+    camera.setAttrs({
+        x: 0,
+        y: 0
+    });
+    camera_positionX.value = 0;
+    camera_positionY.value = 0;
+    camera_positionZ.value = 0;
+    moveLine();
+})
+
+document.getElementById('cameraApertureDefault').addEventListener('click', () => {
+    cameraData.cam_aperture = 0.0;
+    cameraApertureRange.value = 0.0;
+    cameraApertureText.value = 0.0;
+})
 
 document.querySelectorAll('.sideBar_menu > ul > li').forEach((v, i) => {
     if(i !== 2) {

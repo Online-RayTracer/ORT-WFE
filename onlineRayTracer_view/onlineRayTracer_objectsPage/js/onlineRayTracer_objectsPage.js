@@ -21,6 +21,8 @@ let objectStructure = {
 const objects_box = document.getElementById('objects_box');
 
 let stage = new Konva.Stage({
+    x: objectsData.width/2,
+    y: objectsData.height/2,
     container: 'objects_box',
     width: objects_box.clientWidth,
     height: objects_box.clientHeight,
@@ -30,8 +32,8 @@ let stage = new Konva.Stage({
 let layer = new Konva.Layer();
 
 let stageRect =  new Konva.Rect({ 
-    x:0,
-    y:0,
+    x:-objectsData.width/2,
+    y:-objectsData.height/2,
     width: objectsData.width,
     height: objectsData.height,
     fill: 'rgb(74, 74, 74)',
@@ -45,14 +47,14 @@ let circleIndex = objectsData.objects.length;
 function addCircle(kind) {
     let X, Y, radius, color, roughness;
     if(kind === 'random') {
-        X = parseInt(Math.random() * objectsData.width);
-        Y = parseInt(Math.random() * objectsData.height);
+        X = parseInt((Math.random()-0.5) * (objectsData.width));
+        Y = parseInt((Math.random()-0.5) * (objectsData.height));
         radius = parseInt(Math.random() * 50) + 9;
         color = `rgb(${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)})`;
         roughness = Math.random().toFixed(1);
     } else {
-        X = parseInt(objectsData.width / 2);
-        Y = parseInt(objectsData.height / 2);
+        X = 0;
+        Y = 0;
         radius = 10;
         color = 'rgb(255,0,0)';
     }
@@ -477,6 +479,88 @@ function objectDataChanged(k, v) {
 
     layer.draw();
 }
+
+document.getElementById('objectPositionDefault').addEventListener('click', () => {
+    let obj = objectsData.objects[objectTarget.attrs.name];
+    obj.location[0] = 0;
+    obj.location[1] = 0;
+    obj.location[2] = 0;
+    objectTarget.setAttrs({
+        x:0,
+        y:0
+    })
+    object_positionX.value = 0;
+    object_positionY.value = 0;
+    object_positionZ.value = 0;
+    layer.draw();
+})
+
+document.getElementById('objectRadiusDefault').addEventListener('click', () => {
+    objectTarget.setAttrs({
+        radius: 10
+    })
+    objectsData.objects[objectTarget.attrs.name].size = 10;
+    objectRadiusRange.value = 10;
+    objectRadiusText.value = 10;
+    layer.draw();
+})
+
+document.getElementById('objectSurfaceDefault').addEventListener('click', () => {
+    objects_sideBar.classList.add('metal');
+    if(objectsData.objects[objectTarget.attrs.name].material.type == "lambertian") {
+        objects_sideBar.classList.remove('nonMetal');
+        let objcolor = objectTarget.attrs.fill;
+        objectsData.objects[objectTarget.attrs.name].material = {
+            type: "metal",
+            color: [parseInt(objcolor.substring(objcolor.indexOf('(')+1, objcolor.indexOf(','))), parseInt(objcolor.substring(objcolor.indexOf(',')+1, objcolor.lastIndexOf(','))), parseInt(objcolor.substring(objcolor.lastIndexOf(',')+1, objcolor.indexOf(')')))],
+            roughness: 0.0
+        }
+    } else if(objectsData.objects[objectTarget.attrs.name].material.type == "dielectric") {
+        objects_sideBar.classList.remove('glass');
+        objectsData.objects[objectTarget.attrs.name].material = {
+            type: "metal",
+            color: [255, 0, 0],
+            roughness: 0.0
+        }
+        objectTarget.setAttrs({
+            fill: 'rgb(255,0,0)'
+        });
+        colorPicker.color.setChannel('rgb', 'r', 255);
+        colorPicker.color.setChannel('rgb', 'g', 0);
+        colorPicker.color.setChannel('rgb', 'b', 0);
+    }
+    objectTarget.setAttrs({
+        stroke: 'rgb(145,145,145)'
+    });
+    layer.draw();
+})
+
+document.getElementById('objectRoughnessDefault').addEventListener('click', () => {
+    objectsData.objects[objectTarget.attrs.name].material.roughness = 0.0;
+    objectRoughnessRange.value = 0.0;
+    objectRoughnessText.value = 0.0;
+})
+
+document.getElementById('objectColorsDefault').addEventListener('click', () => {
+    objectsData.objects[objectTarget.attrs.name].material.color = [255, 0, 0];
+    objectTarget.setAttrs({
+        fill: 'rgb(255,0,0)'
+    });
+    colorPicker.color.setChannel('rgb', 'r', 255);
+    colorPicker.color.setChannel('rgb', 'g', 0);
+    colorPicker.color.setChannel('rgb', 'b', 0);
+    layer.draw();
+})
+
+document.getElementById('objectRefractiveDefault').addEventListener('click', () => {
+    objectsData.objects[objectTarget.attrs.name].material.ref_idx = 0.0;
+    objectRefractiveRange.value = 0.0;
+    objectRefractiveText.value = 0.0;
+})
+
+document.getElementById('objectRandomDefault').addEventListener('click', () => {
+    objectRandomText.value = 0;
+})
 
 document.querySelectorAll('.sideBar_menu > ul > li').forEach((v, i) => {
     if(i >= 1) {
