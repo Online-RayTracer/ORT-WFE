@@ -27,12 +27,17 @@ let stage = new Konva.Stage({
 
 let layer = new Konva.Layer();
 
+let imageRect = new Image();
+
+imageRect.src = 'https://lh3.google.com/u/0/d/1xPrHG1XJVR2Fk1gzmh1nnrNvOgL0EHNy=w1920-h888-iv1';
+
 let stageRect =  new Konva.Rect({ 
     x: 0,
     y: 0,
     width: cameraData.width,
     height: cameraData.height,
     fill: 'rgb(74, 74, 74)',
+    fillPatternImage: imageRect,
     listening: true
 })
 
@@ -54,7 +59,7 @@ if(cLc[0] === 0 && cLc[1] === 0 && cLc[2] === 0 && cLa[0] === 0 && cLa[1] === 0 
 
 let camera = new Konva.Image({
     x: cameraData.cam_location[0],
-    y: cameraData.cam_location[1],
+    y: -cameraData.cam_location[1],
     image: imageCamera,
     width: 100,
     height: 100,
@@ -67,7 +72,7 @@ let camera = new Konva.Image({
 
 let point = new Konva.Image({
     x: cameraData.cam_lookat[0],
-    y: cameraData.cam_lookat[1],
+    y: -cameraData.cam_lookat[1],
     image: imagePoint,
     width: 50,
     height: 50,
@@ -240,9 +245,9 @@ const camera_positionZ = document.getElementById('camera_positionZ');
 
 function cameraMove() {
     camera_positionX.value = parseInt(camera.attrs.x);
-    camera_positionY.value = parseInt(camera.attrs.y);
+    camera_positionY.value = -parseInt(camera.attrs.y);
     cameraData.cam_location[0] = parseInt(camera.attrs.x);
-    cameraData.cam_location[1] = parseInt(camera.attrs.y);
+    cameraData.cam_location[1] = -parseInt(camera.attrs.y);
 }
 
 const point_positionX = document.getElementById('point_positionX');
@@ -251,7 +256,7 @@ const point_positionZ = document.getElementById('point_positionZ');
 
 function pointMove() {
     point_positionX.value = parseInt(point.attrs.x);
-    point_positionY.value = parseInt(point.attrs.y);
+    point_positionY.value = -parseInt(point.attrs.y);
     cameraData.cam_lookat[0] = parseInt(point.attrs.x);
     cameraData.cam_lookat[1] = parseInt(point.attrs.y);
 }
@@ -275,7 +280,7 @@ function cameraDataChanged(k, v) {
         cameraData.cam_location[0] = parseInt(camera_positionX.value);
     } else if(k === 'cy') {
         camera.setAttrs({
-            y:parseInt(camera_positionY.value)
+            y:-parseInt(camera_positionY.value)
         })
         cameraData.cam_location[1] = parseInt(camera_positionY.value);
     } else if(k === 'cz') {
@@ -287,7 +292,7 @@ function cameraDataChanged(k, v) {
         cameraData.cam_lookat[0] = parseInt(point_positionX.value);
     } else if(k === 'py') {
         point.setAttrs({
-            y:parseInt(point_positionY.value)
+            y:-parseInt(point_positionY.value)
         })
         cameraData.cam_lookat[1] = parseInt(point_positionY.value);
     } else if(k === 'pz') {

@@ -104,7 +104,7 @@ function addCircle(kind) {
     stage.add(layer);
 
     objectStructure = {
-        location: [X, Y, 000],
+        location: [X, -Y, 000],
         size: radius,
         material: {
             type: "metal",
@@ -133,7 +133,7 @@ function putObjects() {
             }
             let circle = new Konva.Circle({
                 x: v.location[0],
-                y: v.location[1],
+                y: -v.location[1],
                 radius: v.size,
                 fill: fill,
                 name: `${i}`,
@@ -447,9 +447,9 @@ function getTargetData() {
 
 function objectMove() {
     object_positionX.value = parseInt(objectTarget.attrs.x);
-    object_positionY.value = parseInt(objectTarget.attrs.y);
+    object_positionY.value =- parseInt(objectTarget.attrs.y);
     objectsData.objects[objectTarget.attrs.name].location[0] = parseInt(objectTarget.attrs.x);
-    objectsData.objects[objectTarget.attrs.name].location[1] = parseInt(objectTarget.attrs.y);
+    objectsData.objects[objectTarget.attrs.name].location[1] = -parseInt(objectTarget.attrs.y);
 }
 
 function objectDataChanged(k, v) {
@@ -461,7 +461,7 @@ function objectDataChanged(k, v) {
         obj.location[0] = parseInt(object_positionX.value);
     } else if(k === 'y') {
         objectTarget.setAttrs({
-            y:parseInt(object_positionY.value)
+            y:-parseInt(object_positionY.value)
         })
         obj.location[1] = parseInt(object_positionY.value);
     } else if(k === 'z') {
@@ -563,7 +563,7 @@ document.getElementById('objectRandomDefault').addEventListener('click', () => {
 })
 
 document.querySelectorAll('.sideBar_menu > ul > li').forEach((v, i) => {
-    if(i >= 1) {
+    if(i !== 1) {
         v.addEventListener('click', () => {saveObjectsData();})
     }
 })
