@@ -40,8 +40,21 @@ let stageRect =  new Konva.Rect({
     fillPatternImage: imageRect,
     listening: true
 })
-
 layer.add(stageRect);
+
+// let rowLine = new Konva.Line({
+//     points: [stageRect.getX(), -1, -stageRect.getX(), -1],
+//     stroke: 'white',
+//     strokeWidth: 3
+// })
+// layer.add(rowLine);
+
+// let columnLine = new Konva.Line({
+//     points: [-1, stageRect.getY(), -1, -stageRect.getY()],
+//     stroke: 'white',
+//     strokeWidth: 3
+// })
+// layer.add(columnLine);
 
 let imageCamera = new Image();
 let imagePoint = new Image();

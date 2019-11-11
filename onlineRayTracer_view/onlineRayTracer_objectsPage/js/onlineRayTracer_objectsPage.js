@@ -40,6 +40,21 @@ let stageRect =  new Konva.Rect({
     listening: true
 })
 layer.add(stageRect);
+
+let rowLine = new Konva.Line({
+    points: [stageRect.getX(), -1, -stageRect.getX(), -1],
+    stroke: 'white',
+    strokeWidth: 3
+})
+layer.add(rowLine);
+
+let columnLine = new Konva.Line({
+    points: [-1, stageRect.getY(), -1, -stageRect.getY()],
+    stroke: 'white',
+    strokeWidth: 3
+})
+layer.add(columnLine);
+
 stage.add(layer);
 
 let circleIndex = objectsData.objects.length;
@@ -244,6 +259,8 @@ function objectReset() {
         objDeleteList = [];
         circleIndex = 0;
         layer.add(stageRect);
+        layer.add(rowLine);
+        layer.add(columnLine);
             
         stage.add(layer);
     }
