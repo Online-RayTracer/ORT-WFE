@@ -1,0 +1,14 @@
+{
+  "name": "onlineraytracer",
+  "version": "1.0.0",
+  "description": "onlineRayTracer web hosting",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "김상은",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
