@@ -13,4 +13,4 @@
 - 11월 4일 ~ 11월 17일: 회고 및 수정
 
 ## 주소
-(https://online-ray-tracer.herokuapp.com/)
+[링크](https://online-ray-tracer.herokuapp.com/)
