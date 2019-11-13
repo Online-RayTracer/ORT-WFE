@@ -90,17 +90,3 @@ document.getElementById('sceneExportButton').addEventListener('click', () => {
 document.getElementById('sceneImportButton').addEventListener('click', () => {
 	addToast('아직 없는 기능입니다.');
 })
-
-const toastPopupWrapper = document.getElementById('toastPopupWrapper');
-
-function addToast(v) {
-	let toastBox = document.createElement('li');
-	toastBox.innerText = v;
-	toastBox.addEventListener('click', () => {
-		toastBox.remove();
-	})
-	setTimeout(()=> {
-		toastBox.remove();
-	}, 3000);
-	toastPopupWrapper.prepend(toastBox);
-}

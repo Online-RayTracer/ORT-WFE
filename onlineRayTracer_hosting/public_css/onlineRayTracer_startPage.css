@@ -378,7 +378,7 @@
     .main_contents {
         width: 100%;
         height: 92%;
-        background-image: url('https://lh3.google.com/u/0/d/1KOxjqQPWoskN_NxlmfI8kYPT8QwHVIyY=w1920-h937-iv1');
+        background-image: url('/src/start_background.png');
         background-size: cover;
         background-position: top;
         background-repeat: no-repeat;
@@ -408,7 +408,7 @@
         width: 270px;
         height: 100px;
         min-height: 100px;
-        background-image: url('https://lh3.google.com/u/0/d/1a1pngLFLnquZtPcRfFqGlPr1zsK8hWbQ=w1920-h937-iv1');
+        background-image: url('/src/logo_W.png');
         background-size: cover;
         background-position: top;
         background-repeat: no-repeat;

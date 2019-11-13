@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link type="text/css" href="/css/onlineRayTracer_scenePage.css" rel="stylesheet" />
+    <link type="text/css" href="/css/toastPopup.css" rel="stylesheet" />
     <link type="text/css" href="/css/resetCSS.css" rel="stylesheet" />
     <title>onlineRayTracer_scenePage</title>
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro/dist/iro.min.js"></script>
@@ -12,7 +13,7 @@
 <body>
     <div class="onlineRayTracerScenePage">
         <aside class="onlineRayTracerSideBar">
-            <a class="sideBar_logo" href="../onlineRayTracer_startPage/onlineRayTracer_startPage.html"></a>
+            <a class="sideBar_logo" href="/html/onlineRayTracer_startPage.html"></a>
             <nav class="sideBar_menu">
                 <ul>
                     <li id="goto_sceneP"><a>scene</a></li>
@@ -39,7 +40,7 @@
                     <div><h3>Resolution</h3></div>
                     <div>
                         <input id="sceneResolutionX" class="scene_resolution_inputT" type="number" placeholder="0" min="0" max="10000" onfocus="this.select()" onchange="if(this.value > 10000){this.value = 10000}">
-                        <img class="scene_resolution_x" src="https://lh3.google.com/u/0/d/1zydHeU8iLZyJca7kEcfXKPJFZ6SZqatt=w1920-h888-iv1">
+                        <img class="scene_resolution_x" src="/src/cross.png">
                         <input id="sceneResolutionY" class="scene_resolution_inputT" type="number" placeholder="0" min="0" max="10000" onfocus="this.select()" onchange="if(this.value > 10000){this.value = 10000}">
                     </div>
                 </article>
@@ -59,10 +60,8 @@
                 </article>
             </div>
         </section>
-        <section class="toastPopup_wrapper">
-            <ul id="toastPopupWrapper"></ul>
-        </section>
-        <script src="/js/onlineRayTracer_scenePage.js"></script>
     </div>
+    <script src="/js/toastPopup.js"></script>
+    <script src="/js/onlineRayTracer_scenePage.js"></script>
 </body>
 </html>

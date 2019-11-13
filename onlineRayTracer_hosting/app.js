@@ -8,6 +8,7 @@ const port = process.env.PORT || 8080;
 app.use('/html', express.static('./public_html'));
 app.use('/css', express.static('./public_css'));
 app.use('/js', express.static('./public_js'));
+app.use('/src', express.static('./public_src'));
 
 app.get('/', (request, response) => {
     fs.readFile(`${__dirname}/public_html/onlineRayTracer_startPage.html`, (err, data) => {

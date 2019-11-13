@@ -29,15 +29,12 @@ let layer = new Konva.Layer();
 
 let imageRect = new Image();
 
-imageRect.src = 'https://lh3.google.com/u/0/d/1xPrHG1XJVR2Fk1gzmh1nnrNvOgL0EHNy=w1920-h888-iv1';
-
 let stageRect =  new Konva.Rect({ 
     x:-cameraData.width/2,
     y:-cameraData.height/2,
     width: cameraData.width,
     height: cameraData.height,
     fill: 'rgb(74, 74, 74)',
-    fillPatternImage: imageRect,
     listening: true
 })
 layer.add(stageRect);
@@ -61,8 +58,8 @@ stage.add(layer);
 let imageCamera = new Image();
 let imagePoint = new Image();
 
-imageCamera.src = 'https://lh3.google.com/u/0/d/1ZipdYg3E1U9WXuKs_152CytgZBBIUN3I=w1920-h888-iv1';
-imagePoint.src = 'https://lh3.google.com/u/0/d/1mbtvqBZMN43s7d6Jzr_HP1ikE6sUQ7P0=w1920-h888-iv1';
+imageCamera.src = '/src/camera.png';
+imagePoint.src = '/src/point.png';
 
 let cLc = cameraData.cam_location;
 let cLa = cameraData.cam_lookat;

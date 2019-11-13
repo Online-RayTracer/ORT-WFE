@@ -5,18 +5,6 @@ window.addEventListener('load', () => {
         location.href = '/html/onlineRayTracer_startPage.html'
     }
     putObjects();
-    setTimeout(()=> {
-        addToast('안녕하세요.');
-    }, 500);
-    setTimeout(()=> {
-        addToast('object를 생성하시려면 create버튼을 눌러주세요.');
-    }, 1500);
-    setTimeout(()=> {
-        addToast('object를 클릭하시면 데이트를 수정하실 수 있습니다.');
-    }, 2500);
-    setTimeout(()=> {
-        addToast('자유롭게 이용해보세요.');
-    }, 3000);
 })
 
 let objectStructure = {
@@ -201,6 +189,19 @@ function putObjects() {
         
             stage.add(layer);
         })
+    } else {
+        setTimeout(()=> {
+            addToast('안녕하세요.');
+        }, 500);
+        setTimeout(()=> {
+            addToast('object를 생성하시려면 create버튼을 눌러주세요.');
+        }, 1500);
+        setTimeout(()=> {
+            addToast('object를 클릭하시면 데이터를 수정하실 수 있습니다.');
+        }, 2500);
+        setTimeout(()=> {
+            addToast('자유롭게 이용해보세요.');
+        }, 3500);
     }
 }
 
@@ -307,9 +308,14 @@ function objectRandomMake() {
 
 function objectDelete() {
     if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
+        objectTarget = {};
         objDeleteList.push(parseInt(objectTarget.attrs.name));
         objectTarget.remove();
         layer.draw();
+    } else if(objectsData.objects.length === 0) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
+    } else {
+        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
     }
 }
 
@@ -359,71 +365,77 @@ document.getElementById('object_nonMetal').addEventListener('click', () => {chos
 document.getElementById('object_glass').addEventListener('click', () => {choseSurface(2)});
 
 function choseSurface(s) {
-    objects_sideBar.classList.remove('metal');
-    objects_sideBar.classList.remove('nonMetal');
-    objects_sideBar.classList.remove('glass');
-    if(s === 0) {
-        objects_sideBar.classList.add('metal');
-        if(objectsData.objects[objectTarget.attrs.name].material.type == "lambertian") {
-            let objcolor = objectTarget.attrs.fill;
-            objectsData.objects[objectTarget.attrs.name].material = {
-                type: "metal",
-                color: [parseInt(objcolor.substring(objcolor.indexOf('(')+1, objcolor.indexOf(','))), parseInt(objcolor.substring(objcolor.indexOf(',')+1, objcolor.lastIndexOf(','))), parseInt(objcolor.substring(objcolor.lastIndexOf(',')+1, objcolor.indexOf(')')))],
-                roughness: 0.0
-            }
-        } else {
-            objectsData.objects[objectTarget.attrs.name].material = {
-                type: "metal",
-                color: [255, 0, 0],
-                roughness: 0.0
+    if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
+        objects_sideBar.classList.remove('metal');
+        objects_sideBar.classList.remove('nonMetal');
+        objects_sideBar.classList.remove('glass');
+        if(s === 0) {
+            objects_sideBar.classList.add('metal');
+            if(objectsData.objects[objectTarget.attrs.name].material.type == "lambertian") {
+                let objcolor = objectTarget.attrs.fill;
+                objectsData.objects[objectTarget.attrs.name].material = {
+                    type: "metal",
+                    color: [parseInt(objcolor.substring(objcolor.indexOf('(')+1, objcolor.indexOf(','))), parseInt(objcolor.substring(objcolor.indexOf(',')+1, objcolor.lastIndexOf(','))), parseInt(objcolor.substring(objcolor.lastIndexOf(',')+1, objcolor.indexOf(')')))],
+                    roughness: 0.0
+                }
+            } else {
+                objectsData.objects[objectTarget.attrs.name].material = {
+                    type: "metal",
+                    color: [255, 0, 0],
+                    roughness: 0.0
+                }
+                objectTarget.setAttrs({
+                    fill: 'rgb(255,0,0)'
+                });
+                colorPicker.color.setChannel('rgb', 'r', 255);
+                colorPicker.color.setChannel('rgb', 'g', 0);
+                colorPicker.color.setChannel('rgb', 'b', 0);
             }
             objectTarget.setAttrs({
-                fill: 'rgb(255,0,0)'
+                stroke: 'rgb(145,145,145)'
             });
-            colorPicker.color.setChannel('rgb', 'r', 255);
-            colorPicker.color.setChannel('rgb', 'g', 0);
-            colorPicker.color.setChannel('rgb', 'b', 0);
-        }
-        objectTarget.setAttrs({
-            stroke: 'rgb(145,145,145)'
-        });
 
-    } else if (s === 1) {
-        objects_sideBar.classList.add('nonMetal');
-        if(objectsData.objects[objectTarget.attrs.name].material.type == "metal") {
-            let objcolor = objectTarget.attrs.fill;
-            objectsData.objects[objectTarget.attrs.name].material = {
-                type: "lambertian",
-                color: [parseInt(objcolor.substring(objcolor.indexOf('(')+1, objcolor.indexOf(','))), parseInt(objcolor.substring(objcolor.indexOf(',')+1, objcolor.lastIndexOf(','))), parseInt(objcolor.substring(objcolor.lastIndexOf(',')+1, objcolor.indexOf(')')))]
-            }
-        } else {
-            objectsData.objects[objectTarget.attrs.name].material = {
-                type: "lambertian",
-                color: [255, 0, 0]
+        } else if (s === 1) {
+            objects_sideBar.classList.add('nonMetal');
+            if(objectsData.objects[objectTarget.attrs.name].material.type == "metal") {
+                let objcolor = objectTarget.attrs.fill;
+                objectsData.objects[objectTarget.attrs.name].material = {
+                    type: "lambertian",
+                    color: [parseInt(objcolor.substring(objcolor.indexOf('(')+1, objcolor.indexOf(','))), parseInt(objcolor.substring(objcolor.indexOf(',')+1, objcolor.lastIndexOf(','))), parseInt(objcolor.substring(objcolor.lastIndexOf(',')+1, objcolor.indexOf(')')))]
+                }
+            } else {
+                objectsData.objects[objectTarget.attrs.name].material = {
+                    type: "lambertian",
+                    color: [255, 0, 0]
+                }
+                objectTarget.setAttrs({
+                    fill: 'rgb(255,0,0)'
+                });
+                colorPicker.color.setChannel('rgb', 'r', 255);
+                colorPicker.color.setChannel('rgb', 'g', 0);
+                colorPicker.color.setChannel('rgb', 'b', 0);
             }
             objectTarget.setAttrs({
-                fill: 'rgb(255,0,0)'
+                stroke: 'rgb(105,105,105)'
             });
-            colorPicker.color.setChannel('rgb', 'r', 255);
-            colorPicker.color.setChannel('rgb', 'g', 0);
-            colorPicker.color.setChannel('rgb', 'b', 0);
+            
+        } else if (s === 2) {
+            objects_sideBar.classList.add('glass');
+            objectsData.objects[objectTarget.attrs.name].material = {
+                type: "dielectric",
+                ref_idx: 0.0
+            }
+            objectTarget.setAttrs({
+                fill: 'rgb(249,248,247)',
+                stroke: 'rgb(232,231,227)'
+            });
         }
-        objectTarget.setAttrs({
-            stroke: 'rgb(105,105,105)'
-        });
-        
-    } else if (s === 2) {
-        objects_sideBar.classList.add('glass');
-        objectsData.objects[objectTarget.attrs.name].material = {
-            type: "dielectric",
-            ref_idx: 0.0
-        }
-        objectTarget.setAttrs({
-            fill: 'rgb(249,248,247)',
-            stroke: 'rgb(232,231,227)'
-        });
+        layer.draw();
+    } else if(objectsData.objects.length === 0) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
+    } else {
+        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
     }
-    layer.draw();
 }
 
 const object_positionX = document.getElementById('object_positionX');
@@ -508,91 +520,130 @@ function objectDataChanged(k, v) {
         }
 
         layer.draw();
+    } else if(objectsData.objects.length === 0) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
     } else {
-        addToast('create버튼을 눌러 object를 생성해주세요.');
+        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
     }
 }
 
 document.getElementById('objectPositionDefault').addEventListener('click', () => {
-    let obj = objectsData.objects[objectTarget.attrs.name];
-    obj.location[0] = 0;
-    obj.location[1] = 0;
-    obj.location[2] = 0;
-    objectTarget.setAttrs({
-        x:0,
-        y:0
-    })
-    object_positionX.value = 0;
-    object_positionY.value = 0;
-    object_positionZ.value = 0;
-    layer.draw();
+    if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
+        let obj = objectsData.objects[objectTarget.attrs.name];
+        obj.location[0] = 0;
+        obj.location[1] = 0;
+        obj.location[2] = 0;
+        objectTarget.setAttrs({
+            x:0,
+            y:0
+        })
+        object_positionX.value = 0;
+        object_positionY.value = 0;
+        object_positionZ.value = 0;
+        layer.draw();
+        addToast('위치값이 기본값으로 변경되셨습니다.', 3, '#000272');
+    } else if(objectsData.objects.length === 0) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
+    } else {
+        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
+    }
 })
 
 document.getElementById('objectRadiusDefault').addEventListener('click', () => {
-    objectTarget.setAttrs({
-        radius: 10
-    })
-    objectsData.objects[objectTarget.attrs.name].size = 10;
-    objectRadiusRange.value = 10;
-    objectRadiusText.value = 10;
-    layer.draw();
+    if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
+        objectTarget.setAttrs({
+            radius: 10
+        })
+        objectsData.objects[objectTarget.attrs.name].size = 10;
+        objectRadiusRange.value = 10;
+        objectRadiusText.value = 10;
+        layer.draw();
+        addToast('크기값이 기본값으로 변경되셨습니다.', 3, '#341677');
+    } else if(objectsData.objects.length === 0) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
+    } else {
+        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
+    }
 })
 
 document.getElementById('objectSurfaceDefault').addEventListener('click', () => {
-    objects_sideBar.classList.add('metal');
-    if(objectsData.objects[objectTarget.attrs.name].material.type == "lambertian") {
-        objects_sideBar.classList.remove('nonMetal');
-        let objcolor = objectTarget.attrs.fill;
-        objectsData.objects[objectTarget.attrs.name].material = {
-            type: "metal",
-            color: [parseInt(objcolor.substring(objcolor.indexOf('(')+1, objcolor.indexOf(','))), parseInt(objcolor.substring(objcolor.indexOf(',')+1, objcolor.lastIndexOf(','))), parseInt(objcolor.substring(objcolor.lastIndexOf(',')+1, objcolor.indexOf(')')))],
-            roughness: 0.0
+    if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
+        objects_sideBar.classList.add('metal');
+        if(objectsData.objects[objectTarget.attrs.name].material.type == "lambertian") {
+            objects_sideBar.classList.remove('nonMetal');
+            let objcolor = objectTarget.attrs.fill;
+            objectsData.objects[objectTarget.attrs.name].material = {
+                type: "metal",
+                color: [parseInt(objcolor.substring(objcolor.indexOf('(')+1, objcolor.indexOf(','))), parseInt(objcolor.substring(objcolor.indexOf(',')+1, objcolor.lastIndexOf(','))), parseInt(objcolor.substring(objcolor.lastIndexOf(',')+1, objcolor.indexOf(')')))],
+                roughness: 0.0
+            }
+        } else if(objectsData.objects[objectTarget.attrs.name].material.type == "dielectric") {
+            objects_sideBar.classList.remove('glass');
+            objectsData.objects[objectTarget.attrs.name].material = {
+                type: "metal",
+                color: [255, 0, 0],
+                roughness: 0.0
+            }
+            objectTarget.setAttrs({
+                fill: 'rgb(255,0,0)'
+            });
+            colorPicker.color.setChannel('rgb', 'r', 255);
+            colorPicker.color.setChannel('rgb', 'g', 0);
+            colorPicker.color.setChannel('rgb', 'b', 0);
         }
-    } else if(objectsData.objects[objectTarget.attrs.name].material.type == "dielectric") {
-        objects_sideBar.classList.remove('glass');
-        objectsData.objects[objectTarget.attrs.name].material = {
-            type: "metal",
-            color: [255, 0, 0],
-            roughness: 0.0
-        }
+        objectTarget.setAttrs({
+            stroke: 'rgb(145,145,145)'
+        });
+        layer.draw();
+        addToast('재질이 기본재질로 변경되셨습니다.', 3, '#a32f80');
+    } else if(objectsData.objects.length === 0) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
+    } else {
+        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
+    }
+})
+
+document.getElementById('objectRoughnessDefault').addEventListener('click', () => {
+    if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
+        objectsData.objects[objectTarget.attrs.name].material.roughness = 0.0;
+        objectRoughnessRange.value = 0.0;
+        objectRoughnessText.value = 0.0;
+        addToast('거칠기가 기본값으로 변경되셨습니다.', 3, '#233714');
+    } else if(objectsData.objects.length === 0) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
+    } else {
+        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
+    }
+})
+
+document.getElementById('objectColorsDefault').addEventListener('click', () => {
+    if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
+        objectsData.objects[objectTarget.attrs.name].material.color = [255, 0, 0];
         objectTarget.setAttrs({
             fill: 'rgb(255,0,0)'
         });
         colorPicker.color.setChannel('rgb', 'r', 255);
         colorPicker.color.setChannel('rgb', 'g', 0);
         colorPicker.color.setChannel('rgb', 'b', 0);
+        layer.draw();
+        addToast('색상이 기본색상으로 변경되셨습니다.', 3, '#1fab89');
+    } else if(objectsData.objects.length === 0) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
+    } else {
+        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
     }
-    objectTarget.setAttrs({
-        stroke: 'rgb(145,145,145)'
-    });
-    layer.draw();
-})
-
-document.getElementById('objectRoughnessDefault').addEventListener('click', () => {
-    objectsData.objects[objectTarget.attrs.name].material.roughness = 0.0;
-    objectRoughnessRange.value = 0.0;
-    objectRoughnessText.value = 0.0;
-})
-
-document.getElementById('objectColorsDefault').addEventListener('click', () => {
-    objectsData.objects[objectTarget.attrs.name].material.color = [255, 0, 0];
-    objectTarget.setAttrs({
-        fill: 'rgb(255,0,0)'
-    });
-    colorPicker.color.setChannel('rgb', 'r', 255);
-    colorPicker.color.setChannel('rgb', 'g', 0);
-    colorPicker.color.setChannel('rgb', 'b', 0);
-    layer.draw();
 })
 
 document.getElementById('objectRefractiveDefault').addEventListener('click', () => {
     objectsData.objects[objectTarget.attrs.name].material.ref_idx = 0.0;
     objectRefractiveRange.value = 0.0;
     objectRefractiveText.value = 0.0;
+    addToast('굴절률이 기본값으로 변경되셨습니다.', 3, '#10316b');
 })
 
 document.getElementById('objectRandomDefault').addEventListener('click', () => {
     objectRandomText.value = 0;
+    addToast('랜덤값이 기본값으로 변경되셨습니다.', 3, '#3e64ff');
 })
 
 document.querySelectorAll('.sideBar_menu > ul > li').forEach((v, i) => {
@@ -612,18 +663,4 @@ function saveObjectsData() {
     }
 	sessionStorage.setItem('ORTData', JSON.stringify(objectsData));
 
-}
-
-const toastPopupWrapper = document.getElementById('toastPopupWrapper');
-
-function addToast(v) {
-	let toastBox = document.createElement('li');
-	toastBox.innerText = v;
-	toastBox.addEventListener('click', () => {
-		toastBox.remove();
-	})
-	setTimeout(()=> {
-		toastBox.remove();
-	}, 3000);
-	toastPopupWrapper.prepend(toastBox);
 }
