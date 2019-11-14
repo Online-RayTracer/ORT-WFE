@@ -112,9 +112,8 @@ function moveLine(){
     const dx = pointX - cameraX;
     const dy = pointY - cameraY;
     let angle = Math.atan2(-dy, dx);
-
-    // let degree = ((Math.atan2(cameraY-camera.getY(), cameraX-camera.getX())*180)/Math.PI)*2;
-    let degree = ((Math.atan2(point.getY()-camera.getY(), point.getX()-camera.getX())*180)/Math.PI);
+    
+    let degree = ((Math.atan2(pointY-cameraY, pointX-cameraX)*180)/Math.PI);
     // console.log(degree,'도');
 
     const radius = 50;
@@ -172,12 +171,14 @@ camera_withObjects.addEventListener('click', () => {
         if(isWidthObject) {
             removeObjects();
             isWidthObject = false;
+            addToast('object가 제거되었습니다.');
         } else {
             putObjects();
             isWidthObject = true;
+            addToast('object가 추가되었습니다.');
         }
     } else {
-        alert('object가 없습니다.');
+        addToast('object가 없습니다.');
     }
 })
 
@@ -328,17 +329,30 @@ document.getElementById('cameraPositionDefault').addEventListener('click', () =>
     camera_positionY.value = 0;
     camera_positionZ.value = 0;
     moveLine();
+    addToast('카메라 위치가 기본값으로 변경되셨습니다.');
 })
 
 document.getElementById('cameraApertureDefault').addEventListener('click', () => {
     cameraData.cam_aperture = 0.0;
     cameraApertureRange.value = 0.0;
     cameraApertureText.value = 0.0;
+    addToast('카메라 위치가 기본값으로 변경되셨습니다.');
+})
+
+document.getElementById('camera_front').addEventListener('click', () => {
+    addToast('아직 없는 기능입니다.', '#F8D308');
+})
+
+document.getElementById('camera_right').addEventListener('click', () => {
+    addToast('아직 없는 기능입니다.', '#F8D308');
 })
 
 document.querySelectorAll('.sideBar_menu > ul > li').forEach((v, i) => {
     if(i !== 2) {
-        v.addEventListener('click', () => {saveCameraData();})
+        v.addEventListener('click', () => {
+            saveCameraData();
+            addToast('페이지 이동중입니다 잠시만 기다려주세요', undefined, 10);
+        })
     }
 })
 

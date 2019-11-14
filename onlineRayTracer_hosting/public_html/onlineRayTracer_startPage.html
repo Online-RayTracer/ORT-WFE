@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link type="text/css" href="/css/onlineRayTracer_startPage.css" rel="stylesheet" />
+    <link type="text/css" href="/css/toastPopup.css" rel="stylesheet" />
     <link type="text/css" href="/css/resetCSS.css" rel="stylesheet" />
     <title>onlineRayTracer_startPage</title>
 </head>
@@ -19,17 +20,17 @@
                             <h1>welcome to RayTracing</h1>
                         </div>
                         <a id="mainContentsStartButton" class="main_contents_startB">Get Start</a>
-                        <a class="main_contents_exploreB">EXPLORE</a>
+                        <a id="mainContentsExploreButton" class="main_contents_exploreB">EXPLORE</a>
                     </div>
                 </div>
             </article>
         </section>
-        <section class="startPage-explore">
+        <section id="startPageExplore" class="startPage-explore">
             <article class="explore_title">
                 <h1>Ray Tracing</h1>
             </article>
             <article class="explore_explanWhat">
-                <img class="explore_explanWhat_img" src="/src/home.png">
+                <img class="explore_explanWhat_img" src="/src/home1.png">
                 <div class="explore_explanWhat_text">
                     <h3>레이트레이싱이란 무엇입니까?</h3>
                     <p>레이트레이싱은 전역 조명 방식 렌더링 기법중 하나로<br>카메라에 들어오는 픽셀에 광선을 쏘아 빛을 물체에<br>반사된 빛을 역추격 합니다.</p>
@@ -47,7 +48,7 @@
                     <h3>지금 바로 체험하기.</h3>
                     <p>서비스는 이미 존재합니다.<br>오직 당신이 사용하기만을 기다릴 뿐입니다.<br>당신만의 레이트리이싱 이미지를 만들어보세요.</p>
                 </div>
-                <a class="explore_start_button">START</a>
+                <a id="exploreStartButton" class="explore_start_button">START</a>
             </article>
             <article class="explore_team">
                 <h3>TEAM</h3>
@@ -56,5 +57,6 @@
         </section>
     </div>
     <script src="/js/onlineRayTracer_startPage.js"></script>
+    <script src="/js/toastPopup.js"></script>
 </body>
 </html>

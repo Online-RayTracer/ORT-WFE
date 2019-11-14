@@ -72,6 +72,7 @@ function addCircle(kind) {
         Y = 0;
         radius = 10;
         color = 'rgb(255,0,0)';
+        roughness = 0;
     }
     let circle = new Konva.Circle({
         x: X,
@@ -230,7 +231,9 @@ stage.on('wheel', e => {
     stage.batchDraw();
 });
 
-stageRect.on('click', () => {
+stageRect.on('click', setDefaultAll);
+
+function setDefaultAll() {
     if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
         objectTarget.setAttrs({
             draggable: false,
@@ -254,7 +257,7 @@ stageRect.on('click', () => {
         objects_sideBar.classList.remove('glass');
         objectTarget = {};
     }
-});
+}
 
 document.getElementById('object_reset').addEventListener('click', () => {objectReset()})
 
@@ -266,6 +269,7 @@ document.getElementById('object_create').addEventListener('click', () => {addCir
 
 function objectReset() {
     if(confirm('초기화 됩니다. 계속 하시겠습니까?')) {
+        setDefaultAll();
         layer.removeChildren();
         objectsData.objects = [];
         objectTarget = {};
@@ -298,7 +302,7 @@ function objectRandomMake() {
             draggable: false,
             strokeWidth: 2
         })
-        objectTarget = {};
+        setDefaultAll();
     }
     for(let i = 0; i < parseInt(objectRandomText.value); i++) {
         addCircle('random');
@@ -308,14 +312,14 @@ function objectRandomMake() {
 
 function objectDelete() {
     if (Object.getOwnPropertyNames(objectTarget).length !== 0) {
-        objectTarget = {};
         objDeleteList.push(parseInt(objectTarget.attrs.name));
         objectTarget.remove();
         layer.draw();
-    } else if(objectsData.objects.length === 0) {
-        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
+        setDefaultAll();
+    } else if(objectsData.objects.length === objDeleteList.length) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', '#ea5e5e');
     } else {
-        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
+        addToast('oject를 클릭후 변경해주세요.', '#6f9a8d');
     }
 }
 
@@ -355,6 +359,10 @@ colorPicker.on('input:move', (color) => {
         objectsData.objects[objectTarget.attrs.name].material.color[1] = color.rgb.g;
         objectsData.objects[objectTarget.attrs.name].material.color[2] = color.rgb.b;
         layer.draw();
+    } else if(objectsData.objects.length === objDeleteList.length) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', '#ea5e5e');
+    } else {
+        addToast('oject를 클릭후 변경해주세요.', '#6f9a8d');
     }
 });
 
@@ -431,10 +439,10 @@ function choseSurface(s) {
             });
         }
         layer.draw();
-    } else if(objectsData.objects.length === 0) {
-        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
+    } else if(objectsData.objects.length === objDeleteList.length) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', '#ea5e5e');
     } else {
-        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
+        addToast('oject를 클릭후 변경해주세요.', '#6f9a8d');
     }
 }
 
@@ -520,10 +528,10 @@ function objectDataChanged(k, v) {
         }
 
         layer.draw();
-    } else if(objectsData.objects.length === 0) {
-        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
+    } else if(objectsData.objects.length === objDeleteList.length) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', '#ea5e5e');
     } else {
-        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
+        addToast('oject를 클릭후 변경해주세요.', '#6f9a8d');
     }
 }
 
@@ -541,11 +549,11 @@ document.getElementById('objectPositionDefault').addEventListener('click', () =>
         object_positionY.value = 0;
         object_positionZ.value = 0;
         layer.draw();
-        addToast('위치값이 기본값으로 변경되셨습니다.', 3, '#000272');
-    } else if(objectsData.objects.length === 0) {
-        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
+        addToast('위치값이 기본값으로 변경되셨습니다.', '#000272');
+    } else if(objectsData.objects.length === objDeleteList.length) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', '#ea5e5e');
     } else {
-        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
+        addToast('oject를 클릭후 변경해주세요.', '#6f9a8d');
     }
 })
 
@@ -558,11 +566,11 @@ document.getElementById('objectRadiusDefault').addEventListener('click', () => {
         objectRadiusRange.value = 10;
         objectRadiusText.value = 10;
         layer.draw();
-        addToast('크기값이 기본값으로 변경되셨습니다.', 3, '#341677');
-    } else if(objectsData.objects.length === 0) {
-        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
+        addToast('크기값이 기본값으로 변경되셨습니다.', '#341677');
+    } else if(objectsData.objects.length === objDeleteList.length) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', '#ea5e5e');
     } else {
-        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
+        addToast('oject를 클릭후 변경해주세요.', '#6f9a8d');
     }
 })
 
@@ -595,11 +603,11 @@ document.getElementById('objectSurfaceDefault').addEventListener('click', () => 
             stroke: 'rgb(145,145,145)'
         });
         layer.draw();
-        addToast('재질이 기본재질로 변경되셨습니다.', 3, '#a32f80');
-    } else if(objectsData.objects.length === 0) {
-        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
+        addToast('재질이 기본재질로 변경되셨습니다.', '#a32f80');
+    } else if(objectsData.objects.length === objDeleteList.length) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', '#ea5e5e');
     } else {
-        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
+        addToast('oject를 클릭후 변경해주세요.', '#6f9a8d');
     }
 })
 
@@ -608,11 +616,11 @@ document.getElementById('objectRoughnessDefault').addEventListener('click', () =
         objectsData.objects[objectTarget.attrs.name].material.roughness = 0.0;
         objectRoughnessRange.value = 0.0;
         objectRoughnessText.value = 0.0;
-        addToast('거칠기가 기본값으로 변경되셨습니다.', 3, '#233714');
-    } else if(objectsData.objects.length === 0) {
-        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
+        addToast('거칠기가 기본값으로 변경되셨습니다.', '#233714');
+    } else if(objectsData.objects.length === objDeleteList.length) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', '#ea5e5e');
     } else {
-        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
+        addToast('oject를 클릭후 변경해주세요.', '#6f9a8d');
     }
 })
 
@@ -626,11 +634,11 @@ document.getElementById('objectColorsDefault').addEventListener('click', () => {
         colorPicker.color.setChannel('rgb', 'g', 0);
         colorPicker.color.setChannel('rgb', 'b', 0);
         layer.draw();
-        addToast('색상이 기본색상으로 변경되셨습니다.', 3, '#1fab89');
-    } else if(objectsData.objects.length === 0) {
-        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', 3, '#ea5e5e');
+        addToast('색상이 기본색상으로 변경되셨습니다.', '#1fab89');
+    } else if(objectsData.objects.length === objDeleteList.length) {
+        addToast('먼저 create버튼을 눌러 object를 만들어 주세요.', '#ea5e5e');
     } else {
-        addToast('oject를 클릭후 변경해주세요.', 3, '#6f9a8d');
+        addToast('oject를 클릭후 변경해주세요.', '#6f9a8d');
     }
 })
 
@@ -638,17 +646,28 @@ document.getElementById('objectRefractiveDefault').addEventListener('click', () 
     objectsData.objects[objectTarget.attrs.name].material.ref_idx = 0.0;
     objectRefractiveRange.value = 0.0;
     objectRefractiveText.value = 0.0;
-    addToast('굴절률이 기본값으로 변경되셨습니다.', 3, '#10316b');
+    addToast('굴절률이 기본값으로 변경되셨습니다.', '#10316b');
 })
 
 document.getElementById('objectRandomDefault').addEventListener('click', () => {
     objectRandomText.value = 0;
-    addToast('랜덤값이 기본값으로 변경되셨습니다.', 3, '#3e64ff');
+    addToast('랜덤값이 기본값으로 변경되셨습니다.', '#3e64ff');
+})
+
+document.getElementById('object_front').addEventListener('click', () => {
+    addToast('아직 없는 기능입니다.', '#F8D308');
+})
+
+document.getElementById('object_right').addEventListener('click', () => {
+    addToast('아직 없는 기능입니다.', '#F8D308');
 })
 
 document.querySelectorAll('.sideBar_menu > ul > li').forEach((v, i) => {
     if(i !== 1) {
-        v.addEventListener('click', () => {saveObjectsData();})
+        v.addEventListener('click', () => {
+            saveObjectsData();
+            addToast('페이지 이동중입니다 잠시만 기다려주세요', undefined, 10);
+        })
     }
 })
 

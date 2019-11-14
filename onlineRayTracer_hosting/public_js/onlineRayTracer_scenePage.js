@@ -84,9 +84,9 @@ function sceneQualityRangeValue(v) {
 }
 
 document.getElementById('sceneExportButton').addEventListener('click', () => {
-	addToast('아직 없는 기능입니다.');
+    addToast('아직 없는 기능입니다.', '#F8D308');
 })
 
 document.getElementById('sceneImportButton').addEventListener('click', () => {
-	addToast('아직 없는 기능입니다.');
+    addToast('아직 없는 기능입니다.', '#F8D308');
 })

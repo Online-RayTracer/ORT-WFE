@@ -3,7 +3,7 @@ toastPopup_wrapper.classList.add('toastPopup_wrapper');
 toastPopup_wrapper.innerHTML = `<ul id="toastPopupWrapper"></ul>`;
 document.body.prepend(toastPopup_wrapper);
 
-function addToast(v, time, color) {
+function addToast(v, color, time) {
 	let toastBox = document.createElement('li');
     toastBox.innerText = v;
 
@@ -14,13 +14,10 @@ function addToast(v, time, color) {
     }
 
     if(time !== undefined) {
-        console.log('true');
         time *= 1000;
     } else {
-        console.log('nope');
         time = 3000;
     }
-    console.log(time)
 
 	toastBox.addEventListener('click', () => {
 		toastBox.remove();
