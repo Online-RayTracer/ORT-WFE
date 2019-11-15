@@ -125,7 +125,7 @@
                     </div>
                     <div class="objects_sideBarRandomC">
                         <p>Amount</p>
-                        <input id="objectRandomText" type="number"onfocus="this.select()" value="0" min="0" max="500">
+                        <input id="objectRandomText" type="number"onfocus="this.select()" value="0" min="0" max="500" onchange="if(this.value > 500){this.value = 500}else if(this.value < 0){this.value = 0}">
                     </div>
                     <div class="objects_sideBarRandomB">
                         <button id="objectRandomSave">SAVE</button>

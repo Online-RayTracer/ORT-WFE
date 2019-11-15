@@ -1,6 +1,7 @@
-const toastPopup_wrapper = document.createElement('div');
+const toastPopup_wrapper = document.createElement('ul');
 toastPopup_wrapper.classList.add('toastPopup_wrapper');
-toastPopup_wrapper.innerHTML = `<ul id="toastPopupWrapper"></ul>`;
+toastPopup_wrapper.setAttribute('id', 'toastPopupWrapper');
+// toastPopup_wrapper.innerHTML = `<ul id="toastPopupWrapper"></ul>`;
 document.body.prepend(toastPopup_wrapper);
 
 function addToast(v, color, time) {

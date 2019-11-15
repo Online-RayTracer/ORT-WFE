@@ -39,9 +39,9 @@
                 <article class="sceneContent scene_resolution">
                     <div><h3>Resolution</h3></div>
                     <div>
-                        <input id="sceneResolutionX" class="scene_resolution_inputT" type="number" placeholder="0" min="0" max="10000" onfocus="this.select()" onchange="if(this.value > 10000){this.value = 10000}">
+                        <input id="sceneResolutionX" class="scene_resolution_inputT" type="number" placeholder="0" min="0" max="10000" onfocus="this.select()" onchange="if(this.value > 10000){this.value = 10000}else if(this.value < 0){this.value = 0}">
                         <img class="scene_resolution_x" src="/src/cross.png">
-                        <input id="sceneResolutionY" class="scene_resolution_inputT" type="number" placeholder="0" min="0" max="10000" onfocus="this.select()" onchange="if(this.value > 10000){this.value = 10000}">
+                        <input id="sceneResolutionY" class="scene_resolution_inputT" type="number" placeholder="0" min="0" max="10000" onfocus="this.select()" onchange="if(this.value > 10000){this.value = 10000}else if(this.value < 0){this.value = 0}">
                     </div>
                 </article>
                 <article class="sceneContent scene_quality">
@@ -55,7 +55,7 @@
                     <div><h3>Light Color</h3></div>
                     <div>
                         <div id="scenecolorPicker"></div>
-                        <div><div id="sceneColorBox"></div><p id="sceneColorText">#ff0000</p></div>
+                        <div><div id="sceneColorBox"></div><p id="sceneColorText">#ffffff</p></div>
                     </div>
                 </article>
             </div>
