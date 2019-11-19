@@ -108,7 +108,6 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     background-color: #343434;
 }
 
-
 @media all and (min-width: 1385px) {
     .objects_topMenu {
         border-radius: 100px;

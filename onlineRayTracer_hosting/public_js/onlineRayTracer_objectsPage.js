@@ -655,11 +655,11 @@ document.getElementById('objectRandomDefault').addEventListener('click', () => {
 })
 
 document.getElementById('object_front').addEventListener('click', () => {
-    addToast('아직 없는 기능입니다.', '#F8D308');
+    addToast('아직 없는 기능입니다.', '#F8D308; color: #000000'); // 추후에 변경할 예정
 })
 
 document.getElementById('object_right').addEventListener('click', () => {
-    addToast('아직 없는 기능입니다.', '#F8D308');
+    addToast('아직 없는 기능입니다.', '#F8D308; color: #000000'); // 추후에 변경할 예정
 })
 
 document.querySelectorAll('.sideBar_menu > ul > li').forEach((v, i) => {

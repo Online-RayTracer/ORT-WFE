@@ -34,36 +34,3 @@ function addToast(v, color, time) {
     
 	toastPopupWrapper.prepend(toastBox);
 }
-
-/*
-    let toastBoxStyle = '';
-	let toastBox = document.createElement('li');
-    toastBox.innerText = v;
-
-    if(color !== undefined) {
-        toastBoxStyle += `backgroundColor: ${color};`;
-    } else {
-        toastBoxStyle += `background-color: #57a99a;`
-    }
-
-    if(time !== undefined) {
-        time *= 1000;
-    } else {
-        time = 3000;
-    }
-
-	toastBox.addEventListener('click', () => {
-		toastBox.remove();
-    })
-
-    setTimeout(() => {
-        toastBoxStyle += 'opacity: 0;';
-        toastBox.setAttribute('style', toastBoxStyle);
-    }, (time-600));
-
-	setTimeout(() => {
-		toastBox.remove();
-	}, time);
-	toastPopupWrapper.prepend(toastBox);
-
-*/

@@ -12,7 +12,6 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     width: 100vw;
     height: 100vh;
     min-height: 650px;
-    overflow: hidden;
     background-color: #EBEBEB;
     user-select: none;
 }

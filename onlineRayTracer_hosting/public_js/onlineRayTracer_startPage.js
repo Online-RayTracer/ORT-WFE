@@ -8,13 +8,6 @@ document.getElementById('mainContentsExploreButton').addEventListener('click', (
 })
 document.getElementById('exploreStartButton').addEventListener('click', makeORTData);
 
-
-document.addEventListener('scroll', () => {
-
-})
-
-
-
 function makeORTData() {
     let ORTData = {
         name: "",
@@ -24,6 +17,7 @@ function makeORTData() {
         cam_location: [0.000, 0.000, 0.000],
         cam_lookat: [0.000, 0.000, 0.000],
         cam_aperture: 0.0,
+        cam_vfov: 0.0,
         light_color: [255.000, 255.000, 255.000],
         objects: [] /*{
             location: [],

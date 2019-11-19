@@ -84,9 +84,9 @@ function sceneQualityRangeValue(v) {
 }
 
 document.getElementById('sceneExportButton').addEventListener('click', () => {
-    addToast('아직 없는 기능입니다.', '#F8D308');
+    addToast('아직 없는 기능입니다.', '#F8D308; color: #000000'); // 추후에 변경할 예정
 })
 
 document.getElementById('sceneImportButton').addEventListener('click', () => {
-    addToast('아직 없는 기능입니다.', '#F8D308');
+    addToast('아직 없는 기능입니다.', '#F8D308; color: #000000'); // 추후에 변경할 예정
 })

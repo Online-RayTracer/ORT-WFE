@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link type="text/css" href="/css/onlineRayTracer_renderPage.css" rel="stylesheet" />
+    <link type="text/css" href="/css/toastPopup.css" rel="stylesheet" />
     <link type="text/css" href="/css/resetCSS.css" rel="stylesheet" />
-    <title>onlineRayTracer_backgroundPage</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>onlineRayTracer_renderPage</title>
 </head>
 <body>
     <div class="onlineRayTracerRenderPage">
@@ -21,15 +23,27 @@
                 </ul>
             </nav>
         </aside>
-        <section class="renderContents">
-            <article class="renderContent">
+        <section id="renderContents" class="render_contents">
+            <article class="render_content">
                 <div><h3>Render</h3></div>
                 <div>
-                    <button>START</button>
+                    <div id="renderImageWrapper" class="render_imageWrapper">
+                        <!-- <img id="renderImage" class="render_image" src="/src/start_background.png"> -->
+                    </div>
+                    <button id="renderButton" class="render_button">START</button>
+                    <div id="renderTextWrapper" class="render_textWrapper">
+                        <!-- <a id="renderRestrat" class="render_restart">scene reset and re-start</a>
+                        <a id="renderDownload" class="render_download">scene download</a>
+                        <a id="renderContinue" class="render_continue">continue edit scene</a> -->
+                    </div>
                 </div>
             </article>
         </section>
-        <script src="/js/onlineRayTracer_renderPage.js"></script>
     </div>
+    <div id="popup_showImg" class="popup-showImg hidden">
+        <img id="popup_showImgImage" class="popup-showImgImage" src="">
+    </div>
+    <script src="/js/onlineRayTracer_renderPage.js"></script>
+    <script src="/js/toastPopup.js"></script>
 </body>
 </html>
