@@ -274,7 +274,7 @@ function pointMove() {
     point_positionX.value = parseInt(point.attrs.x);
     point_positionY.value = -parseInt(point.attrs.y);
     cameraData.cam_lookat[0] = parseInt(point.attrs.x);
-    cameraData.cam_lookat[1] = parseInt(point.attrs.y);
+    cameraData.cam_lookat[1] = -parseInt(point.attrs.y);
 }
 
 const cameraApertureRange = document.getElementById('cameraApertureRange');
@@ -286,6 +286,17 @@ cameraApertureText.value = cameraData.cam_aperture;
 function cameraApertureValue(v) {
     cameraApertureText.value = v;
     cameraDataChanged('ca', v);
+}
+
+const cameraVforRange = document.getElementById('cameraVforRange');
+const cameraVforText = document.getElementById('cameraVforText');
+
+cameraVforRange.value = cameraData.cam_vfov;
+cameraVforText.value = cameraData.cam_vfov;
+
+function cameraVforValue(v) {
+    cameraVforText.value = v;
+    cameraDataChanged('vf', v);
 }
 
 function cameraDataChanged(k, v) {
@@ -315,6 +326,8 @@ function cameraDataChanged(k, v) {
         cameraData.cam_lookat[2] = parseInt(point_positionZ.value);
     } else if(k === 'ca') {
         cameraData.cam_aperture = parseFloat(v);
+    } else if(k === 'vf') {
+        cameraData.cam_vfov = parseFloat(v);
     }
     moveLine();
 }
@@ -337,6 +350,13 @@ document.getElementById('cameraApertureDefault').addEventListener('click', () =>
     cameraApertureRange.value = 0.0;
     cameraApertureText.value = 0.0;
     addToast('카메라 위치가 기본값으로 변경되셨습니다.');
+})
+
+document.getElementById('cameraVforDefault').addEventListener('click', () => {
+    cameraData.cam_vfov = 0.0;
+    cameraVforRange.value = 0.0;
+    cameraVforText.value = 0.0;
+    addToast('카메라 각도가 기본값으로 변경되셨습니다.');
 })
 
 document.getElementById('camera_front').addEventListener('click', () => {

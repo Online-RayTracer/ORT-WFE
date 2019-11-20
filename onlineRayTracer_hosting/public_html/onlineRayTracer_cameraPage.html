@@ -83,6 +83,16 @@
                         <input id="cameraApertureText" class="camera_apertureinputT" type="number" value="0" readonly>
                     </div>
                 </div>
+                <div class="camera_sideBarVfor">
+                    <div class="camera_sideBarTitle">
+                        <h4>Camera vfor</h4>
+                        <a id="cameraVforDefault">set Default</a>
+                    </div>
+                    <div class="camera_sideBarVforC">
+                        <div class="camera_vforInputR"><input id="cameraVforRange" type="range" oninput='cameraVforValue(this.value)' value="0" min="0" max="180" step="1"></div>
+                        <input id="cameraVforText" class="camera_vforInputT" type="number" value="0" readonly>
+                    </div>
+                </div>
             </article>
         </section>
     </div>
