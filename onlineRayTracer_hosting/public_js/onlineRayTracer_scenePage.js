@@ -24,7 +24,7 @@ window.addEventListener('load', () => {
 })
 
 let colorPicker = new iro.ColorPicker("#scenecolorPicker", {
-    width: 220,
+    width: document.body.offsetWidth*0.11462,
 	color: "#ff0000",
 	sliderHeight: 10
 });
@@ -48,10 +48,10 @@ function sceneSave(k) {
 	if(sceneName.value === '') {
 		addToast('Name의 값을 정해주세요.');
 		sceneContents.classList.add('fillName');
-	} else if(sceneResolutionX.value === '' && sceneResolutionY.value === '') {
+	} else if(sceneResolutionX.value === '0' && sceneResolutionY.value === '0') {
 		addToast('Resolution의 값을 정해주세요.');
 		sceneContents.classList.add('fillResolution');
-	} else if(sceneQualityText.value === '') {
+	} else if(sceneQualityText.value === '100') {
 		addToast('Quality의 값을 정해주세요.');
 		sceneContents.classList.add('fillQuality');
 	} else {

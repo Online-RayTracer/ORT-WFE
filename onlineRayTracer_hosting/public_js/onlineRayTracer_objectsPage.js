@@ -345,7 +345,7 @@ function objectRefractiveValue(v) {
 }
 
 let colorPicker = new iro.ColorPicker("#objectcolorPicker", {
-    width: 130,
+    width: document.body.offsetWidth*0.06773,
     color: "#ff0000",
     sliderHeight: 10
 });

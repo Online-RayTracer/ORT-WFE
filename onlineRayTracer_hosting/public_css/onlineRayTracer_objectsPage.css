@@ -19,9 +19,10 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     flex-direction: column;
     position: relative;
     width: 18.5%;
-    min-width: 300px;
+    min-width: 180px;
     height: 100%;
     background-color: #1C1C1C;
+    font-size: 0.85vw;
 }
 
 .sideBar_logo {
@@ -30,13 +31,13 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     justify-content: center;
     width: 100%;
     height: 20%;
-    min-height: 185px;
+    min-height: 110px;
 }
 
 .sideBar_logo::after {
     content: '';
-    width: 220px;
-    height: 120px;
+    width: 11.5vw;
+    height: 6.2vw;
     background-image: url('/src/logo_W.png');
     background-size: cover;
     background-repeat: no-repeat;
@@ -47,7 +48,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     justify-content: flex-end;
     width: 100%;
     height: 35%;
-    min-height: 256px;
+    min-height: 200px;
 }
 
 .sideBar_menu > ul {
@@ -65,7 +66,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     width: 100%;
     height: 25%;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .sideBar_menu > ul > li:hover {
@@ -78,7 +79,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     justify-content: center;
     width: 100%;
     height: 100%;
-    font-size: 2.3rem;
+    font-size: 2.3em;
     text-decoration: none;
     letter-spacing: 0rem;
     color: #FFFFFF;
@@ -108,7 +109,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     background-color: #343434;
 }
 
-@media all and (min-width: 1385px) {
+/* @media all and (min-width: 1385px) { */
     .objects_topMenu {
         border-radius: 100px;
         padding: 0 20px 0 40px;
@@ -116,14 +117,15 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
         grid-template-rows: 1fr;
         top: 3%;
         left: 3%;
-        width: calc(80% - 6% - 60px);
-        height: calc(10% - 3%);
-        min-width: 580px;
-        min-height: 55px;
+        width: 56vw;
+        height: 3vw;
+        /* min-width: 580px;*/
+        min-height: 33px;
+        font-size: 0.8vw;
     }
-}
+/* } */
 
-@media (max-width: 1384px) and (min-width: 0px) {
+/* @media (max-width: 1384px) and (min-width: 0px) {
     .objects_topMenu {
         border-radius: 0 0 10px 0;
         grid-template-columns: 1fr;
@@ -133,7 +135,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
         min-width: 200px;
         min-height: 330px;
     }
-}
+} */
 
 #object_top {
     /* color: #FFFFFF; */
@@ -155,7 +157,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 
 .objects_topMenu > div > a, .objects_topMenu > div > a:active {
     color: #FFFFFF;
-    font-size: 2rem;
+    font-size: 2em;
     text-decoration: none;
     cursor: pointer;
 }
@@ -176,45 +178,48 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 }
 
 .objects_sideBar {
-    padding-top: 2%;
+    padding-top: 1%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     width: 20%;
-    min-width: 250px;
+    /* min-width: 250px; */
     height: calc(100% - 2%);
+    font-size: 0.8vw;
     overflow-y: scroll;
 }
 
 .objects_sideBar > div {
     width: 80%;
-    min-width: 250px;
+    /* min-width: 250px; */
 }
 
 .objects_sideBarTitle {
     border-bottom: 1px solid black;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 30px;
+    height: 22%;
+    min-height: 22px;
 }
 
 .objects_sideBarTitle > h4 {
-    font-size: 1.7rem;
+    font-size: 1.7em;
     letter-spacing: -0.05rem;
 }
 
 .objects_sideBarTitle > a {
+    margin-bottom: 5%;
     color: #598FD1;
     cursor: pointer;
 }
 
 .objects_sideBarPosition {
     height: 18%;
-    min-height: 125px;
+    min-height: 100px;
 }
 
 .random .objects_sideBarPosition {
@@ -229,7 +234,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 100px;
+    height: 60%;
 }
 
 .objects_sideBarPositionC > div {
@@ -247,12 +252,14 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 
 .objects_sideBarPositionC > div > input {
     width: 100%;
+    height: 30%;
+    font-size: 1em;
     text-align: center;
 }
 
 .objects_sideBarRadius {
     height: 20%;
-    min-height: 140px;
+    min-height: 110px;
 }
 
 .random .objects_sideBarRadius {
@@ -267,7 +274,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     align-items: center;
     justify-content: space-around;
     width: 100%;
-    height: 100px;
+    height: 60%;
 }
 
 .objects_radiusinputR {
@@ -278,25 +285,28 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 230px;
-    height: 30px;
+    width: 90%;
+    height: 30%;
 }
 
 .objects_radiusinputR::before {
     content: "";
     position: absolute;
-    width: 2px;
+    width: 0.1vw;
     height: 100%;
     background-color: #ABABAB;
 }
 
 .objects_radiusinputR > input[type=range] {
     z-index: 50;
+    display: flex;
+    align-items: center;
     width: 100%;
-    height: 20px;
+    height: 100%;
     margin: 0;
     -webkit-appearance: none;
     background: none;
+    overflow: hidden;
 }
 
 .objects_radiusinputR > input[type=range]:focus {
@@ -305,14 +315,14 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 
 .objects_radiusinputR > input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
-    height: 2px;
+    height: 0.1vw;
     cursor: pointer;
     background: #707070;
 }
 
 .objects_radiusinputR > input[type=range]::-webkit-slider-thumb {
-    width: 8px;
-    height: 30px;
+    width: 3%;
+    height: 100px;
     background: #384772;
     cursor: pointer;
     -webkit-appearance: none;
@@ -320,16 +330,16 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 }
 
 .objects_radiusinputT {
-    width: 220px;
-    height: 20px;
+    width: 85%;
+    height: 20%;
     outline: none;
-    font-size: 1.2rem;
+    font-size: 1.2em;
     text-align: center;
 }
 
 .objects_sideBarSurface {
-    height: 20%;
-    min-height: 140px;
+    height: 18%;
+    min-height: 110px;
 }
 
 .random .objects_sideBarSurface {
@@ -343,8 +353,8 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    height: calc(85% - 31px);
-    min-height: 80px;
+    height: calc(95% - 31px);
+    /* min-height: 80px; */
 }
 
 .objects_sideBarSurfaceC > a {
@@ -353,7 +363,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     align-items: center;
     justify-content: space-around;
     width: 25%;
-    height: 100px;
+    height: 80%;
     cursor: pointer;
     transition: border 0.2s ease-in-out;
 }
@@ -366,19 +376,19 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     display: flex;
     align-items: center;
     height: 32px;
-    font-size: 1rem;
+    font-size: 1.1em;
     font-weight: bold;
 }
 
 .objects_sideBarSurfaceC > a > img {
     width: 60%;
-    height: 40px;
+    height: 40%;
     background-color: #1C1C1C;
 }
 
 .objects_sideBarRoughness {
     height: 18%;
-    min-height: 125px;
+    min-height: 110px;
 }
 
 .nonMetal .objects_sideBarRoughness, .glass .objects_sideBarRoughness, .random .objects_sideBarRoughness {
@@ -393,7 +403,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     align-items: center;
     justify-content: space-around;
     width: 100%;
-    height: 100px;
+    height: 60%;
 }
 
 .objects_roughnessinputR {
@@ -404,25 +414,28 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 230px;
-    height: 30px;
+    width: 90%;
+    height: 30%;
 }
 
 .objects_roughnessinputR::before {
     content: "";
     position: absolute;
-    width: 2px;
+    width: 0.1vw;
     height: 100%;
     background-color: #ABABAB;
 }
 
 .objects_roughnessinputR > input[type=range] {
     z-index: 50;
+    display: flex;
+    align-items: center;
     width: 100%;
-    height: 20px;
+    height: 100%;
     margin: 0;
     -webkit-appearance: none;
     background: none;
+    overflow: hidden;
 }
 
 .objects_roughnessinputR > input[type=range]:focus {
@@ -431,14 +444,14 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 
 .objects_roughnessinputR > input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
-    height: 2px;
+    height: 0.1vw;
     cursor: pointer;
     background: #707070;
 }
 
 .objects_roughnessinputR > input[type=range]::-webkit-slider-thumb {
-    width: 8px;
-    height: 30px;
+    width: 3%;
+    height: 100px;
     background: #384772;
     cursor: pointer;
     -webkit-appearance: none;
@@ -446,10 +459,10 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 }
 
 .objects_roughnessinputT {
-    width: 220px;
-    height: 20px;
+    width: 85%;
+    height: 20%;
     outline: none;
-    font-size: 1.2rem;
+    font-size: 1.2em;
     text-align: center;
 }
 
@@ -458,8 +471,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 22%;
-    min-height: 230px;
+    height: 26%;
 }
 
 .glass .objects_sideBarColors, .random .objects_sideBarColors {
@@ -469,13 +481,14 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 }
 
 .objects_sideBarColorsC {
-    margin-top: 5%;
+    margin-top: 3%;
     border: 1px solid black;
+    padding: 3% 10%;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 180px;
-    height: 162px;
+    width: auto;
+    height: auto;
 }
 
 .objects_sideBarRefractive {
@@ -486,7 +499,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 
 .glass .objects_sideBarRefractive {
     height: 18%;
-    min-height: 125px;
+    /* min-height: 125px; */
 }
 
 .objects_sideBarRefractiveC {
@@ -495,7 +508,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     align-items: center;
     justify-content: space-around;
     width: 100%;
-    height: 100px;
+    height: 60%;
 }
 
 .objects_refractiveinputR {
@@ -506,25 +519,28 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 230px;
-    height: 30px;
+    width: 90%;
+    height: 30%;
 }
 
 .objects_refractiveinputR::before {
     content: "";
     position: absolute;
-    width: 2px;
+    width: 0.1vw;
     height: 100%;
     background-color: #ABABAB;
 }
 
 .objects_refractiveinputR > input[type=range] {
     z-index: 50;
+    display: flex;
+    align-items: center;
     width: 100%;
-    height: 20px;
+    height: 100%;
     margin: 0;
     -webkit-appearance: none;
     background: none;
+    overflow: hidden;
 }
 
 .objects_refractiveinputR > input[type=range]:focus {
@@ -533,14 +549,14 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 
 .objects_refractiveinputR > input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
-    height: 2px;
+    height: 0.1vw;
     cursor: pointer;
     background: #707070;
 }
 
 .objects_refractiveinputR > input[type=range]::-webkit-slider-thumb {
-    width: 8px;
-    height: 30px;
+    width: 3%;
+    height: 100px;
     background: #384772;
     cursor: pointer;
     -webkit-appearance: none;
@@ -548,10 +564,10 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 }
 
 .objects_refractiveinputT {
-    width: 220px;
-    height: 20px;
+    width: 85%;
+    height: 20%;
     outline: none;
-    font-size: 1.2rem;
+    font-size: 1.2em;
     text-align: center;
 }
 
@@ -571,7 +587,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     align-items: center;
     justify-content: space-around;
     width: 100%;
-    height: 100px;
+    height: 35%;
 }
 
 .objects_sideBarRandomC > p {
@@ -594,8 +610,8 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 .objects_sideBarRandomB > button {
     border: 0;
     border-radius: 100px;
-    width: 100px;
-    height: 30px;
+    width: 44.74%;
+    height: 34.9%;
     background-color: #384772;
     color: #FFFFFF;
     letter-spacing: 0.1rem;

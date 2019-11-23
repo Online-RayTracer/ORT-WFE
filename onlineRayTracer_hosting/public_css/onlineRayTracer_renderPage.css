@@ -11,7 +11,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     position: relative;
     width: 100vw;
     height: 100vh;
-    min-height: 650px;
+    /* min-height: 650px; */
     overflow: hidden;
     background-color: #EBEBEB;
     user-select: none;
@@ -22,9 +22,10 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     flex-direction: column;
     position: relative;
     width: 18.5%;
-    min-width: 300px;
+    min-width: 180px;
     height: 100%;
     background-color: #1C1C1C;
+    font-size: 0.85vw;
 }
 
 .sideBar_logo {
@@ -33,13 +34,13 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     justify-content: center;
     width: 100%;
     height: 20%;
-    min-height: 185px;
+    min-height: 110px;
 }
 
 .sideBar_logo::after {
     content: '';
-    width: 220px;
-    height: 120px;
+    width: 11.5vw;
+    height: 6.2vw;
     background-image: url('/src/logo_W.png');
     background-size: cover;
     background-repeat: no-repeat;
@@ -50,7 +51,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     justify-content: flex-end;
     width: 100%;
     height: 35%;
-    min-height: 256px;
+    min-height: 200px;
 }
 
 .sideBar_menu > ul {
@@ -68,7 +69,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     width: 100%;
     height: 25%;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .sideBar_menu > ul > li:hover {
@@ -81,9 +82,9 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     justify-content: center;
     width: 100%;
     height: 100%;
-    font-size: 2.3rem;
+    font-size: 2.3em;
     text-decoration: none;
-    letter-spacing: 0rem;
+    letter-spacing: 0em;
     color: #FFFFFF;
 }
 
@@ -111,6 +112,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     width: 80%;
     min-width: 570px;
     height: 90%;
+    font-size: 0.85vw;
 }
 
 .render_content > div:nth-child(1) {
@@ -119,9 +121,9 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    height: 70px;
+    height: 3.646vw;
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 3rem;
+    font-size: 3em;
 }
 
 .render_content > div:nth-child(2) {
@@ -161,13 +163,13 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 450px;
-    height: 100px;
+    width: 24.063vw;
+    height: 5.313vw;
     background: linear-gradient(to right, #0073B0, #00314A);
     color: #B4FFDC;
-    font-size: 2.2rem;
+    font-size: 2.2em;
     font-weight: 700;
-    letter-spacing: 0.5rem;
+    letter-spacing: 0.5em;
     cursor: pointer;
 }
 
@@ -192,7 +194,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 }
 
 .render_restart, .render_download, .render_continue {
-    font-size: 1.5rem;
+    font-size: 1.5em;
     text-decoration: underline;
     cursor: pointer;
 }

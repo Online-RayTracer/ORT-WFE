@@ -9,7 +9,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     position: relative;
     width: 100vw;
     height: 100vh;
-    min-height: 650px;
+    /* min-height: 650px; */
     overflow: hidden;
     background-color: #EBEBEB;
     user-select: none;
@@ -20,9 +20,10 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     flex-direction: column;
     position: relative;
     width: 18.5%;
-    min-width: 300px;
+    min-width: 180px;
     height: 100%;
     background-color: #1C1C1C;
+    font-size: 0.85vw;
 }
 
 .sideBar_logo {
@@ -31,13 +32,13 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     justify-content: center;
     width: 100%;
     height: 20%;
-    min-height: 185px;
+    min-height: 110px;
 }
 
 .sideBar_logo::after {
     content: '';
-    width: 220px;
-    height: 120px;
+    width: 11.5vw;
+    height: 6.2vw;
     background-image: url('/src/logo_W.png');
     background-size: cover;
     background-repeat: no-repeat;
@@ -48,7 +49,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     justify-content: flex-end;
     width: 100%;
     height: 35%;
-    min-height: 256px;
+    min-height: 200px;
 }
 
 .sideBar_menu > ul {
@@ -66,7 +67,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     width: 100%;
     height: 25%;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .sideBar_menu > ul > li:hover {
@@ -79,9 +80,9 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     justify-content: center;
     width: 100%;
     height: 100%;
-    font-size: 2.3rem;
+    font-size: 2.3em;
     text-decoration: none;
-    letter-spacing: 0rem;
+    letter-spacing: 0em;
     color: #FFFFFF;
 }
 
@@ -99,6 +100,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     min-width: 650px;
     height: 100%;
     background-color: #FFFFFF;
+    font-size: 0.85vw;
 }
 
 .camera_topMenu {
@@ -109,7 +111,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     background-color: #343434;
 }
 
-@media all and (min-width: 1385px) {
+/* @media all and (min-width: 1385px) { */
     .camera_topMenu {
         border-radius: 100px;
         padding: 0 20px 0 40px;
@@ -119,16 +121,16 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
         left: 3%;
         width: calc(80% - 6% - 60px);
         height: calc(10% - 3%);
-        min-width: 580px;
-        min-height: 55px;
+        /* min-width: 580px; */
+        /* min-height: 55px; */
     }
 
     .camera_topMenu > div:nth-child(4) {
         grid-column: 7/9;
     }
-}
+/* } */
 
-@media (max-width: 1384px) and (min-width: 0px) {
+/* @media (max-width: 1384px) and (min-width: 0px) {
     .camera_topMenu {
         border-radius: 0 0 10px 0;
         grid-template-columns: 1fr;
@@ -138,7 +140,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
         min-width: 200px;
         min-height: 230px;
     }
-}
+} */
 
 .camera_topMenu > div {
     display: flex;
@@ -148,7 +150,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 
 .camera_topMenu > div > a, .camera_topMenu > div > a:active {
     color: #FFFFFF;
-    font-size: 2rem;
+    font-size: 2em;
     text-decoration: none;
     cursor: pointer;
 }
@@ -210,8 +212,8 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
 }
 
 .camera_sideBarTitle > h4 {
-    font-size: 1.7rem;
-    letter-spacing: -0.05rem;
+    font-size: 1.7em;
+    letter-spacing: -0.05em;
 }
 
 .camera_sideBarTitle > a {
@@ -317,7 +319,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     width: 220px;
     height: 20px;
     outline: none;
-    font-size: 1.2rem;
+    font-size: 1.2em;
     text-align: center;
 }
 
@@ -388,6 +390,6 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     width: 220px;
     height: 20px;
     outline: none;
-    font-size: 1.2rem;
+    font-size: 1.2em;
     text-align: center;
 }
