@@ -17,8 +17,8 @@ window.addEventListener('load', () => {
 const camera_box = document.getElementById('camera_box');
 
 let stage = new Konva.Stage({
-    x: cameraData.width/2,
-    y: cameraData.height/2,
+    x: camera_box.clientWidth/2,
+    y: camera_box.clientHeight/2,
     container: 'camera_box',
     width: camera_box.clientWidth,
     height: camera_box.clientHeight,
@@ -236,7 +236,7 @@ function putObjects() {
             }
             let circle = new Konva.Circle({
                 x: v.location[0],
-                y: v.location[1],
+                y: -v.location[1],
                 radius: v.size,
                 fill: fill,
                 name: `${i}`,

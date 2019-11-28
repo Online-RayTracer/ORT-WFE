@@ -21,8 +21,8 @@ let objectStructure = {
 const objects_box = document.getElementById('objects_box');
 
 let stage = new Konva.Stage({
-    x: objectsData.width/2,
-    y: objectsData.height/2,
+    x: objects_box.clientWidth/2,
+    y: objects_box.clientHeight/2,
     container: 'objects_box',
     width: objects_box.clientWidth,
     height: objects_box.clientHeight,

@@ -260,12 +260,12 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     text-align: center;
 }
 
-.camera_sideBarAperture, .camera_sideBarVfor  {
+.camera_sideBarAperture, .camera_sideBarVfov  {
     height: 20%;
     min-height: 110px;
 }
 
-.camera_sideBarApertureC, .camera_sideBarVforC {
+.camera_sideBarApertureC, .camera_sideBarVfovC {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -274,7 +274,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     height: 60%;
 }
 
-.camera_apertureinputR, .camera_vforInputR {
+.camera_apertureinputR, .camera_vfovInputR {
     margin-right: 2%;
     border-left: 2px solid #ABABAB;
     border-right: 2px solid #ABABAB;
@@ -286,7 +286,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     height: 30%;
 }
 
-.camera_apertureinputR::before, .camera_vforInputR::before {
+.camera_apertureinputR::before, .camera_vfovInputR::before {
     content: "";
     position: absolute;
     width: 0.1vw;
@@ -294,7 +294,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     background-color: #ABABAB;
 }
 
-.camera_apertureinputR > input[type=range], .camera_vforInputR > input[type=range] {
+.camera_apertureinputR > input[type=range], .camera_vfovInputR > input[type=range] {
     z-index: 50;
     width: 100%;
     height: 100%;
@@ -304,18 +304,18 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     overflow: hidden;
 }
 
-.camera_apertureinputR > input[type=range]:focus, .camera_vforInputR > input[type=range]:focus  {
+.camera_apertureinputR > input[type=range]:focus, .camera_vfovInputR > input[type=range]:focus  {
     outline: none;
 }
 
-.camera_apertureinputR > input[type=range]::-webkit-slider-runnable-track, .camera_vforInputR > input[type=range]::-webkit-slider-runnable-track {
+.camera_apertureinputR > input[type=range]::-webkit-slider-runnable-track, .camera_vfovInputR > input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
     height: 0.1vw;
     cursor: pointer;
     background: #707070;
 }
 
-.camera_apertureinputR > input[type=range]::-webkit-slider-thumb, .camera_vforInputR > input[type=range]::-webkit-slider-thumb {
+.camera_apertureinputR > input[type=range]::-webkit-slider-thumb, .camera_vfovInputR > input[type=range]::-webkit-slider-thumb {
     width: 3%;
     height: 100px;
     background: #384772;
@@ -324,7 +324,7 @@ input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-in
     margin-top: -14px;
 }
 
-.camera_apertureinputT, .camera_vforInputT {
+.camera_apertureinputT, .camera_vfovInputT {
     width: 85%;
     height: 20%;
     outline: none;

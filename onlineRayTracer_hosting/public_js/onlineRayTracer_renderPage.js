@@ -19,29 +19,78 @@ renderButton.addEventListener('click', function() {
             }
         }
     });
+
+    getImage();
+    
+    axios.post(`http://15.165.0.14:8080/api/renderer`, {
+        name: renderData.name,
+        width: renderData.width,
+        height: renderData.height,
+        samples: renderData.samples,
+        cam_location: renderData.cam_location,
+        cam_lookat: renderData.cam_lookat,
+        cam_aperture: renderData.cam_aperture,
+        cam_vfov: renderData.cam_vfov,
+        light_color: renderData.light_color,
+        objects: renderData.objects
+    //     "name": "이름",
+    // "width": 1280,
+    // "height": 720,
+    // "samples": 100,
+    // "cam_location": [0.000, 0.000, 0.000],
+    // "cam_lookat": [0.000, 3.2, 0.000],
+    // "cam_aperture": 1.4,
+    // "cam_vfov": 60.0,
+    // "light_color": [1.000, 1.0, 1.0],
+    // "objects": [
+    //     {
+    //         "location": [2.4, 0.0, 0.0],
+    //         "size": 0.5,
+    //         "material": {
+    //             "type": "lambertian",
+    //             "color": [1.000, 0.2341, 0.14141]
+    //         }
+    //     },
+    //     {
+    //         "location": [-2.4, 0.0, 0.0],
+    //         "size": 0.5,
+    //         "material": {
+    //             "type": "metal",
+    //             "color": [1.000, 0.2341, 0.14141],
+    //             "roughness": 0.3
+    //         }
+    //     },
+    //     {
+    //         "location": [2.4, 0.0, 0.0],
+    //         "size": 0.5,
+    //         "material": {
+    //             "type": "dielectric",
+    //             "ref_idx": 1.5
+    //         }
+    //     }
+    // ]
+    })
+    .then((response) => {
+        if(response.status === 200) {
+            console.log('Success', response);
+            showImage(response.data);
+
+        } else {
+            console.log(`Error: status code[${response.status}]`);
+    
+        }
+    })
+    .catch((reject) => {
+        console.log("데이터 보내기에 실패하셨습니다." + reject + " and " + Promise.reject(reject.response));
+    })
+    this.removeEventListener('click', arguments.callee);
+})
+
+function getImage() {
     addToast('레이트레이싱 중입니다.', '#23374d');
     setTimeout(() => {
         addToast('커피 한잔 마시면서 기다리고 계세요..', '#7A4F38', 7);
     }, 3000)
-    // axios.post(`/image`, {
-    //     data: renderData,
-    // })
-    // .then((response) => {
-    //     if(response.status === 200) {
-    //         console.log('Success');
-            getImage();
-    //     } else {
-    //         console.log(`Error: status code[${response.status}]`);
-    
-    //     }
-    // })
-    // .catch((reject) => {
-    //     console.log("데이터 보내기에 실패하셨습니다." + reject + " and " + Promise.reject(reject.response));
-    this.removeEventListener('click', arguments.callee);
-    // })
-})
-
-function getImage() {
     let i = 0;
     let timer = setInterval(() => {
         renderButton.innerText = `${i}%`;
@@ -49,7 +98,6 @@ function getImage() {
         if(i === 101) {
             clearInterval(timer);
             timer = null;
-            showImage();
         }
     }, 100);
 }
@@ -59,29 +107,11 @@ const renderContents = document.getElementById('renderContents');
 const renderImageWrapper = document.getElementById('renderImageWrapper');
 const renderTextWrapper = document.getElementById('renderTextWrapper');
 
-function showImage() {
-    // axios.get(`??`, {
-    //     params: {
-            
-    //     }
-    // })
-    // .then((response) => {
-    //     if(response.status === 200) {
-    //         console.log('success');
-
-    //     } else {
-    //         console.log(`Error: status code[${response.status}]`);
-
-    //     }
-    // })
-    // .catch((reject) => {
-    //     console.log("??" + reject + " and " + Promise.reject(reject.response));
-
-    // })
+function showImage(img) {
     let renderImageBox = document.createElement('img');
     renderImageBox.setAttribute('id', 'renderImage');
     renderImageBox.setAttribute('class', 'render_image');
-    renderImageBox.setAttribute('src', '/src/start_background.png');
+    renderImageBox.setAttribute('src', `http://15.165.0.14:8080${img}`);
 
     renderImageBox.addEventListener('click', imageClicked);
 
@@ -103,7 +133,7 @@ const popup_showImgImage = document.getElementById('popup_showImgImage');
 
 function imageClicked() {
     popup_showImg.classList.remove('hidden');
-    popup_showImgImage.setAttribute('src', '/src/start_background.png');
+    popup_showImgImage.setAttribute('src', '/src/endingImage.png');
     popup_showImgImage.style.height = popup_showItemImg.naturalHeight;
 }
 
@@ -113,6 +143,7 @@ popup_showImg.addEventListener('click', () => {
 
 function imageDownload() {
     addToast('다운로드가 완료되셨습니다.', '#28B100; color: #B4FFDC'); // 추후에 변경할 예정
-
+    renderButton.setAttribute('download',`${renderData.name}`);
+    renderButton.setAttribute('href', '/src/endingImage.png')
 }
 
