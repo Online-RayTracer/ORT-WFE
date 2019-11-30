@@ -8,7 +8,12 @@ window.addEventListener('load', () => {
 
 const renderButton = document.getElementById('renderButton');
 
+let ar  = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+let result = '';
+
 renderButton.addEventListener('click', function() {
+    console.log('Rendering Start Time : ', new Date());
     for(let i = 0; i < 3; i++) {
         renderData.light_color[i] = parseFloat((renderData.light_color[i] / 255).toFixed(3));
     }
@@ -21,9 +26,13 @@ renderButton.addEventListener('click', function() {
     });
 
     getImage();
+
+    for(let i = 0; i < 16; i++) {
+        result += ar.charAt(Math.floor(Math.random() * ar.length));
+    };
     
     axios.post(`http://15.165.0.14:8080/api/renderer`, {
-        name: renderData.name,
+        name: result += '.png',
         width: renderData.width,
         height: renderData.height,
         samples: renderData.samples,
@@ -33,7 +42,7 @@ renderButton.addEventListener('click', function() {
         cam_vfov: renderData.cam_vfov,
         light_color: renderData.light_color,
         objects: renderData.objects
-    //     "name": "이름",
+    // "name": "이름",
     // "width": 1280,
     // "height": 720,
     // "samples": 100,
@@ -91,15 +100,16 @@ function getImage() {
     setTimeout(() => {
         addToast('커피 한잔 마시면서 기다리고 계세요..', '#7A4F38', 7);
     }, 3000)
-    let i = 0;
+    renderButton.innerText = `0%`;
+    let i = 1;
     let timer = setInterval(() => {
         renderButton.innerText = `${i}%`;
         i++;
-        if(i === 101) {
+        if(i === 100) {
             clearInterval(timer);
             timer = null;
         }
-    }, 100);
+    }, 5000);
 }
 
 const renderContents = document.getElementById('renderContents');
@@ -107,11 +117,15 @@ const renderContents = document.getElementById('renderContents');
 const renderImageWrapper = document.getElementById('renderImageWrapper');
 const renderTextWrapper = document.getElementById('renderTextWrapper');
 
+let responseImage;
+
 function showImage(img) {
+    console.log('Rendering End Time : ', new Date())
+    responseImage = `http://15.165.0.14:4000/static/${result}`;
     let renderImageBox = document.createElement('img');
     renderImageBox.setAttribute('id', 'renderImage');
     renderImageBox.setAttribute('class', 'render_image');
-    renderImageBox.setAttribute('src', `http://15.165.0.14:8080${img}`);
+    renderImageBox.setAttribute('src', responseImage);
 
     renderImageBox.addEventListener('click', imageClicked);
 
@@ -133,7 +147,7 @@ const popup_showImgImage = document.getElementById('popup_showImgImage');
 
 function imageClicked() {
     popup_showImg.classList.remove('hidden');
-    popup_showImgImage.setAttribute('src', '/src/endingImage.png');
+    popup_showImgImage.setAttribute('src', responseImage);
     popup_showImgImage.style.height = popup_showItemImg.naturalHeight;
 }
 
@@ -144,6 +158,6 @@ popup_showImg.addEventListener('click', () => {
 function imageDownload() {
     addToast('다운로드가 완료되셨습니다.', '#28B100; color: #B4FFDC'); // 추후에 변경할 예정
     renderButton.setAttribute('download',`${renderData.name}`);
-    renderButton.setAttribute('href', '/src/endingImage.png')
+    renderButton.setAttribute('href', responseImage);
 }
 

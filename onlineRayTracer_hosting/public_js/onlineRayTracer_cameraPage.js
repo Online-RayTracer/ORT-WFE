@@ -288,14 +288,14 @@ function cameraApertureValue(v) {
     cameraDataChanged('ca', v);
 }
 
-const cameraVforRange = document.getElementById('cameraVforRange');
-const cameraVforText = document.getElementById('cameraVforText');
+const cameraVfovRange = document.getElementById('cameraVfovRange');
+const cameraVfovText = document.getElementById('cameraVfovText');
 
-cameraVforRange.value = cameraData.cam_vfov;
-cameraVforText.value = cameraData.cam_vfov;
+cameraVfovRange.value = cameraData.cam_vfov;
+cameraVfovText.value = cameraData.cam_vfov;
 
-function cameraVforValue(v) {
-    cameraVforText.value = v;
+function cameraVfovValue(v) {
+    cameraVfovText.value = v;
     cameraDataChanged('vf', v);
 }
 
@@ -352,10 +352,10 @@ document.getElementById('cameraApertureDefault').addEventListener('click', () =>
     addToast('카메라 위치가 기본값으로 변경되셨습니다.');
 })
 
-document.getElementById('cameraVforDefault').addEventListener('click', () => {
+document.getElementById('cameraVfovDefault').addEventListener('click', () => {
     cameraData.cam_vfov = 0.0;
-    cameraVforRange.value = 0.0;
-    cameraVforText.value = 0.0;
+    cameraVfovRange.value = 0.0;
+    cameraVfovText.value = 0.0;
     addToast('카메라 각도가 기본값으로 변경되셨습니다.');
 })
 
