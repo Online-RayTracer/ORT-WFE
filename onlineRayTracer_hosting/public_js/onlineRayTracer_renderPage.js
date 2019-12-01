@@ -90,10 +90,11 @@ renderButton.addEventListener('click', function() {
         }
     })
     .catch((reject) => {
-        console.log("데이터 보내기에 실패하셨습니다." + reject + " and " + Promise.reject(reject.response));
+        console.log("렌더링에 실패하셨습니다." + reject + " and " + Promise.reject(reject.response));
     })
     this.removeEventListener('click', arguments.callee);
 })
+let timer;
 
 function getImage() {
     addToast('레이트레이싱 중입니다.', '#23374d');
@@ -102,7 +103,7 @@ function getImage() {
     }, 3000)
     renderButton.innerText = `0%`;
     let i = 1;
-    let timer = setInterval(() => {
+    timer = setInterval(() => {
         renderButton.innerText = `${i}%`;
         i++;
         if(i === 100) {
@@ -120,8 +121,25 @@ const renderTextWrapper = document.getElementById('renderTextWrapper');
 let responseImage;
 
 function showImage(img) {
+    clearInterval(timer);
+    timer = null;
+    // axios.get(img, {})
+    // .then((response) => {
+    //     if(response.status === 200) {
+    //         console.log('get image success');
+    //         responseImage = response.data;
+
+    //     } else {
+    //         console.log(`Error: status code[${response.status}]`);
+    //     }
+    // })
+    // .catch((reject) => {
+    //     console.log("이미지 접근에 실패하셨습니다." + reject + " and " + Promise.reject(reject.response));
+        
+    // })
+    responseImage = img;
     console.log('Rendering End Time : ', new Date())
-    responseImage = `http://15.165.0.14:4000/static/${result}`;
+    
     let renderImageBox = document.createElement('img');
     renderImageBox.setAttribute('id', 'renderImage');
     renderImageBox.setAttribute('class', 'render_image');
