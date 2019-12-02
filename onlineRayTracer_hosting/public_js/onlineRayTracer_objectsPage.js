@@ -31,7 +31,7 @@ let stage = new Konva.Stage({
 
 let layer = new Konva.Layer();
 
-let stageRect =  new Konva.Rect({ 
+let stageRect = new Konva.Rect({ 
     x:-objectsData.width/2,
     y:-objectsData.height/2,
     width: objectsData.width,
@@ -120,7 +120,7 @@ function addCircle(kind) {
     stage.add(layer);
 
     objectStructure = {
-        location: [X, -Y, 000],
+        location: [X, 000, -Y],
         size: radius,
         material: {
             type: "metal",
@@ -149,7 +149,7 @@ function putObjects() {
             }
             let circle = new Konva.Circle({
                 x: v.location[0],
-                y: -v.location[1],
+                y: -v.location[2],
                 radius: v.size,
                 fill: fill,
                 name: `${i}`,
@@ -496,9 +496,9 @@ function getTargetData() {
 
 function objectMove() {
     object_positionX.value = parseInt(objectTarget.attrs.x);
-    object_positionY.value =- parseInt(objectTarget.attrs.y);
+    object_positionZ.value =- parseInt(objectTarget.attrs.y);
     objectsData.objects[objectTarget.attrs.name].location[0] = parseInt(objectTarget.attrs.x);
-    objectsData.objects[objectTarget.attrs.name].location[1] = -parseInt(objectTarget.attrs.y);
+    objectsData.objects[objectTarget.attrs.name].location[2] = -parseInt(objectTarget.attrs.y);
 }
 
 function objectDataChanged(k, v) {
@@ -510,11 +510,11 @@ function objectDataChanged(k, v) {
             })
             obj.location[0] = parseInt(object_positionX.value);
         } else if(k === 'y') {
-            objectTarget.setAttrs({
-                y:-parseInt(object_positionY.value)
-            })
             obj.location[1] = parseInt(object_positionY.value);
         } else if(k === 'z') {
+            objectTarget.setAttrs({
+                y:-parseInt(object_positionZ.value)
+            })
             obj.location[2] = parseInt(object_positionZ.value);
         } else if(k === 'ra') {
             objectTarget.setAttrs({

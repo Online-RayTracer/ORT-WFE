@@ -71,7 +71,7 @@ if(cLc[0] === 0 && cLc[1] === 0 && cLc[2] === 0 && cLa[0] === 0 && cLa[1] === 0 
 
 let camera = new Konva.Image({
     x: cameraData.cam_location[0],
-    y: -cameraData.cam_location[1],
+    y: -cameraData.cam_location[2],
     image: imageCamera,
     width: 100,
     height: 100,
@@ -84,7 +84,7 @@ let camera = new Konva.Image({
 
 let point = new Konva.Image({
     x: cameraData.cam_lookat[0],
-    y: -cameraData.cam_lookat[1],
+    y: -cameraData.cam_lookat[2],
     image: imagePoint,
     width: 50,
     height: 50,
@@ -236,7 +236,7 @@ function putObjects() {
             }
             let circle = new Konva.Circle({
                 x: v.location[0],
-                y: -v.location[1],
+                y: -v.location[2],
                 radius: v.size,
                 fill: fill,
                 name: `${i}`,
@@ -261,9 +261,9 @@ const camera_positionZ = document.getElementById('camera_positionZ');
 
 function cameraMove() {
     camera_positionX.value = parseInt(camera.attrs.x);
-    camera_positionY.value = -parseInt(camera.attrs.y);
+    camera_positionZ.value = -parseInt(camera.attrs.y);
     cameraData.cam_location[0] = parseInt(camera.attrs.x);
-    cameraData.cam_location[1] = -parseInt(camera.attrs.y);
+    cameraData.cam_location[2] = -parseInt(camera.attrs.y);
 }
 
 const point_positionX = document.getElementById('point_positionX');
@@ -272,9 +272,9 @@ const point_positionZ = document.getElementById('point_positionZ');
 
 function pointMove() {
     point_positionX.value = parseInt(point.attrs.x);
-    point_positionY.value = -parseInt(point.attrs.y);
+    point_positionZ.value = -parseInt(point.attrs.y);
     cameraData.cam_lookat[0] = parseInt(point.attrs.x);
-    cameraData.cam_lookat[1] = -parseInt(point.attrs.y);
+    cameraData.cam_lookat[2] = -parseInt(point.attrs.y);
 }
 
 const cameraApertureRange = document.getElementById('cameraApertureRange');
@@ -306,11 +306,11 @@ function cameraDataChanged(k, v) {
         })
         cameraData.cam_location[0] = parseInt(camera_positionX.value);
     } else if(k === 'cy') {
-        camera.setAttrs({
-            y:-parseInt(camera_positionY.value)
-        })
         cameraData.cam_location[1] = parseInt(camera_positionY.value);
     } else if(k === 'cz') {
+        camera.setAttrs({
+            y:-parseInt(camera_positionZ.value)
+        })
         cameraData.cam_location[2] = parseInt(camera_positionZ.value);
     } else if(k === 'px') {
         point.setAttrs({
@@ -318,11 +318,11 @@ function cameraDataChanged(k, v) {
         })
         cameraData.cam_lookat[0] = parseInt(point_positionX.value);
     } else if(k === 'py') {
-        point.setAttrs({
-            y:-parseInt(point_positionY.value)
-        })
         cameraData.cam_lookat[1] = parseInt(point_positionY.value);
     } else if(k === 'pz') {
+        point.setAttrs({
+            y:-parseInt(point_positionZ.value)
+        })
         cameraData.cam_lookat[2] = parseInt(point_positionZ.value);
     } else if(k === 'ca') {
         cameraData.cam_aperture = parseFloat(v);

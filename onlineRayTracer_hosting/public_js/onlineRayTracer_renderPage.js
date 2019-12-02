@@ -10,7 +10,8 @@ const renderButton = document.getElementById('renderButton');
 
 let ar  = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-let result = '';
+let imgName = '';
+let timer;
 
 renderButton.addEventListener('click', function() {
     console.log('Rendering Start Time : ', new Date());
@@ -25,78 +26,7 @@ renderButton.addEventListener('click', function() {
         }
     });
 
-    getImage();
-
-    for(let i = 0; i < 16; i++) {
-        result += ar.charAt(Math.floor(Math.random() * ar.length));
-    };
     
-    axios.post(`http://15.165.0.14:8080/api/renderer`, {
-        name: result += '.png',
-        width: renderData.width,
-        height: renderData.height,
-        samples: renderData.samples,
-        cam_location: renderData.cam_location,
-        cam_lookat: renderData.cam_lookat,
-        cam_aperture: renderData.cam_aperture,
-        cam_vfov: renderData.cam_vfov,
-        light_color: renderData.light_color,
-        objects: renderData.objects
-    // "name": "이름",
-    // "width": 1280,
-    // "height": 720,
-    // "samples": 100,
-    // "cam_location": [0.000, 0.000, 0.000],
-    // "cam_lookat": [0.000, 3.2, 0.000],
-    // "cam_aperture": 1.4,
-    // "cam_vfov": 60.0,
-    // "light_color": [1.000, 1.0, 1.0],
-    // "objects": [
-    //     {
-    //         "location": [2.4, 0.0, 0.0],
-    //         "size": 0.5,
-    //         "material": {
-    //             "type": "lambertian",
-    //             "color": [1.000, 0.2341, 0.14141]
-    //         }
-    //     },
-    //     {
-    //         "location": [-2.4, 0.0, 0.0],
-    //         "size": 0.5,
-    //         "material": {
-    //             "type": "metal",
-    //             "color": [1.000, 0.2341, 0.14141],
-    //             "roughness": 0.3
-    //         }
-    //     },
-    //     {
-    //         "location": [2.4, 0.0, 0.0],
-    //         "size": 0.5,
-    //         "material": {
-    //             "type": "dielectric",
-    //             "ref_idx": 1.5
-    //         }
-    //     }
-    // ]
-    })
-    .then((response) => {
-        if(response.status === 200) {
-            console.log('Success', response);
-            showImage(response.data);
-
-        } else {
-            console.log(`Error: status code[${response.status}]`);
-    
-        }
-    })
-    .catch((reject) => {
-        console.log("렌더링에 실패하셨습니다." + reject + " and " + Promise.reject(reject.response));
-    })
-    this.removeEventListener('click', arguments.callee);
-})
-let timer;
-
-function getImage() {
     addToast('레이트레이싱 중입니다.', '#23374d');
     setTimeout(() => {
         addToast('커피 한잔 마시면서 기다리고 계세요..', '#7A4F38', 7);
@@ -111,7 +41,41 @@ function getImage() {
             timer = null;
         }
     }, 5000);
-}
+
+    for(let i = 0; i < 16; i++) {
+        imgName += ar.charAt(Math.floor(Math.random() * ar.length));
+    };
+    
+    axios.post(`http://15.165.0.14:8080/api/renderer`, {
+        name: imgName += '.png',
+        width: renderData.width,
+        height: renderData.height,
+        samples: renderData.samples,
+        cam_location: renderData.cam_location,
+        cam_lookat: renderData.cam_lookat,
+        cam_aperture: renderData.cam_aperture,
+        cam_vfov: renderData.cam_vfov,
+        light_color: renderData.light_color,
+        objects: renderData.objects
+    })
+    .then((response) => {
+        if(response.status === 200) {
+            console.log('Success', response);
+            showImage(response.data);
+
+        } else {
+            console.log(`Error: status code[${response.status}]`);
+    
+        }
+    })
+    .catch((reject) => {
+        console.log("렌더링에 실패하셨습니다." + reject + " and " + Promise.reject(reject.response));
+        clearInterval(timer);
+        timer = null;
+        renderButton.innerText = 'ERR';
+    })
+    this.removeEventListener('click', arguments.callee);
+})
 
 const renderContents = document.getElementById('renderContents');
 
@@ -123,20 +87,6 @@ let responseImage;
 function showImage(img) {
     clearInterval(timer);
     timer = null;
-    // axios.get(img, {})
-    // .then((response) => {
-    //     if(response.status === 200) {
-    //         console.log('get image success');
-    //         responseImage = response.data;
-
-    //     } else {
-    //         console.log(`Error: status code[${response.status}]`);
-    //     }
-    // })
-    // .catch((reject) => {
-    //     console.log("이미지 접근에 실패하셨습니다." + reject + " and " + Promise.reject(reject.response));
-        
-    // })
     responseImage = img;
     console.log('Rendering End Time : ', new Date())
     
@@ -157,25 +107,34 @@ function showImage(img) {
 
     renderButton.innerText = `Download`;
     renderContents.classList.add('render_finished');
-    renderButton.addEventListener('click', imageDownload);
+    renderButton.addEventListener('click', () => {
+        addToast('다운로드가 완료되셨습니다.', '#28B100; color: #B4FFDC'); // 추후에 변경할 예정
+    });
+    renderButton.setAttribute('download',`${renderData.name}`);
+    renderButton.setAttribute('href', responseImage);
 }
 
 const popup_showImg = document.getElementById('popup_showImg');
 const popup_showImgImage = document.getElementById('popup_showImgImage');
 
 function imageClicked() {
-    popup_showImg.classList.remove('hidden');
+    let popup_showImg = document.createElement('div');
+    let popup_showImgImage = document.createElement('img');
+
+    popup_showImg.setAttribute('id', 'popup_showImg');
+    popup_showImg.setAttribute('class', 'popup-showImg');
+    popup_showImg.addEventListener('click', () => {
+        popup_showImg.remove();
+    })
+
+    popup_showImgImage.setAttribute('id', 'popup_showImgImage');
+    popup_showImgImage.setAttribute('class', 'popup-showImgImage');
     popup_showImgImage.setAttribute('src', responseImage);
-    popup_showImgImage.style.height = popup_showItemImg.naturalHeight;
-}
+    popup_showImgImage.style.height = popup_showImgImage.naturalHeight;
 
-popup_showImg.addEventListener('click', () => {
-    popup_showImg.classList.add('hidden');
-})
+    popup_showImg.appendChild(popup_showImgImage);
+    
+    document.body.appendChild(popup_showImg);
 
-function imageDownload() {
-    addToast('다운로드가 완료되셨습니다.', '#28B100; color: #B4FFDC'); // 추후에 변경할 예정
-    renderButton.setAttribute('download',`${renderData.name}`);
-    renderButton.setAttribute('href', responseImage);
 }
 
